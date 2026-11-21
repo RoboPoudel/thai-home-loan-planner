@@ -1,0 +1,85 @@
+name: Android & Windows apps
+
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', 'site/**', 'tools/**', 'android/**', 'windows/**', '.github/workflows/apps.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  VERSION_NAME: 1.0.${{ github.run_number }}
+  VERSION_CODE: ${{ github.run_number }}
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build site/index.html
+        run: python3 tools/make_site.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Build APK
+        working-directory: android
+        run: gradle assembleDebug --no-daemon
+      - name: Rename APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk ThaiHomeLoanPlanner-${VERSION_NAME}.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: ThaiHomeLoanPlanner-*.apk
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build site/index.html
+        run: python tools/make_site.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Copy the web app into the Windows app
+        shell: bash
+        run: |
+          mkdir -p windows/app
+          cp -r site/* windows/app/
+      - name: Build portable .exe and installer
+        working-directory: windows
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm install --no-audit --no-fund
+          npm version "$VERSION_NAME" --no-git-tag-version --allow-same-version
+          npx electron-builder --win portable nsis --x64 --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-exe
+          path: windows/dist/*.exe
+
+  release:
+    needs: [android, windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION_NAME }}
+          name: Thai Home Loan Planner ${{ env.VERSION_NAME }}
+          make_latest: 'true'
+          body: |
+            **Android:** download the `.apk`, open it on your phone and allow installing from this source.
+            **Windows:** `-portable.exe` runs without installing; `-setup.exe` installs it with a Start-menu shortcut. Windows SmartScreen may warn because the app isn't code-signed – choose *More info → Run anyway*.
+            **Web / iPhone:** https://robopoudel.github.io/thai-home-loan-planner/ (Share → Add to Home Screen).
+          files: out/*

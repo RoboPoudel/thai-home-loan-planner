@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'th.homeloan.planner'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'th.homeloan.planner'
+        minSdk 24
+        targetSdk 34
+        versionCode (System.getenv('VERSION_CODE') ?: '1').toInteger()
+        versionName System.getenv('VERSION_NAME') ?: '1.0'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    // the web app is copied from ../site into the APK's assets at build time
+    sourceSets {
+        main.assets.srcDirs += ['../../site']
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.webkit:webkit:1.11.0'
+}

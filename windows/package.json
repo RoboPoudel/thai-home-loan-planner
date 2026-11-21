@@ -1,0 +1,26 @@
+{
+  "name": "thai-home-loan-planner",
+  "productName": "Thai Home Loan Planner",
+  "version": "1.0.0",
+  "description": "Plan a Thai home loan: compare banks, stress-test rates, track payments and prepare your application.",
+  "author": "RoboPoudel",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable nsis --x64"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "th.homeloan.planner",
+    "productName": "Thai Home Loan Planner",
+    "files": ["main.js", "app/**/*"],
+    "directories": { "output": "dist" },
+    "win": { "icon": "icon.png", "artifactName": "ThaiHomeLoanPlanner-${version}-${arch}-${target}.${ext}" },
+    "portable": { "artifactName": "ThaiHomeLoanPlanner-${version}-portable.exe" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "artifactName": "ThaiHomeLoanPlanner-${version}-setup.exe" }
+  }
+}

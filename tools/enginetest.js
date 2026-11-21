@@ -1,0 +1,26 @@
+// Checks the planner's calculation engine against figures from the Excel planner and an independent Python model.
+const fs = require('fs'), path = require('path');
+const html = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
+eval(html.match(/<script id="engine">([\s\S]*?)<\/script>/)[1] + ';Object.assign(globalThis,{schedule,bankSteps,pit,investVsPrepay,refiCompare,rentVsBuy,trackerReplay,normalizePlan});');
+let fail = 0;
+const eq = (name, got, want, tol = 0.5) => { const ok = Math.abs(got - want) <= tol; if (!ok) fail++; console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}: ${got} (expected ${want})`); };
+const r = Math.round;
+const base = { price: 4e6, down: 1e6, years: 15, ppy: 12, xtype: 'amount', xfreq: 'every', xval: 2000, lump: 0, lumpAt: 12, shock: 0, shockFrom: 4 };
+const varp = Object.assign({}, base, { rmode: 'steps', steps: [{ from: 1, rate: .03 }, { from: 3, rate: .045 }, { from: 5, rate: .055 }] });
+const fix = Object.assign({}, base, { rmode: 'fixed', frate: .05 });
+const scb = { y: [.0255, .027, .027], mrr: .06575, margin: -.0125 };
+let s = schedule(varp); eq('variable payments', s.count, 166); eq('variable interest', r(s.tint), 1061430);
+s = schedule(fix); eq('fixed saved by extra', r(schedule(fix, { noExtra: true }).tint - s.tint), 153754);
+eq('10% balance yearly + lump payments', schedule(Object.assign({}, varp, { xtype: 'pbal', xval: .10, xfreq: 'yearly', lump: 200000, lumpAt: 30 })).count, 134);
+eq('SCB total interest', r(schedule(Object.assign({}, base, { rmode: 'bank', steps: bankSteps(scb) }), { noExtra: true }).tint), 1104331);
+eq('+2% highest installment', +schedule(Object.assign({}, varp, { shock: .02, shockFrom: 4 })).hi.toFixed(2), 25457.17, 0.005);
+const iv = investVsPrepay(varp, 5000, .05, 0); eq('prepay pot', r(iv.A), 1359537); eq('invest pot', r(iv.B), 1336445);
+eq('tax on 600k', pit(600000), 42500);
+const rf = refiCompare(varp, { at: 36, retRate: .045, retFee: 0, bank: scb, penPct: .03, penYears: 3, regPct: .01, other: 3000, topAmt: 0, topRate: .065, topYears: 10 });
+eq('refi balance', r(rf.B), 2518617); eq('stay interest', r(rf.stay.int), 899586); eq('retention interest', r(rf.ret.int), 745540); eq('refi saving', r(rf.refi.save), 179661);
+const fees = 4e6 * .0001 * .5 + 3e6 * .0001 + Math.min(3e6 * .0005, 10000) + 3000;
+const rv = rentVsBuy(varp, { rent: 15000, rentUp: .03, years: 10, growth: .02, ret: .05, sell: .03, yearly: 3000, upfront: fees, vac: .08 });
+eq('buy wealth 10y', r(rv.buy), 3481880); eq('rent wealth 10y', r(rv.rent), 2600528);
+const pl = schedule(varp); eq('tracker ahead', r(trackerReplay(varp, { 1: pl.rows[0].paid, 2: pl.rows[1].paid, 3: 30000 }).ahead), 7283);
+const sh = Object.assign({}, varp, { shock: .01, shockFrom: 1 }); eq('what-if normalize', r(schedule(normalizePlan(sh)).tint), r(schedule(sh).tint));
+if (fail) { console.error(fail + ' check(s) failed'); process.exit(1); } else console.log('all checks passed');
