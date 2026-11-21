@@ -1,4 +1,6 @@
-# Thai Home Loan Planner
+# Home Loan Planner
+
+Developed by **Henry Poudel** · [hennrywebworm@gmail.com](mailto:hennrywebworm@gmail.com) · WhatsApp [+66 87 407 5116](https://wa.me/66874075116)
 
 Plan a home loan in Thailand: compare bank offers, stress-test rate rises, track your payments, check refinancing, and prepare your application – in 8 languages (English, ไทย, မြန်မာ, नेपाली, हिन्दी, Tiếng Việt, 中文, 日本語).
 

@@ -7,7 +7,7 @@ function createWindow() {
     width: 1280,
     height: 860,
     minWidth: 380,
-    title: 'Thai Home Loan Planner',
+    title: 'Home Loan Planner',
     icon: path.join(__dirname, 'icon.png'),
     backgroundColor: '#F3F5F9',
     webPreferences: { contextIsolation: true, sandbox: true },

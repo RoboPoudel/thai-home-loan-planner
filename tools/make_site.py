@@ -13,7 +13,7 @@ head = """<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Home Loan">
+<meta name="apple-mobile-web-app-title" content="Home Loan Planner">
 """
 sw = """<script>
 if ('serviceWorker' in navigator && location.protocol === 'https:' && !/androidplatform\\.net$/.test(location.hostname)) {

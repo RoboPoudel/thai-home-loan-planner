@@ -31,11 +31,11 @@ jobs:
         working-directory: android
         run: gradle assembleDebug --no-daemon
       - name: Rename APK
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk ThaiHomeLoanPlanner-${VERSION_NAME}.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk HomeLoanPlanner-${VERSION_NAME}.apk
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
-          path: ThaiHomeLoanPlanner-*.apk
+          path: HomeLoanPlanner-*.apk
 
   windows:
     runs-on: windows-latest
@@ -76,10 +76,12 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ env.VERSION_NAME }}
-          name: Thai Home Loan Planner ${{ env.VERSION_NAME }}
+          name: Home Loan Planner ${{ env.VERSION_NAME }}
           make_latest: 'true'
           body: |
             **Android:** download the `.apk`, open it on your phone and allow installing from this source.
             **Windows:** `-portable.exe` runs without installing; `-setup.exe` installs it with a Start-menu shortcut. Windows SmartScreen may warn because the app isn't code-signed – choose *More info → Run anyway*.
+            Developed by Henry Poudel · hennrywebworm@gmail.com · WhatsApp +66 87 407 5116 (https://wa.me/66874075116)
+
             **Web / iPhone:** https://robopoudel.github.io/thai-home-loan-planner/ (Share → Add to Home Screen).
           files: out/*

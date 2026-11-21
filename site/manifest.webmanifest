@@ -1,7 +1,7 @@
 {
-  "name": "Thai Home Loan Planner",
+  "name": "Home Loan Planner",
   "short_name": "Home Loan",
-  "description": "Plan a Thai home loan: compare banks, stress-test rates, track payments, refinance, and prepare your application.",
+  "description": "Developed by Henry Poudel. Plan a Thai home loan: compare banks, stress-test rates, track payments, refinance, and prepare your application.",
   "start_url": "./#plan",
   "scope": "./",
   "display": "standalone",

@@ -1,9 +1,9 @@
 {
   "name": "thai-home-loan-planner",
-  "productName": "Thai Home Loan Planner",
+  "productName": "Home Loan Planner",
   "version": "1.0.0",
   "description": "Plan a Thai home loan: compare banks, stress-test rates, track payments and prepare your application.",
-  "author": "RoboPoudel",
+  "author": "Henry Poudel <hennrywebworm@gmail.com>",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "build": {
     "appId": "th.homeloan.planner",
-    "productName": "Thai Home Loan Planner",
+    "productName": "Home Loan Planner",
     "files": [
       "main.js",
       "app/**/*"
@@ -26,17 +26,18 @@
     },
     "win": {
       "icon": "icon.png",
-      "artifactName": "ThaiHomeLoanPlanner-${version}-${arch}-${target}.${ext}"
+      "artifactName": "HomeLoanPlanner-${version}-${arch}-${target}.${ext}"
     },
     "portable": {
-      "artifactName": "ThaiHomeLoanPlanner-${version}-portable.exe"
+      "artifactName": "HomeLoanPlanner-${version}-portable.exe"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "ThaiHomeLoanPlanner-${version}-setup.exe"
+      "artifactName": "HomeLoanPlanner-${version}-setup.exe"
     },
-    "publish": null
+    "publish": null,
+    "copyright": "Developed by Henry Poudel"
   },
   "repository": {
     "type": "git",
