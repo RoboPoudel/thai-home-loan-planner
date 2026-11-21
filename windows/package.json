@@ -17,10 +17,29 @@
   "build": {
     "appId": "th.homeloan.planner",
     "productName": "Thai Home Loan Planner",
-    "files": ["main.js", "app/**/*"],
-    "directories": { "output": "dist" },
-    "win": { "icon": "icon.png", "artifactName": "ThaiHomeLoanPlanner-${version}-${arch}-${target}.${ext}" },
-    "portable": { "artifactName": "ThaiHomeLoanPlanner-${version}-portable.exe" },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "artifactName": "ThaiHomeLoanPlanner-${version}-setup.exe" }
+    "files": [
+      "main.js",
+      "app/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "icon.png",
+      "artifactName": "ThaiHomeLoanPlanner-${version}-${arch}-${target}.${ext}"
+    },
+    "portable": {
+      "artifactName": "ThaiHomeLoanPlanner-${version}-portable.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "ThaiHomeLoanPlanner-${version}-setup.exe"
+    },
+    "publish": null
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RoboPoudel/thai-home-loan-planner.git"
   }
 }
