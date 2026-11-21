@@ -14,6 +14,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
+import android.print.PrintAttributes;
+import android.print.PrintManager;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -102,8 +104,18 @@ public class MainActivity extends AppCompatActivity {
         web.saveState(outState);
     }
 
-    /** Lets the page save a generated file (the exported Excel planner) to Downloads. */
+    /** Lets the page save a generated file (the exported Excel planner) to Downloads, and print. */
     private class Bridge {
+        @JavascriptInterface
+        public void print(String title) {
+            runOnUiThread(() -> {
+                String job = (title == null || title.isEmpty()) ? "Home Loan Planner" : title;
+                PrintManager pm = (PrintManager) getSystemService(PRINT_SERVICE);
+                pm.print(job, web.createPrintDocumentAdapter(job),
+                        new PrintAttributes.Builder().setMediaSize(PrintAttributes.MediaSize.ISO_A4).build());
+            });
+        }
+
         @JavascriptInterface
         public void saveFile(String base64, String name) {
             byte[] data = Base64.decode(base64, Base64.DEFAULT);

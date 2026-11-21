@@ -141,7 +141,7 @@ footer.dev{font-size:13px;color:var(--ink);padding-bottom:6px} footer.dev a{colo
 .msg.a{background:var(--accent-soft);justify-self:start;border-bottom-left-radius:4px}
 .ask{display:flex;gap:8px;margin-top:10px}
 .ask textarea{flex:1;font:inherit;color:var(--ink);background:var(--accent-soft);border:0;border-bottom:2px solid var(--accent);border-radius:8px;padding:8px 10px;resize:vertical;min-height:44px}
-@media print{header.app,footer,nav,.noprint{display:none!important} .view{display:none!important} #v-apply.on{display:block!important} #v-apply .panel:not(#sheetpanel){display:none} body{background:#fff}}
+@media print{header.app,footer,nav,.noprint{display:none!important} .view:not(.on){display:none!important} .view.on{display:block!important} .panel{break-inside:avoid;box-shadow:none} .stack,.tiles{gap:10px} #v-apply .panel:not(#sheetpanel){display:none} body{background:#fff}}
 </style>
 </head>
 <body>
@@ -1121,6 +1121,12 @@ let actTimer=null;
 function saveAct(){ store.set('act',ACT); if(!DB) return; clearTimeout(actTimer); actTimer=setTimeout(()=>{ DB.doc('tracker/main').set({act:ACT,at:Date.now(),by:ME}).catch(()=>{$('tr-sync').textContent=T('fm_err');}); },800); }
 function b64e(s){ return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
 function b64d(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); return decodeURIComponent(escape(atob(s))); }
+/* Windows app: PDF preview window; Android app: system print screen; browsers: normal print */
+function printPage(title){
+  if(window.desktop&&window.desktop.printPreview){ window.desktop.printPreview('Home Loan Planner').catch(()=>window.print()); return; }
+  if(window.AndroidBridge&&window.AndroidBridge.print){ window.AndroidBridge.print('Home Loan Planner'); return; }
+  window.print();
+}
 function copyText(t){ if(navigator.clipboard&&navigator.clipboard.writeText) return navigator.clipboard.writeText(t);
   return new Promise((ok,no)=>{ const ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); const r=document.execCommand('copy'); ta.remove(); r?ok():no(); }); }
 async function saveFile(blob,filename){
@@ -1180,7 +1186,7 @@ document.addEventListener('click',e=>{
   const ld=e.target.closest('[data-load]'); if(ld){ loadPlan(SAVED[+ld.dataset.load].q); location.hash='#plan'; return; }
   const sd=e.target.closest('[data-sdel]'); if(sd){ SAVED.splice(+sd.dataset.sdel,1); renderExtras(); return; }
   if(e.target.id==='cty-th'||e.target.id==='cty-mm'){ CTY=e.target.id==='cty-th'?'th':'mm'; renderExtras(); return; }
-  if(e.target.id==='print'){ window.print(); return; }
+  if(e.target.id==='print'){ printPage(T('sh_title')); return; }
   const ch=e.target.closest('[data-ask]'); if(ch){ ask(ch.dataset.ask); return; }
   if(e.target.id==='ai-send'){ const q=$('ai-q').value; $('ai-q').value=''; ask(q); return; }
   if(e.target.id==='copy'){ copyText(window.__sum).then(()=>$('copied').textContent=T('copied')).catch(()=>$('copied').textContent=T('copyfail')); }

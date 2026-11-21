@@ -19,6 +19,7 @@
     "productName": "Home Loan Planner",
     "files": [
       "main.js",
+      "preload.js",
       "app/**/*"
     ],
     "directories": {
