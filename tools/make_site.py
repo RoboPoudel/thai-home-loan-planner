@@ -3,12 +3,14 @@
 Adds the web-app manifest, icons and the offline service worker. Run from the repo root:
     python3 tools/make_site.py
 """
-import pathlib, re
+import os, pathlib, re
 
 root = pathlib.Path(__file__).resolve().parent.parent
 src = (root / "app" / "index.html").read_text(encoding="utf-8")
 
-head = """<link rel="manifest" href="manifest.webmanifest">
+version = os.environ.get("VERSION_NAME", "web")
+head = f"""<script>window.APP_VERSION={version!r};</script>
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2E5BE6">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">

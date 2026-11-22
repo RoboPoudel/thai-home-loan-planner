@@ -14,9 +14,23 @@ android {
         versionName System.getenv('VERSION_NAME') ?: '1.0'
     }
 
+    // Release builds are signed with the permanent key from the repo's Actions secrets,
+    // so every new APK installs over the previous one.
+    signingConfigs {
+        release {
+            def ks = System.getenv('ANDROID_KEYSTORE')
+            if (ks) {
+                storeFile file(ks)
+                storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD')
+                keyAlias System.getenv('ANDROID_KEY_ALIAS') ?: 'homeloan'
+                keyPassword System.getenv('ANDROID_KEYSTORE_PASSWORD')
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
+            if (System.getenv('ANDROID_KEYSTORE')) signingConfig signingConfigs.release
         }
     }
     compileOptions {

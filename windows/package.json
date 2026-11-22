@@ -37,11 +37,18 @@
       "allowToChangeInstallationDirectory": true,
       "artifactName": "HomeLoanPlanner-${version}-setup.exe"
     },
-    "publish": null,
+    "publish": {
+      "provider": "github",
+      "owner": "RoboPoudel",
+      "repo": "thai-home-loan-planner"
+    },
     "copyright": "Developed by Henry Poudel"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/RoboPoudel/thai-home-loan-planner.git"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
   }
 }

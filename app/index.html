@@ -104,6 +104,56 @@ a{color:var(--accent)}
 footer{max-width:1240px;margin:0 auto;padding:0 20px 30px;color:var(--muted);font-size:12px}
 footer.dev{font-size:13px;color:var(--ink);padding-bottom:6px} footer.dev a{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* settings, wizard, dialogs */
+.iconbtn{font:inherit;font-size:18px;line-height:1;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;width:34px;height:34px;cursor:pointer}
+.dlg{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);padding:20px 22px;max-width:420px;width:calc(100% - 32px)}
+.dlg.wide{max-width:640px}
+.dlg::backdrop{background:rgba(10,15,30,.45)}
+.swatches{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
+.sw{width:34px;height:34px;border-radius:50%;border:3px solid var(--surface);box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+.wzhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.wznav{display:flex;align-items:center;gap:8px;margin-top:18px}
+.wzq{font-family:var(--display);font-size:17px;margin:14px 0 4px}
+.choice{display:grid;gap:8px;margin-top:8px}
+.choice label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.choice label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.wzres{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px}
+.updbar[hidden]{display:none!important}
+.updbar{max-width:1240px;margin:0 auto 6px;padding:8px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--accent-soft);border-radius:10px;font-size:14px}
+/* vault */
+.vault{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-left:auto}
+.vbtn{font:inherit;font-size:12px;border:1px dashed var(--accent);color:var(--accent);background:none;border-radius:8px;padding:3px 8px;cursor:pointer;white-space:nowrap}
+.vt{width:40px;height:40px;border:1px solid var(--line);border-radius:6px;padding:0;overflow:hidden;background:var(--accent-soft);cursor:pointer;font-size:11px;color:var(--ink)}
+.vt img{width:100%;height:100%;object-fit:cover;display:block}
+#v-body img{max-width:100%;max-height:70vh;display:block;margin:0 auto;border-radius:8px}
+/* reminders */
+.rmlist{list-style:none;padding:0;margin:10px 0;display:grid;gap:6px}
+.rmlist li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:6px 0;font-size:14px}
+.rmlist .d{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.rmlist .soon{color:var(--warn)}
+/* report */
+.report{background:#fff;color:#101828;border:1px solid var(--line);border-radius:var(--r);padding:28px 32px;max-width:860px;margin:0 auto;font-size:13px}
+.report h1{font-size:22px;margin-bottom:2px} .report h2{font-size:15px;margin:18px 0 6px;color:#2E5BE6}
+.report .pg{break-after:page;page-break-after:always}
+.report .pg:last-child{break-after:auto}
+.report table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.report th,.report td{border-bottom:1px solid #E3E7EF;padding:5px 6px;text-align:right;font-size:12px}
+.report th:first-child,.report td:first-child{text-align:left}
+.report th{color:#5B6476;font-weight:600}
+.report .kg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.report .kg div{border:1px solid #E3E7EF;border-top:3px solid #2E5BE6;border-radius:8px;padding:8px}
+.report .kg b{display:block;font-size:16px} .report .kg span{font-size:11px;color:#5B6476}
+.report .meta{color:#5B6476;font-size:12px}
+.report .foot{margin-top:18px;color:#5B6476;font-size:11px;border-top:1px solid #E3E7EF;padding-top:8px}
+.report #rp-chart svg{max-height:170px} .report .kg div{padding:6px 8px} .report h2{margin-top:12px}
+.report svg text{fill:#5B6476;font-size:11px}
+.report .blank{border-bottom:1px solid #98A2B6;display:inline-block;min-width:220px;height:1em}
+@media print{.report{border:0;padding:0;max-width:none} body{-webkit-print-color-adjust:exact;print-color-adjust:exact} #v-report .panel{display:none}}
+@media (max-width:640px){.report .kg{grid-template-columns:repeat(2,1fr)} .report{padding:16px}}
+#wiz-open{white-space:nowrap}
+@media (max-width:560px){.brand span{display:none} .bar{gap:8px;padding:10px 12px} #wiz-open{font-size:12px;padding:5px 8px} .report{overflow-x:auto;padding:12px}}
+
 /* what-if */
 .sl{margin-bottom:14px}
 .sl .top{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
@@ -149,10 +199,13 @@ footer.dev{font-size:13px;color:var(--ink);padding-bottom:6px} footer.dev a{colo
   <div class="bar">
     <div class="brand"><h1>Home Loan Planner</h1><span data-t="tag">Plan, compare banks, stress-test and prepare your application</span></div>
     <div class="spacer"></div>
+    <button class="btn" id="wiz-open" data-t="wz_open">Start here</button>
+    <button class="iconbtn" id="set-open" aria-label="Settings" title="Settings">⚙</button>
     <select id="lang" class="langsel" aria-label="Language"><option value="en">English</option><option value="th">ไทย</option><option value="my">မြန်မာ</option><option value="ne">नेपाली</option><option value="hi">हिन्दी</option><option value="vi">Tiếng Việt</option><option value="zh">中文</option><option value="ja">日本語</option></select>
   </div>
+  <div id="upd" class="updbar" hidden></div>
   <nav class="tabs" aria-label="Sections">
-    <a href="#plan" data-t="t_plan">Plan</a><a href="#banks" data-t="t_banks">Bank rates</a><a href="#afford" data-t="t_afford">Affordability</a>
+    <a href="#loans" data-t="t_loans">My loans</a><a href="#plan" data-t="t_plan">Plan</a><a href="#banks" data-t="t_banks">Bank rates</a><a href="#afford" data-t="t_afford">Affordability</a>
     <a href="#costs" data-t="t_costs">Costs &amp; tax</a><a href="#stress" data-t="t_stress">Stress test</a><a href="#invest" data-t="t_invest">Invest vs prepay</a>
     <a href="#docs" data-t="t_docs">Documents</a><a href="#whatif" data-t="t_whatif">What-if</a><a href="#journey" data-t="t_journey">Journey</a>
     <a href="#tracker" data-t="t_tracker">Tracker</a><a href="#refi" data-t="t_refi">Refinance</a><a href="#rentbuy" data-t="t_rentbuy">Rent vs buy</a>
@@ -305,6 +358,12 @@ footer.dev{font-size:13px;color:var(--ink);padding-bottom:6px} footer.dev a{colo
     <p class="hint" data-t="jr_n">Typical Thai timings – your developer and bank set the real ones. Approval usually takes 2–4 weeks after a complete application.</p>
     <div id="jr-next" class="banner good" style="margin-top:12px"></div></div>
   <div class="panel"><ol class="tl" id="tl"></ol></div>
+  <div class="panel" style="grid-column:1/-1"><h2 data-t="rm_h">Reminders</h2><p class="sub" data-t="rm_s">Payments, rate changes, the end of your promotion and tax time</p>
+    <div class="field" style="max-width:220px"><label for="payday" data-t="rm_day">Payment day of the month</label><input id="payday" type="number" min="1" max="28" value="1"></div>
+    <ul class="rmlist" id="rmlist"></ul>
+    <p><button class="btn solid" id="rm-ics" data-t="rm_ics">Add to my calendar (.ics)</button> <button class="btn" id="rm-phone" data-t="rm_phone" hidden>Turn on phone reminders</button></p>
+    <p class="hint" id="rm-msg"></p>
+    <p class="hint" data-t="rm_n">The calendar file works with Google Calendar, Outlook and iPhone: open it after downloading. Each reminder pops up the day before.</p></div>
 </section>
 <!-- APPLY -->
 <section class="view wide" id="v-apply">
@@ -409,14 +468,53 @@ footer.dev{font-size:13px;color:var(--ink);padding-bottom:6px} footer.dev a{colo
       <div class="bankcards" id="ins"></div></div>
   </div>
 </section>
+<!-- MY LOANS -->
+<section class="view wide" id="v-loans">
+  <div class="panel"><h2 data-t="ln_h">My loans</h2><p class="sub" data-t="ln_s">Keep several homes or loans side by side. The one marked “open” is the one every tab shows.</p>
+    <div class="tiles" id="ln-tiles"></div>
+    <div class="scroll" style="margin-top:12px"><table class="num" id="lntbl"></table></div>
+    <p style="margin-top:12px"><button class="btn solid" id="ln-add" data-t="ln_add">+ Add a loan</button> <button class="btn" id="ln-copy" data-t="ln_copy">Copy the open loan</button></p>
+    <p class="hint" data-t="ln_n">Monthly is this month's payment, or the first one for loans that haven't started. Combined debt-to-income uses the income on the open loan's Affordability tab.</p></div>
+  <div class="panel"><h2 data-t="ln_c">Balances over time</h2><div id="ch-loans"></div><div class="legend" id="ln-legend"></div></div>
+</section>
+<!-- REPORT -->
+<section class="view wide" id="v-report">
+  <div class="panel noprint"><h2 data-t="rp_h">Bank-ready report</h2><p class="sub" data-t="rp_s">A tidy, multi-page report of your plan to print or save as PDF and bring to the bank</p>
+    <p><button class="btn solid" id="rp-print" data-t="rp_print">Print / save as PDF</button> <a class="btn" href="#summary" data-t="rp_back">Back</a></p></div>
+  <div id="report" class="report"></div>
+</section>
 <!-- SUMMARY -->
 <section class="view wide" id="v-summary">
   <div class="panel"><h2 data-t="sum_h">Your home-loan summary</h2><p class="sub" data-t="sum_s">Copy it into a message to your family or loan officer</p>
     <dl class="kv num" id="sum-kv" style="max-width:640px"></dl>
-    <p style="margin-top:14px"><button class="btn solid" id="copy" data-t="copy">Copy summary</button> <span class="hint" id="copied"></span></p>
+    <p style="margin-top:14px"><a class="btn solid" href="#report" data-t="rp_open">Bank-ready PDF report</a> <button class="btn" id="copy" data-t="copy">Copy summary</button> <span class="hint" id="copied"></span></p>
     <p class="hint" data-t="sum_n">Estimates from your own inputs; bank rates and fees change. Not financial advice – confirm with your bank before signing.</p></div>
 </section>
 </main>
+<dialog id="setdlg" class="dlg" aria-labelledby="set-h">
+  <h2 id="set-h" data-t="st_h">Settings</h2>
+  <div class="secthead" data-t="th_mode">Appearance</div>
+  <div class="seg" role="group" aria-label="Appearance"><button data-theme="system" data-t="th_sys">System</button><button data-theme="light" data-t="th_light">Light</button><button data-theme="dark" data-t="th_dark">Dark</button></div>
+  <div class="secthead" data-t="th_col">Colour</div>
+  <div class="swatches" id="swatches"></div>
+  <div class="secthead" data-t="rt_h">Bank rates</div>
+  <p class="hint" id="rt-info"></p>
+  <div class="secthead" data-t="ver_h">App version</div>
+  <p class="hint" id="ver-info"></p>
+  <p><button class="btn" id="ver-check" data-t="ver_check" hidden>Check for updates</button></p>
+  <p style="text-align:right;margin-top:16px"><button class="btn solid" data-close data-t="close">Close</button></p>
+</dialog>
+<dialog id="wizdlg" class="dlg wide" aria-labelledby="wz-h">
+  <div class="wzhead"><h2 id="wz-h" data-t="wz_h">Let's set up your loan</h2><span class="hint" id="wz-step"></span></div>
+  <div class="prog"><b id="wz-prog"></b></div>
+  <div id="wz-body"></div>
+  <p class="wznav"><button class="btn" id="wz-skip" data-t="wz_skip">Skip</button><span class="spacer"></span><button class="btn" id="wz-back" data-t="wz_back">Back</button> <button class="btn solid" id="wz-next" data-t="wz_next">Next</button></p>
+</dialog>
+<dialog id="vdlg" class="dlg wide" aria-label="Document">
+  <div id="v-body"></div>
+  <p class="wznav"><button class="btn" id="v-del" data-t="vt_del">Delete</button><span class="spacer"></span><button class="btn" id="v-dl" data-t="vt_dl">Download</button> <button class="btn solid" data-close data-t="close">Close</button></p>
+</dialog>
+<input type="file" id="vault-in" accept="image/*,application/pdf" multiple hidden>
 <footer class="dev"><span data-t="dev_by">Developed by</span> <b>Henry Poudel</b> · <a href="mailto:hennrywebworm@gmail.com?subject=Home%20Loan%20Planner">hennrywebworm@gmail.com</a> · <a href="https://wa.me/66874075116" target="_blank" rel="noopener" aria-label="WhatsApp +66 87 407 5116">WhatsApp +66 87 407 5116</a></footer>
 <footer data-t="foot" style="padding-top:0">Your inputs stay in this browser only. The full Excel planner has more pages and 8 languages.</footer>
 
@@ -1114,7 +1212,7 @@ async function initShared(){
   const t=setTimeout(()=>{$('fm-status').textContent='';},10000);
   db.collection('plans').orderBy('at','desc').limit(30).onSnapshot(s=>{ clearTimeout(t); SHARED=s.docs.map(d=>Object.assign({id:d.id},d.data())); renderMore(); },e=>{ $('fm-status').textContent=T('fm_err'); });
   db.collection('notes').orderBy('at','desc').limit(30).onSnapshot(s=>{ NOTES=s.docs.map(d=>d.data()); renderMore(); },()=>{});
-  db.doc('tracker/main').onSnapshot(d=>{ const v=d.exists?d.data():null; if(v&&v.act&&JSON.stringify(v.act)!==JSON.stringify(ACT)){ ACT=v.act; renderMore(); } },()=>{});
+  subTracker();
   renderMore();
 }
 let actTimer=null;
@@ -1142,6 +1240,7 @@ function route(){ const h=(location.hash||'#plan').slice(1); const v=document.ge
 window.addEventListener('hashchange',route);
 $('bank').innerHTML=BANKS.map((b,i)=>`<option value="${i}">${esc(b.n)}</option>`).join(''); $('rf-bank').innerHTML=$('bank').innerHTML; $('rf-bank').value=5;
 IDS.push('rf-at','rf-rr','rf-rf','rf-bank','rf-pp','rf-py','rf-reg','rf-oth','tu-amt','tu-r','tu-y','rb-rent','rb-up','rb-y','rb-g','rb-r','rb-sell','rb-vac');
+window.__firstRun=store.get('price')==null;
 IDS.forEach(id=>{const v=store.get(id); if(v!=null&&$(id)) $(id).value=v;});
 const sSt=store.get('steps'); if(Array.isArray(sSt)&&sSt.length) STEPS=sSt; const sB=store.get('bank'); if(sB!=null) BANK=sB; $('bank').value=BANK;
 const sD=store.get('docs'); if(sD) DOCDONE=sD; const sL=store.get('lang'); if(sL) LANG=sL;
@@ -1194,6 +1293,305 @@ document.addEventListener('click',e=>{
 document.addEventListener('keydown',e=>{ if(e.target.id==='ai-q'&&e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); const q=e.target.value; e.target.value=''; ask(q); } });
 if((location.hash||'').startsWith('#p=')){ try{ const o=JSON.parse(b64d(location.hash.slice(3))); history.replaceState(null,'',location.pathname+location.search+'#plan'); setTimeout(()=>importInputs(o),0); }catch(e){} }
 stepsUI(); route(); applyLang(); initShared();
+</script>
+<script id="i18n2">window.I18N2={"th":{"wz_open":"เริ่มที่นี่","t_loans":"สินเชื่อของฉัน","rm_h":"การแจ้งเตือน","rm_s":"ค่างวด ดอกเบี้ยเปลี่ยน หมดโปรโมชัน และช่วงยื่นภาษี","rm_day":"วันที่ผ่อนของเดือน","rm_ics":"เพิ่มลงปฏิทินของฉัน (.ics)","rm_phone":"เปิดการแจ้งเตือนบนมือถือ","rm_n":"ไฟล์ปฏิทินใช้กับ Google Calendar, Outlook และ iPhone ได้: เปิดไฟล์หลังดาวน์โหลด แต่ละรายการจะเตือนล่วงหน้า 1 วัน","ln_h":"สินเชื่อของฉัน","ln_s":"เก็บบ้านหรือสินเชื่อหลายรายการไว้เทียบกัน รายการที่ “เปิดอยู่” คือรายการที่ทุกแท็บแสดง","ln_add":"+ เพิ่มสินเชื่อ","ln_copy":"คัดลอกสินเชื่อที่เปิดอยู่","ln_n":"ค่างวดคืองวดของเดือนนี้ หรืองวดแรกสำหรับสินเชื่อที่ยังไม่เริ่ม ภาระหนี้รวมใช้รายได้จากแท็บความสามารถผ่อนของสินเชื่อที่เปิดอยู่","ln_c":"ยอดหนี้ตามเวลา","rp_h":"รายงานพร้อมยื่นธนาคาร","rp_s":"รายงานหลายหน้าของแผนคุณ พิมพ์หรือบันทึกเป็น PDF แล้วนำไปธนาคาร","rp_print":"พิมพ์ / บันทึกเป็น PDF","rp_back":"กลับ","rp_open":"รายงาน PDF สำหรับธนาคาร","st_h":"การตั้งค่า","th_mode":"รูปแบบการแสดงผล","th_sys":"ตามระบบ","th_light":"สว่าง","th_dark":"มืด","th_col":"สี","rt_h":"ดอกเบี้ยธนาคาร","ver_h":"เวอร์ชันแอป","ver_check":"ตรวจหาอัปเดต","close":"ปิด","wz_h":"มาตั้งค่าสินเชื่อของคุณกัน","wz_skip":"ข้าม","wz_back":"ย้อนกลับ","wz_next":"ถัดไป","vt_del":"ลบ","vt_dl":"ดาวน์โหลด","ln_default":"บ้านของฉัน","ln_new":"สินเชื่อ {n}","ln_cols":["สินเชื่อ","ธนาคาร / ดอกเบี้ย","ยอดกู้","ค่างวดตอนนี้","ยอดหนี้ตอนนี้","ผ่อนหมด","ดอกเบี้ยรวม",""],"ln_open":"เปิด","ln_isopen":"เปิดอยู่","ln_rename":"เปลี่ยนชื่อ","ln_del":"ลบ","ln_count":"จำนวนสินเชื่อ","ln_month":"ค่างวดรวมทุกสินเชื่อ","ln_bal":"ยอดหนี้ตอนนี้","ln_dsr":"ภาระหนี้ต่อรายได้รวม","ln_free":"ปลอดหนี้","ln_total":"รวม","ln_ask":"ชื่อสินเชื่อนี้:","ln_confirm":"ลบ “{n}” ใช่ไหม? ย้อนกลับไม่ได้","ln_notyet":"เริ่ม {d}","th_cols":["น้ำเงิน","เขียว","เขียวอมฟ้า","ม่วง","ส้ม","ชมพู"],"rt_built":"ใช้อัตราที่มากับเวอร์ชันนี้ ({d})","rt_live":"อัปเดตอัตรา {d} – โหลดอัตโนมัติ","rt_offline":"อัตราจาก {d} (บันทึกในเครื่องนี้)","rates_asof":"อัตรา ณ {d}","ver_web":"เว็บไซต์ – เป็นเวอร์ชันล่าสุดเสมอ","ver_app":"เวอร์ชัน {v}","ver_new":"มีเวอร์ชัน {v} ใหม่แล้ว","ver_get":"ดาวน์โหลด","ver_latest":"คุณใช้เวอร์ชันล่าสุดแล้ว","ver_err":"ตรวจหาอัปเดตไม่ได้ – ออนไลน์อยู่หรือไม่?","ver_auto":"อัปเดตจะติดตั้งอัตโนมัติเมื่อปิดแอป","wz_steps":"ขั้นที่ {a} จาก {b}","wz_done":"เสร็จสิ้น","wz_q1":"ใครเป็นผู้ซื้อ?","wz_q2":"บ้านและเงินดาวน์","wz_q3":"รายได้ของคุณ","wz_q4":"ระยะเวลากู้และวันที่","wz_q5":"อัตราดอกเบี้ย","wz_price":"ราคาบ้าน (บาท)","wz_downp":"เงินดาวน์ (%)","wz_inc":"รายได้ต่อเดือน (บาท)","wz_coinc":"รายได้ผู้กู้ร่วมต่อเดือน (บาท, 0 ถ้าไม่มี)","wz_debts":"หนี้อื่นต่อเดือน (บาท)","wz_years":"จำนวนปีที่ผ่อน","wz_start":"เดือนที่เริ่มผ่อน","wz_tdate":"วันโอน (ประมาณได้)","wz_r_best":"เลือกธนาคารที่ดอกเบี้ยรวมต่ำสุดให้ฉัน","wz_r_bank":"มีธนาคารในใจแล้ว (เลือกในแท็บแผน)","wz_r_fixed":"ใช้อัตราคงที่อัตราเดียว","wz_r_fixedv":"อัตราคงที่ (%)","wz_res":"แผนของคุณพร้อมแล้ว","wz_go":"ขั้นต่อไปที่แนะนำ","wz_next_aff":"ค่างวดเกินเกณฑ์ธนาคาร – ดูแท็บความสามารถผ่อนว่าแบบไหนเหมาะ","wz_next_docs":"ผ่อนไหว ขั้นต่อไป: เตรียมเอกสาร","wz_next_tight":"ผ่อนไหวแต่ตึง – ลองปรับในแท็บลองปรับ","wz_open_tab":"ไปที่นั่น","vt_add":"📎 เพิ่มรูป / PDF","vt_err":"บันทึกไฟล์ในเครื่องนี้ไม่ได้","vt_conf":"ลบไฟล์นี้?","rm_pay":"ค่างวดบ้าน ≈ {x} บาท","rm_payrow":"ทุกเดือนวันที่ {d} ถึง {e}","rm_rate":"ดอกเบี้ยเปลี่ยนเป็น {r}","rm_retain":"ขอธนาคารลดดอกเบี้ย (Retention)","rm_refi":"หมดโปรโมชัน – เทียบข้อเสนอรีไฟแนนซ์","rm_tax":"ขอหนังสือรับรองดอกเบี้ยเพื่อยื่นภาษี","rm_last":"งวดสุดท้าย","rm_ok":"บันทึกไฟล์ปฏิทินแล้ว – เปิดไฟล์เพื่อเพิ่มการแจ้งเตือน","rm_phone_ok":"เปิดการแจ้งเตือนบนมือถือแล้ว ({n} รายการ)","rm_phone_off":"ปิดการแจ้งเตือนบนมือถือแล้ว","rm_phone_stop":"ปิดการแจ้งเตือนบนมือถือ","rm_none":"ไม่มีการแจ้งเตือน – ตรวจสอบวันที่","rp_title":"รายงานสินเชื่อบ้าน","rp_prepared":"จัดทำเมื่อ {d} ด้วย Home Loan Planner","rp_applicant":"ผู้กู้","rp_name":"ชื่อ","rp_phone":"โทรศัพท์","rp_loan":"ทรัพย์และเงินกู้","rp_rates":"แผนอัตราดอกเบี้ย","rp_from":"ตั้งแต่ปีที่","rp_rate":"ดอกเบี้ย","rp_inst":"ค่างวด","rp_aff":"ความสามารถในการผ่อน","rp_costs":"เงินสดและค่าใช้จ่ายวันโอน","rp_stress":"ถ้าดอกเบี้ยขึ้น","rp_banks":"เทียบข้อเสนอธนาคาร (ไม่รวมการโปะ)","rp_refi":"หลังหมดโปรโมชัน (เปลี่ยนหลังปีที่ {y})","rp_sched":"ตารางรายปี","rp_yr":"ปี","rp_paid":"จ่าย","rp_int":"ดอกเบี้ย","rp_prin":"เงินต้น","rp_end":"ยอดหนี้สิ้นปี","rp_docs":"รายการเอกสาร","rp_done":"พร้อม","rp_todo":"ต้องเตรียม","rp_note":"ประมาณการจากข้อมูลของผู้กู้เอง อัตรา ค่าธรรมเนียม และกฎอาจเปลี่ยน – โปรดยืนยันกับธนาคาร ไม่ใช่คำแนะนำทางการเงิน","rp_chart":"ยอดหนี้คงเหลือ","rp_page":"หน้า {a} จาก {b}"},"my":{"wz_open":"ဤနေရာမှ စပါ","t_loans":"ကျွန်ုပ်၏ ချေးငွေများ","rm_h":"သတိပေးချက်များ","rm_s":"အရစ်ပေးငွေ၊ အတိုးပြောင်းခြင်း၊ ပရိုမိုးရှင်းကုန်ခြင်းနှင့် အခွန်ကာလ","rm_day":"လစဉ် ပေးချေသည့်ရက်","rm_ics":"ပြက္ခဒိန်သို့ ထည့်ရန် (.ics)","rm_phone":"ဖုန်းသတိပေးချက် ဖွင့်ရန်","rm_n":"ပြက္ခဒိန်ဖိုင်ကို Google Calendar၊ Outlook နှင့် iPhone တွင် သုံးနိုင်သည် – ဒေါင်းလုဒ်ပြီး ဖွင့်ပါ။ သတိပေးချက်တိုင်း တစ်ရက်ကြိုတင် ပေါ်လာမည်။","ln_h":"ကျွန်ုပ်၏ ချေးငွေများ","ln_s":"အိမ် သို့မဟုတ် ချေးငွေ အများအပြားကို ဘေးချင်းယှဉ်ထားပါ။ “ဖွင့်ထား” ဟု ပြထားသည့်တစ်ခုကို tab အားလုံးတွင် ပြသည်။","ln_add":"+ ချေးငွေ ထည့်ရန်","ln_copy":"ဖွင့်ထားသော ချေးငွေကို ကူးရန်","ln_n":"လစဉ်ငွေသည် ယခုလ၏ အရစ် (မစတင်သေးလျှင် ပထမအရစ်) ဖြစ်သည်။ စုစုပေါင်း ကြွေး/ဝင်ငွေကို ဖွင့်ထားသော ချေးငွေ၏ ဝင်ငွေဖြင့် တွက်သည်။","ln_c":"အချိန်အလိုက် ကျန်ငွေ","rp_h":"ဘဏ်သို့ တင်ရန် အစီရင်ခံစာ","rp_s":"သင့်စီမံကိန်း၏ စာမျက်နှာများစွာ အစီရင်ခံစာ – ပုံနှိပ် သို့မဟုတ် PDF သိမ်းပြီး ဘဏ်သို့ ယူသွားပါ","rp_print":"ပုံနှိပ် / PDF သိမ်း","rp_back":"နောက်သို့","rp_open":"ဘဏ်အတွက် PDF အစီရင်ခံစာ","st_h":"ဆက်တင်များ","th_mode":"အသွင်အပြင်","th_sys":"စနစ်အတိုင်း","th_light":"အလင်း","th_dark":"အမှောင်","th_col":"အရောင်","rt_h":"ဘဏ်အတိုးနှုန်း","ver_h":"အက်ပ်ဗားရှင်း","ver_check":"အပ်ဒိတ် စစ်ရန်","close":"ပိတ်","wz_h":"သင့်ချေးငွေကို စီစဉ်ကြစို့","wz_skip":"ကျော်","wz_back":"နောက်သို့","wz_next":"ရှေ့သို့","vt_del":"ဖျက်","vt_dl":"ဒေါင်းလုဒ်","ln_default":"ကျွန်ုပ်၏အိမ်","ln_new":"ချေးငွေ {n}","ln_cols":["ချေးငွေ","ဘဏ် / အတိုး","ချေးငွေပမာဏ","ယခုလ အရစ်","ယခု ကျန်ငွေ","ပြီးဆုံးချိန်","စုစုပေါင်းအတိုး",""],"ln_open":"ဖွင့်","ln_isopen":"ဖွင့်ထား","ln_rename":"အမည်ပြောင်း","ln_del":"ဖျက်","ln_count":"ချေးငွေ အရေအတွက်","ln_month":"လစဉ်ပေးငွေ (အားလုံး)","ln_bal":"ယခု ကျန်ကြွေး","ln_dsr":"စုစုပေါင်း ကြွေး/ဝင်ငွေ","ln_free":"ကြွေးကင်းမည့်ချိန်","ln_total":"စုစုပေါင်း","ln_ask":"ဤချေးငွေ၏ အမည်:","ln_confirm":"“{n}” ကို ဖျက်မလား? ပြန်ယူ၍ မရပါ။","ln_notyet":"{d} တွင် စမည်","th_cols":["အပြာ","အစိမ်း","စိမ်းပြာ","ခရမ်း","လိမ္မော်","ပန်းရောင်"],"rt_built":"ဤဗားရှင်းပါ နှုန်းများကို သုံးနေသည် ({d})။","rt_live":"{d} တွင် အပ်ဒိတ်လုပ်ထားသော နှုန်းများ – အလိုအလျောက် ယူထားသည်။","rt_offline":"{d} မှ နှုန်းများ (ဤစက်တွင် သိမ်းထား)။","rates_asof":"{d} အထိ နှုန်းများ။","ver_web":"ဝက်ဘ်ဆိုက် – အမြဲ နောက်ဆုံးဗားရှင်း။","ver_app":"ဗားရှင်း {v}","ver_new":"ဗားရှင်း {v} ရနိုင်ပြီ။","ver_get":"ဒေါင်းလုဒ်","ver_latest":"နောက်ဆုံးဗားရှင်း သုံးနေပြီ။","ver_err":"အပ်ဒိတ် စစ်၍ မရပါ – အင်တာနက် ရှိပါသလား?","ver_auto":"အက်ပ်ပိတ်သောအခါ အပ်ဒိတ်များ အလိုအလျောက် ထည့်သွင်းမည်။","wz_steps":"အဆင့် {b} အနက် {a}","wz_done":"ပြီးပြီ","wz_q1":"ဘယ်သူ ဝယ်မှာလဲ?","wz_q2":"အိမ်နှင့် ကြိုတင်ငွေ","wz_q3":"သင့်ဝင်ငွေ","wz_q4":"ချေးငွေကာလနှင့် ရက်စွဲများ","wz_q5":"အတိုးနှုန်း","wz_price":"အိမ်ဈေး (THB)","wz_downp":"ကြိုတင်ငွေ (%)","wz_inc":"လစဉ်ဝင်ငွေ (THB)","wz_coinc":"ပူးတွဲချေးသူ လစဉ်ဝင်ငွေ (THB၊ မရှိလျှင် 0)","wz_debts":"အခြား လစဉ်ကြွေးပေးငွေ (THB)","wz_years":"ဆပ်မည့် နှစ်","wz_start":"ပထမ ပေးချေမည့်လ","wz_tdate":"လွှဲပြောင်းရက် (ခန့်မှန်းလည်း ရ)","wz_r_best":"စုစုပေါင်းအတိုး အနည်းဆုံးဘဏ်ကို ရွေးပေးပါ","wz_r_bank":"စိတ်ထဲရှိသော ဘဏ်ရှိသည် (စီမံကိန်း tab တွင် ရွေးမည်)","wz_r_fixed":"ပုံသေနှုန်း တစ်ခုသုံးမည်","wz_r_fixedv":"ပုံသေနှုန်း (%)","wz_res":"သင့်စီမံကိန်း အဆင်သင့်ဖြစ်ပြီ","wz_go":"အကြံပြု နောက်တစ်ဆင့်","wz_next_aff":"အရစ်ငွေ ဘဏ်ကန့်သတ်ချက် ကျော်နေသည် – ပေးဆပ်နိုင်မှု tab တွင် ကြည့်ပါ။","wz_next_docs":"ပေးဆပ်နိုင်ပုံရသည်။ နောက်တစ်ဆင့်: စာရွက်စာတမ်း စုဆောင်းပါ။","wz_next_tight":"ရသော်လည်း ကျပ်သည် – အကယ်၍ tab ကို စမ်းကြည့်ပါ။","wz_open_tab":"သွားရန်","vt_add":"📎 ဓာတ်ပုံ / PDF ထည့်","vt_err":"ဤစက်တွင် ဖိုင် မသိမ်းနိုင်ပါ။","vt_conf":"ဤဖိုင်ကို ဖျက်မလား?","rm_pay":"အိမ်ချေးငွေ အရစ် ≈ {x} THB","rm_payrow":"လစဉ် {d} ရက်နေ့၊ {e} အထိ","rm_rate":"အတိုးနှုန်း {r} သို့ ပြောင်းမည်","rm_retain":"ဘဏ်ထံ retention နှုန်း တောင်းပါ","rm_refi":"ပရိုမိုးရှင်းကုန် – refinance ကမ်းလှမ်းချက်များ နှိုင်းယှဉ်ပါ","rm_tax":"အခွန်ပြန်တင်ရန် အတိုးထောက်ခံစာ ယူပါ","rm_last":"နောက်ဆုံးအရစ်","rm_ok":"ပြက္ခဒိန်ဖိုင် သိမ်းပြီး – သတိပေးချက်ထည့်ရန် ဖွင့်ပါ။","rm_phone_ok":"ဖုန်းသတိပေးချက် ဖွင့်ပြီး ({n} ခု)။","rm_phone_off":"ဖုန်းသတိပေးချက် ပိတ်ပြီး။","rm_phone_stop":"ဖုန်းသတိပေးချက် ပိတ်ရန်","rm_none":"သတိပေးချက် မရှိ – ရက်စွဲများ စစ်ပါ။","rp_title":"အိမ်ချေးငွေ အစီရင်ခံစာ","rp_prepared":"{d} တွင် Home Loan Planner ဖြင့် ပြင်ဆင်သည်","rp_applicant":"လျှောက်ထားသူ","rp_name":"အမည်","rp_phone":"ဖုန်း","rp_loan":"အိမ်နှင့် ချေးငွေ","rp_rates":"အတိုးနှုန်း အစီအစဉ်","rp_from":"နှစ်မှ","rp_rate":"နှုန်း","rp_inst":"အရစ်","rp_aff":"ပေးဆပ်နိုင်မှု","rp_costs":"လွှဲပြောင်းရက် ငွေနှင့် ကုန်ကျစရိတ်","rp_stress":"အတိုးတက်လျှင်","rp_banks":"ဘဏ်ကမ်းလှမ်းချက် နှိုင်းယှဉ် (အပိုမပါ)","rp_refi":"ပရိုမိုးရှင်းနောက် (နှစ် {y} နောက် ပြောင်းလျှင်)","rp_sched":"နှစ်အလိုက် ဇယား","rp_yr":"နှစ်","rp_paid":"ပေးငွေ","rp_int":"အတိုး","rp_prin":"အရင်း","rp_end":"နှစ်ကုန် ကျန်ငွေ","rp_docs":"စာရွက်စာတမ်း စာရင်း","rp_done":"အဆင်သင့်","rp_todo":"လုပ်ရန်","rp_note":"လျှောက်ထားသူ၏ ထည့်သွင်းချက်မှ ခန့်မှန်းချက်။ နှုန်း၊ ကြေးနှင့် စည်းမျဉ်း ပြောင်းနိုင်သည် – ဘဏ်နှင့် အတည်ပြုပါ။ ငွေကြေးအကြံဉာဏ် မဟုတ်။","rp_chart":"ချေးငွေ ကျန်ငွေ","rp_page":"စာမျက်နှာ {b} အနက် {a}"},"ne":{"wz_open":"यहाँबाट सुरु","t_loans":"मेरा ऋण","rm_h":"रिमाइन्डर","rm_s":"किस्ता, ब्याज परिवर्तन, प्रवर्द्धन अन्त्य र कर समय","rm_day":"महिनाको भुक्तानी दिन","rm_ics":"मेरो क्यालेन्डरमा थप्नुहोस् (.ics)","rm_phone":"फोन रिमाइन्डर खोल्नुहोस्","rm_n":"क्यालेन्डर फाइल Google Calendar, Outlook र iPhone मा चल्छ: डाउनलोडपछि खोल्नुहोस्। हरेक रिमाइन्डर एक दिन अघि आउँछ।","ln_h":"मेरा ऋण","ln_s":"धेरै घर वा ऋण साथसाथै राख्नुहोस्। “खुला” चिन्ह भएको ऋण सबै ट्याबमा देखिन्छ।","ln_add":"+ ऋण थप्नुहोस्","ln_copy":"खुला ऋण कपी गर्नुहोस्","ln_n":"मासिक भनेको यो महिनाको किस्ता हो, वा सुरु नभएका ऋणको पहिलो किस्ता। संयुक्त ऋण-आम्दानी खुला ऋणको आम्दानीबाट गनिन्छ।","ln_c":"समयसँगै बाँकी","rp_h":"बैंकमा लैजाने रिपोर्ट","rp_s":"तपाईंको योजनाको धेरै पानाको रिपोर्ट – छाप्नुहोस् वा PDF सुरक्षित गरी बैंक लैजानुहोस्","rp_print":"छाप्नुहोस् / PDF सुरक्षित","rp_back":"फर्कनुहोस्","rp_open":"बैंकका लागि PDF रिपोर्ट","st_h":"सेटिङ","th_mode":"रूप","th_sys":"प्रणाली अनुसार","th_light":"उज्यालो","th_dark":"अँध्यारो","th_col":"रङ","rt_h":"बैंक ब्याजदर","ver_h":"एप संस्करण","ver_check":"अपडेट जाँच्नुहोस्","close":"बन्द","wz_h":"तपाईंको ऋण मिलाऔं","wz_skip":"छोड्नुहोस्","wz_back":"पछाडि","wz_next":"अगाडि","vt_del":"मेटाउनुहोस्","vt_dl":"डाउनलोड","ln_default":"मेरो घर","ln_new":"ऋण {n}","ln_cols":["ऋण","बैंक / दर","ऋण रकम","अहिलेको मासिक","अहिलेको बाँकी","चुक्ता","कुल ब्याज",""],"ln_open":"खोल्नुहोस्","ln_isopen":"खुला","ln_rename":"नाम बदल्नुहोस्","ln_del":"मेटाउनुहोस्","ln_count":"ऋण संख्या","ln_month":"मासिक भुक्तानी (सबै ऋण)","ln_bal":"अहिले तिर्न बाँकी","ln_dsr":"संयुक्त ऋण-आम्दानी","ln_free":"ऋणमुक्त","ln_total":"जम्मा","ln_ask":"यो ऋणको नाम:","ln_confirm":"“{n}” मेटाउने? फिर्ता ल्याउन सकिँदैन।","ln_notyet":"{d} बाट सुरु","th_cols":["निलो","हरियो","टिल","बैजनी","सुन्तला","गुलाबी"],"rt_built":"यो संस्करणमा भएका दर प्रयोग हुँदैछ ({d})।","rt_live":"{d} मा अद्यावधिक दर – स्वचालित रूपमा लोड।","rt_offline":"{d} का दर (यो उपकरणमा सुरक्षित)।","rates_asof":"{d} सम्मका दर।","ver_web":"वेबसाइट – सधैं नयाँ संस्करण।","ver_app":"संस्करण {v}","ver_new":"संस्करण {v} उपलब्ध छ।","ver_get":"डाउनलोड","ver_latest":"तपाईंसँग नयाँ संस्करण छ।","ver_err":"अपडेट जाँच्न सकिएन – इन्टरनेट छ?","ver_auto":"एप बन्द गर्दा अपडेट आफैं इन्स्टल हुन्छ।","wz_steps":"{b} मध्ये चरण {a}","wz_done":"सकियो","wz_q1":"को किन्दैछ?","wz_q2":"घर र अग्रिम रकम","wz_q3":"तपाईंको आम्दानी","wz_q4":"ऋण अवधि र मिति","wz_q5":"ब्याजदर","wz_price":"घरको मूल्य (THB)","wz_downp":"अग्रिम रकम (%)","wz_inc":"मासिक आम्दानी (THB)","wz_coinc":"सह-ऋणीको मासिक आम्दानी (THB, नभए 0)","wz_debts":"अन्य मासिक ऋण भुक्तानी (THB)","wz_years":"तिर्ने वर्ष","wz_start":"पहिलो भुक्तानी महिना","wz_tdate":"हस्तान्तरण मिति (अनुमान भए पनि हुन्छ)","wz_r_best":"सबैभन्दा कम कुल ब्याज भएको बैंक छान्नुहोस्","wz_r_bank":"मनमा बैंक छ (योजना ट्याबमा छान्छु)","wz_r_fixed":"एउटै स्थिर दर","wz_r_fixedv":"स्थिर दर (%)","wz_res":"तपाईंको योजना तयार छ","wz_go":"सुझाव गरिएको अर्को चरण","wz_next_aff":"किस्ता बैंक सीमाभन्दा बढी छ – के मिल्छ तिर्न सक्ने क्षमता ट्याबमा हेर्नुहोस्।","wz_next_docs":"तिर्न सकिने देखिन्छ। अर्को: कागजात जम्मा गर्नुहोस्।","wz_next_tight":"मिल्छ तर कसिलो छ – यदि ट्याब प्रयोग गर्नुहोस्।","wz_open_tab":"त्यहाँ जानुहोस्","vt_add":"📎 फोटो / PDF थप्नुहोस्","vt_err":"यो उपकरणमा फाइल सुरक्षित गर्न सकिएन।","vt_conf":"यो फाइल मेटाउने?","rm_pay":"गृह ऋण किस्ता ≈ {x} THB","rm_payrow":"हरेक महिना {d} गते, {e} सम्म","rm_rate":"ब्याजदर {r} मा बदलिन्छ","rm_retain":"बैंकसँग रिटेन्सन दर माग्नुहोस्","rm_refi":"प्रवर्द्धन सकियो – रिफाइनान्स प्रस्ताव तुलना गर्नुहोस्","rm_tax":"कर विवरणका लागि ब्याज प्रमाणपत्र लिनुहोस्","rm_last":"अन्तिम किस्ता","rm_ok":"क्यालेन्डर फाइल सुरक्षित – रिमाइन्डर थप्न खोल्नुहोस्।","rm_phone_ok":"फोन रिमाइन्डर खुला ({n} वटा)।","rm_phone_off":"फोन रिमाइन्डर बन्द।","rm_phone_stop":"फोन रिमाइन्डर बन्द गर्नुहोस्","rm_none":"रिमाइन्डर छैन – मितिहरू जाँच्नुहोस्।","rp_title":"गृह ऋण रिपोर्ट","rp_prepared":"{d} मा Home Loan Planner बाट तयार","rp_applicant":"आवेदक","rp_name":"नाम","rp_phone":"फोन","rp_loan":"घर र ऋण","rp_rates":"ब्याजदर योजना","rp_from":"वर्षदेखि","rp_rate":"दर","rp_inst":"किस्ता","rp_aff":"तिर्न सक्ने क्षमता","rp_costs":"हस्तान्तरणमा नगद र खर्च","rp_stress":"ब्याज बढेमा","rp_banks":"बैंक प्रस्ताव तुलना (थप भुक्तानी बिना)","rp_refi":"प्रवर्द्धनपछि (वर्ष {y} पछि बदल्दा)","rp_sched":"वर्षअनुसार तालिका","rp_yr":"वर्ष","rp_paid":"तिरेको","rp_int":"ब्याज","rp_prin":"साँवा","rp_end":"वर्षान्तमा बाँकी","rp_docs":"कागजात सूची","rp_done":"तयार","rp_todo":"बाँकी","rp_note":"आवेदकका आफ्नै इनपुटबाट अनुमान; दर, शुल्क र नियम बदलिन सक्छन् – बैंकसँग पुष्टि गर्नुहोस्। वित्तीय सल्लाह होइन।","rp_chart":"ऋण बाँकी","rp_page":"पाना {a}/{b}"},"hi":{"wz_open":"यहाँ से शुरू करें","t_loans":"मेरे लोन","rm_h":"रिमाइंडर","rm_s":"किस्तें, ब्याज बदलाव, प्रमोशन का अंत और टैक्स का समय","rm_day":"महीने का भुगतान दिन","rm_ics":"मेरे कैलेंडर में जोड़ें (.ics)","rm_phone":"फ़ोन रिमाइंडर चालू करें","rm_n":"कैलेंडर फ़ाइल Google Calendar, Outlook और iPhone में काम करती है: डाउनलोड के बाद खोलें। हर रिमाइंडर एक दिन पहले आता है।","ln_h":"मेरे लोन","ln_s":"कई घर या लोन साथ-साथ रखें। “खुला” वाला लोन हर टैब में दिखता है।","ln_add":"+ लोन जोड़ें","ln_copy":"खुले लोन की कॉपी","ln_n":"मासिक इस महीने की किस्त है, या शुरू न हुए लोन की पहली किस्त। संयुक्त कर्ज़-आय खुले लोन की आय से गिनी जाती है।","ln_c":"समय के साथ बकाया","rp_h":"बैंक के लिए रिपोर्ट","rp_s":"आपकी योजना की कई पेज की रिपोर्ट – प्रिंट करें या PDF सेव करके बैंक ले जाएँ","rp_print":"प्रिंट / PDF सेव","rp_back":"वापस","rp_open":"बैंक के लिए PDF रिपोर्ट","st_h":"सेटिंग्स","th_mode":"रूप","th_sys":"सिस्टम","th_light":"लाइट","th_dark":"डार्क","th_col":"रंग","rt_h":"बैंक दरें","ver_h":"ऐप संस्करण","ver_check":"अपडेट जाँचें","close":"बंद करें","wz_h":"आइए आपका लोन सेट करें","wz_skip":"छोड़ें","wz_back":"पीछे","wz_next":"आगे","vt_del":"हटाएँ","vt_dl":"डाउनलोड","ln_default":"मेरा घर","ln_new":"लोन {n}","ln_cols":["लोन","बैंक / दर","लोन राशि","अभी मासिक","अभी बकाया","खत्म","कुल ब्याज",""],"ln_open":"खोलें","ln_isopen":"खुला","ln_rename":"नाम बदलें","ln_del":"हटाएँ","ln_count":"लोन","ln_month":"मासिक भुगतान (सभी लोन)","ln_bal":"अभी बकाया","ln_dsr":"संयुक्त कर्ज़-आय","ln_free":"कर्ज़-मुक्त","ln_total":"कुल","ln_ask":"इस लोन का नाम:","ln_confirm":"“{n}” हटाएँ? यह वापस नहीं होगा।","ln_notyet":"{d} से शुरू","th_cols":["नीला","हरा","टील","बैंगनी","नारंगी","गुलाबी"],"rt_built":"इस संस्करण में बनी दरें उपयोग हो रही हैं ({d})।","rt_live":"{d} को अपडेट दरें – अपने-आप लोड।","rt_offline":"{d} की दरें (इस डिवाइस पर सेव)।","rates_asof":"{d} तक की दरें।","ver_web":"वेबसाइट – हमेशा नवीनतम संस्करण।","ver_app":"संस्करण {v}","ver_new":"संस्करण {v} उपलब्ध है।","ver_get":"डाउनलोड","ver_latest":"आपके पास नवीनतम संस्करण है।","ver_err":"अपडेट नहीं जाँच सके – क्या आप ऑनलाइन हैं?","ver_auto":"ऐप बंद करने पर अपडेट अपने-आप इंस्टॉल होंगे।","wz_steps":"{b} में से चरण {a}","wz_done":"पूरा","wz_q1":"कौन खरीद रहा है?","wz_q2":"घर और डाउन पेमेंट","wz_q3":"आपकी आय","wz_q4":"लोन अवधि और तारीखें","wz_q5":"ब्याज दर","wz_price":"घर की कीमत (THB)","wz_downp":"डाउन पेमेंट (%)","wz_inc":"मासिक आय (THB)","wz_coinc":"सह-उधारकर्ता की मासिक आय (THB, न हो तो 0)","wz_debts":"अन्य मासिक कर्ज़ भुगतान (THB)","wz_years":"चुकाने के वर्ष","wz_start":"पहली किस्त का महीना","wz_tdate":"ट्रांसफ़र तारीख (अनुमान चलेगा)","wz_r_best":"सबसे कम कुल ब्याज वाला बैंक चुनें","wz_r_bank":"मेरे मन में बैंक है (योजना टैब में चुनूँगा)","wz_r_fixed":"एक फ़िक्स्ड दर","wz_r_fixedv":"फ़िक्स्ड दर (%)","wz_res":"आपकी योजना तैयार है","wz_go":"सुझाया अगला कदम","wz_next_aff":"किस्त बैंक सीमा से ऊपर है – क्या फ़िट होता है, चुकाने की क्षमता टैब देखें।","wz_next_docs":"यह चुकाने लायक लगता है। अगला: दस्तावेज़ जुटाएँ।","wz_next_tight":"फ़िट है पर तंग – अगर टैब के स्लाइडर आज़माएँ।","wz_open_tab":"वहाँ जाएँ","vt_add":"📎 फ़ोटो / PDF जोड़ें","vt_err":"इस डिवाइस पर फ़ाइल सेव नहीं हुई।","vt_conf":"यह फ़ाइल हटाएँ?","rm_pay":"होम लोन किस्त ≈ {x} THB","rm_payrow":"हर महीने {d} तारीख, {e} तक","rm_rate":"ब्याज दर {r} होगी","rm_retain":"बैंक से रिटेंशन दर माँगें","rm_refi":"प्रमोशन खत्म – रीफाइनेंस ऑफ़र तुलना करें","rm_tax":"टैक्स रिटर्न के लिए ब्याज प्रमाणपत्र लें","rm_last":"आखिरी किस्त","rm_ok":"कैलेंडर फ़ाइल सेव हुई – रिमाइंडर जोड़ने के लिए खोलें।","rm_phone_ok":"फ़ोन रिमाइंडर चालू ({n} तय)।","rm_phone_off":"फ़ोन रिमाइंडर बंद।","rm_phone_stop":"फ़ोन रिमाइंडर बंद करें","rm_none":"कोई रिमाइंडर नहीं – तारीखें जाँचें।","rp_title":"होम लोन रिपोर्ट","rp_prepared":"{d} को Home Loan Planner से तैयार","rp_applicant":"आवेदक","rp_name":"नाम","rp_phone":"फ़ोन","rp_loan":"प्रॉपर्टी और लोन","rp_rates":"ब्याज दर योजना","rp_from":"वर्ष से","rp_rate":"दर","rp_inst":"किस्त","rp_aff":"चुकाने की क्षमता","rp_costs":"ट्रांसफ़र पर नकद और खर्च","rp_stress":"अगर ब्याज बढ़े","rp_banks":"बैंक ऑफ़र तुलना (अतिरिक्त भुगतान बिना)","rp_refi":"प्रमोशन के बाद (वर्ष {y} के बाद बदलने पर)","rp_sched":"साल दर साल तालिका","rp_yr":"वर्ष","rp_paid":"चुकाया","rp_int":"ब्याज","rp_prin":"मूलधन","rp_end":"साल के अंत में बकाया","rp_docs":"दस्तावेज़ सूची","rp_done":"तैयार","rp_todo":"बाकी","rp_note":"आवेदक के अपने इनपुट से अनुमान; दरें, फ़ीस और नियम बदल सकते हैं – कृपया बैंक से पुष्टि करें। वित्तीय सलाह नहीं।","rp_chart":"लोन बकाया","rp_page":"पेज {a}/{b}"},"vi":{"wz_open":"Bắt đầu tại đây","t_loans":"Khoản vay của tôi","rm_h":"Nhắc nhở","rm_s":"Kỳ trả, đổi lãi suất, hết khuyến mãi và mùa thuế","rm_day":"Ngày trả trong tháng","rm_ics":"Thêm vào lịch (.ics)","rm_phone":"Bật nhắc nhở trên điện thoại","rm_n":"Tệp lịch dùng được với Google Calendar, Outlook và iPhone: mở sau khi tải. Mỗi nhắc nhở hiện trước một ngày.","ln_h":"Khoản vay của tôi","ln_s":"Theo dõi nhiều nhà hoặc khoản vay cạnh nhau. Khoản “đang mở” là khoản mọi tab hiển thị.","ln_add":"+ Thêm khoản vay","ln_copy":"Sao chép khoản đang mở","ln_n":"Hằng tháng là kỳ trả tháng này, hoặc kỳ đầu với khoản chưa bắt đầu. Nợ trên thu nhập gộp dùng thu nhập của khoản đang mở.","ln_c":"Dư nợ theo thời gian","rp_h":"Báo cáo nộp ngân hàng","rp_s":"Báo cáo nhiều trang về kế hoạch – in hoặc lưu PDF và mang đến ngân hàng","rp_print":"In / lưu PDF","rp_back":"Quay lại","rp_open":"Báo cáo PDF cho ngân hàng","st_h":"Cài đặt","th_mode":"Giao diện","th_sys":"Theo hệ thống","th_light":"Sáng","th_dark":"Tối","th_col":"Màu","rt_h":"Lãi suất ngân hàng","ver_h":"Phiên bản","ver_check":"Kiểm tra cập nhật","close":"Đóng","wz_h":"Cùng thiết lập khoản vay","wz_skip":"Bỏ qua","wz_back":"Quay lại","wz_next":"Tiếp","vt_del":"Xóa","vt_dl":"Tải về","ln_default":"Nhà của tôi","ln_new":"Khoản vay {n}","ln_cols":["Khoản vay","Ngân hàng / lãi","Số tiền vay","Tháng này","Dư nợ hiện tại","Trả xong","Tổng lãi",""],"ln_open":"Mở","ln_isopen":"đang mở","ln_rename":"Đổi tên","ln_del":"Xóa","ln_count":"Số khoản vay","ln_month":"Trả hằng tháng (tất cả)","ln_bal":"Còn nợ","ln_dsr":"Nợ trên thu nhập gộp","ln_free":"Hết nợ","ln_total":"Tổng","ln_ask":"Tên khoản vay:","ln_confirm":"Xóa “{n}”? Không thể hoàn tác.","ln_notyet":"bắt đầu {d}","th_cols":["Xanh dương","Xanh lá","Xanh ngọc","Tím","Cam","Hồng"],"rt_built":"Đang dùng lãi suất có sẵn trong phiên bản này ({d}).","rt_live":"Lãi suất cập nhật {d} – tải tự động.","rt_offline":"Lãi suất từ {d} (lưu trên máy).","rates_asof":"Lãi suất tính đến {d}.","ver_web":"Website – luôn là bản mới nhất.","ver_app":"Phiên bản {v}","ver_new":"Đã có phiên bản {v}.","ver_get":"Tải về","ver_latest":"Bạn đang dùng bản mới nhất.","ver_err":"Không kiểm tra được – bạn có đang online?","ver_auto":"Cập nhật tự cài khi bạn đóng ứng dụng.","wz_steps":"Bước {a}/{b}","wz_done":"Hoàn tất","wz_q1":"Ai là người mua?","wz_q2":"Căn nhà và tiền trả trước","wz_q3":"Thu nhập của bạn","wz_q4":"Thời hạn và ngày","wz_q5":"Lãi suất","wz_price":"Giá nhà (THB)","wz_downp":"Trả trước (%)","wz_inc":"Thu nhập tháng (THB)","wz_coinc":"Thu nhập người đồng vay (THB, 0 nếu không có)","wz_debts":"Khoản nợ khác mỗi tháng (THB)","wz_years":"Số năm trả","wz_start":"Tháng trả đầu tiên","wz_tdate":"Ngày sang tên (ước tính cũng được)","wz_r_best":"Chọn giúp ngân hàng có tổng lãi thấp nhất","wz_r_bank":"Tôi đã có ngân hàng (chọn ở tab Kế hoạch)","wz_r_fixed":"Dùng một lãi suất cố định","wz_r_fixedv":"Lãi suất cố định (%)","wz_res":"Kế hoạch đã sẵn sàng","wz_go":"Bước tiếp theo nên làm","wz_next_aff":"Kỳ trả vượt giới hạn ngân hàng – xem tab Khả năng trả.","wz_next_docs":"Có vẻ trả được. Tiếp theo: chuẩn bị giấy tờ.","wz_next_tight":"Vừa đủ nhưng sát – thử các thanh trượt ở tab Giả sử.","wz_open_tab":"Đến đó","vt_add":"📎 Thêm ảnh / PDF","vt_err":"Không lưu được tệp trên máy này.","vt_conf":"Xóa tệp này?","rm_pay":"Trả góp nhà ≈ {x} THB","rm_payrow":"Ngày {d} hằng tháng, đến {e}","rm_rate":"Lãi suất đổi thành {r}","rm_retain":"Xin ngân hàng lãi suất retention","rm_refi":"Hết khuyến mãi – so sánh ưu đãi tái cấp vốn","rm_tax":"Lấy giấy xác nhận lãi để khai thuế","rm_last":"Kỳ trả cuối","rm_ok":"Đã lưu tệp lịch – mở để thêm nhắc nhở.","rm_phone_ok":"Đã bật nhắc trên điện thoại ({n} mục).","rm_phone_off":"Đã tắt nhắc trên điện thoại.","rm_phone_stop":"Tắt nhắc trên điện thoại","rm_none":"Không có nhắc nhở – hãy kiểm tra ngày.","rp_title":"Báo cáo vay mua nhà","rp_prepared":"Lập ngày {d} bằng Home Loan Planner","rp_applicant":"Người vay","rp_name":"Họ tên","rp_phone":"Điện thoại","rp_loan":"Tài sản và khoản vay","rp_rates":"Kế hoạch lãi suất","rp_from":"Từ năm","rp_rate":"Lãi suất","rp_inst":"Kỳ trả","rp_aff":"Khả năng trả","rp_costs":"Tiền mặt và chi phí ngày sang tên","rp_stress":"Nếu lãi tăng","rp_banks":"So sánh ưu đãi ngân hàng (không trả thêm)","rp_refi":"Sau khuyến mãi (chuyển sau năm {y})","rp_sched":"Lịch theo năm","rp_yr":"Năm","rp_paid":"Đã trả","rp_int":"Lãi","rp_prin":"Gốc","rp_end":"Dư nợ cuối năm","rp_docs":"Danh sách giấy tờ","rp_done":"đã có","rp_todo":"cần làm","rp_note":"Ước tính từ dữ liệu của người vay; lãi, phí và quy định có thể thay đổi – vui lòng xác nhận với ngân hàng. Không phải tư vấn tài chính.","rp_chart":"Dư nợ","rp_page":"Trang {a}/{b}"},"zh":{"wz_open":"从这里开始","t_loans":"我的贷款","rm_h":"提醒","rm_s":"还款、利率变化、优惠期结束和报税时间","rm_day":"每月还款日","rm_ics":"添加到我的日历 (.ics)","rm_phone":"开启手机提醒","rm_n":"日历文件适用于 Google 日历、Outlook 和 iPhone：下载后打开即可。每条提醒会提前一天弹出。","ln_h":"我的贷款","ln_s":"并排管理多套房或多笔贷款。标为“当前”的那笔会显示在所有页面。","ln_add":"+ 添加贷款","ln_copy":"复制当前贷款","ln_n":"月供为本月还款，尚未开始的贷款显示首期。合并负债收入比使用当前贷款的收入。","ln_c":"余额走势","rp_h":"银行用报告","rp_s":"多页计划报告 – 打印或存为 PDF，带去银行","rp_print":"打印 / 存为 PDF","rp_back":"返回","rp_open":"银行用 PDF 报告","st_h":"设置","th_mode":"外观","th_sys":"跟随系统","th_light":"浅色","th_dark":"深色","th_col":"颜色","rt_h":"银行利率","ver_h":"应用版本","ver_check":"检查更新","close":"关闭","wz_h":"一起设置您的贷款","wz_skip":"跳过","wz_back":"上一步","wz_next":"下一步","vt_del":"删除","vt_dl":"下载","ln_default":"我的房子","ln_new":"贷款 {n}","ln_cols":["贷款","银行 / 利率","贷款金额","本月月供","当前余额","还清","总利息",""],"ln_open":"打开","ln_isopen":"当前","ln_rename":"重命名","ln_del":"删除","ln_count":"贷款数","ln_month":"每月还款（全部）","ln_bal":"当前欠款","ln_dsr":"合并负债收入比","ln_free":"无债日期","ln_total":"合计","ln_ask":"贷款名称：","ln_confirm":"删除“{n}”？此操作无法撤销。","ln_notyet":"{d} 开始","th_cols":["蓝","绿","青","紫","橙","玫红"],"rt_built":"正在使用此版本内置的利率（{d}）。","rt_live":"利率已于 {d} 更新 – 自动载入。","rt_offline":"{d} 的利率（已存于本机）。","rates_asof":"利率截至 {d}。","ver_web":"网站 – 始终是最新版本。","ver_app":"版本 {v}","ver_new":"版本 {v} 已发布。","ver_get":"下载","ver_latest":"已是最新版本。","ver_err":"无法检查更新 – 是否已联网？","ver_auto":"关闭应用时会自动安装更新。","wz_steps":"第 {a}/{b} 步","wz_done":"完成","wz_q1":"谁是买家？","wz_q2":"房子和首付","wz_q3":"您的收入","wz_q4":"贷款期限和日期","wz_q5":"利率","wz_price":"房价 (THB)","wz_downp":"首付 (%)","wz_inc":"月收入 (THB)","wz_coinc":"共同借款人月收入 (THB，没有填0)","wz_debts":"其他每月还款 (THB)","wz_years":"还款年数","wz_start":"首期还款月份","wz_tdate":"过户日期（估计即可）","wz_r_best":"帮我选总利息最低的银行","wz_r_bank":"我已有心仪银行（在计划页选择）","wz_r_fixed":"使用一个固定利率","wz_r_fixedv":"固定利率 (%)","wz_res":"您的计划已就绪","wz_go":"建议的下一步","wz_next_aff":"月供超过银行上限 – 到还款能力页看看合适的方案。","wz_next_docs":"看起来负担得起。下一步：准备文件。","wz_next_tight":"可以但偏紧 – 试试假设页的滑块。","wz_open_tab":"前往","vt_add":"📎 添加照片 / PDF","vt_err":"无法在本机保存文件。","vt_conf":"删除此文件？","rm_pay":"房贷还款 ≈ {x} THB","rm_payrow":"每月 {d} 日，直到 {e}","rm_rate":"利率变为 {r}","rm_retain":"向银行申请续约降息","rm_refi":"优惠结束 – 比较转贷方案","rm_tax":"领取利息证明用于报税","rm_last":"最后一期","rm_ok":"日历文件已保存 – 打开以添加提醒。","rm_phone_ok":"手机提醒已开启（{n} 条）。","rm_phone_off":"手机提醒已关闭。","rm_phone_stop":"关闭手机提醒","rm_none":"没有提醒 – 请检查日期。","rp_title":"房贷报告","rp_prepared":"{d} 由 Home Loan Planner 生成","rp_applicant":"申请人","rp_name":"姓名","rp_phone":"电话","rp_loan":"房产与贷款","rp_rates":"利率计划","rp_from":"起始年","rp_rate":"利率","rp_inst":"月供","rp_aff":"还款能力","rp_costs":"过户时现金与费用","rp_stress":"如果利率上升","rp_banks":"银行方案比较（不含额外还款）","rp_refi":"优惠期后（第 {y} 年后转换）","rp_sched":"逐年明细","rp_yr":"年","rp_paid":"还款","rp_int":"利息","rp_prin":"本金","rp_end":"年末余额","rp_docs":"文件清单","rp_done":"已备","rp_todo":"待办","rp_note":"根据申请人自行输入估算；利率、费用和规定可能变化 – 请向银行确认。非财务建议。","rp_chart":"贷款余额","rp_page":"第 {a}/{b} 页"},"ja":{"wz_open":"ここから始める","t_loans":"マイローン","rm_h":"リマインダー","rm_s":"返済、金利の変更、キャンペーン終了、確定申告","rm_day":"毎月の返済日","rm_ics":"カレンダーに追加 (.ics)","rm_phone":"スマホ通知をオン","rm_n":"カレンダーファイルは Google カレンダー、Outlook、iPhone で使えます。ダウンロード後に開いてください。各通知は前日に表示されます。","ln_h":"マイローン","ln_s":"複数の住宅やローンを並べて管理。「表示中」のローンが全タブに表示されます。","ln_add":"+ ローンを追加","ln_copy":"表示中のローンを複製","ln_n":"月額は今月の返済額（未開始のローンは初回）。合計の返済負担率は表示中ローンの収入で計算。","ln_c":"残高の推移","rp_h":"銀行提出用レポート","rp_s":"プランの複数ページのレポート – 印刷または PDF 保存して銀行へ","rp_print":"印刷 / PDF 保存","rp_back":"戻る","rp_open":"銀行用 PDF レポート","st_h":"設定","th_mode":"表示","th_sys":"システム","th_light":"ライト","th_dark":"ダーク","th_col":"色","rt_h":"銀行金利","ver_h":"アプリのバージョン","ver_check":"アップデートを確認","close":"閉じる","wz_h":"ローンを設定しましょう","wz_skip":"スキップ","wz_back":"戻る","wz_next":"次へ","vt_del":"削除","vt_dl":"ダウンロード","ln_default":"わが家","ln_new":"ローン {n}","ln_cols":["ローン","銀行 / 金利","借入額","今月の返済","現在の残高","完済","総利息",""],"ln_open":"開く","ln_isopen":"表示中","ln_rename":"名前変更","ln_del":"削除","ln_count":"ローン数","ln_month":"月々の返済（全ローン）","ln_bal":"現在の借入残高","ln_dsr":"合計返済負担率","ln_free":"完済予定","ln_total":"合計","ln_ask":"ローンの名前：","ln_confirm":"「{n}」を削除しますか？元に戻せません。","ln_notyet":"{d} 開始","th_cols":["ブルー","グリーン","ティール","パープル","オレンジ","ローズ"],"rt_built":"このバージョン内蔵の金利を使用中（{d}）。","rt_live":"金利は {d} 更新 – 自動で読み込みました。","rt_offline":"{d} の金利（この端末に保存）。","rates_asof":"{d} 時点の金利。","ver_web":"ウェブサイト – 常に最新版。","ver_app":"バージョン {v}","ver_new":"バージョン {v} が公開されています。","ver_get":"ダウンロード","ver_latest":"最新版です。","ver_err":"確認できません – オンラインですか？","ver_auto":"アプリを閉じると自動でアップデートされます。","wz_steps":"ステップ {a}/{b}","wz_done":"完了","wz_q1":"購入者は？","wz_q2":"物件と頭金","wz_q3":"あなたの収入","wz_q4":"期間と日付","wz_q5":"金利","wz_price":"物件価格 (THB)","wz_downp":"頭金 (%)","wz_inc":"月収 (THB)","wz_coinc":"連帯債務者の月収 (THB、なければ0)","wz_debts":"その他の月々の返済 (THB)","wz_years":"返済年数","wz_start":"初回返済月","wz_tdate":"名義移転日（目安で可）","wz_r_best":"総利息が最も少ない銀行を選んで","wz_r_bank":"希望の銀行がある（プランタブで選ぶ）","wz_r_fixed":"固定金利を1つ使う","wz_r_fixedv":"固定金利 (%)","wz_res":"プランができました","wz_go":"おすすめの次の一歩","wz_next_aff":"返済額が銀行の上限を超えています – 返済能力タブで確認を。","wz_next_docs":"無理なく返せそうです。次は書類集め。","wz_next_tight":"可能ですが余裕が少なめ – もしもタブで調整を。","wz_open_tab":"開く","vt_add":"📎 写真 / PDF を追加","vt_err":"この端末にファイルを保存できません。","vt_conf":"このファイルを削除しますか？","rm_pay":"住宅ローン返済 ≈ {x} THB","rm_payrow":"毎月 {d} 日、{e} まで","rm_rate":"金利が {r} に変わります","rm_retain":"銀行にリテンション金利を依頼","rm_refi":"キャンペーン終了 – 借り換えを比較","rm_tax":"確定申告用の利息証明書をもらう","rm_last":"最終返済","rm_ok":"カレンダーファイルを保存しました – 開いて追加してください。","rm_phone_ok":"スマホ通知をオンにしました（{n} 件）。","rm_phone_off":"スマホ通知をオフにしました。","rm_phone_stop":"スマホ通知をオフ","rm_none":"リマインダーはありません – 日付を確認してください。","rp_title":"住宅ローンレポート","rp_prepared":"{d} Home Loan Planner で作成","rp_applicant":"申込者","rp_name":"氏名","rp_phone":"電話","rp_loan":"物件とローン","rp_rates":"金利プラン","rp_from":"開始年","rp_rate":"金利","rp_inst":"返済額","rp_aff":"返済能力","rp_costs":"名義移転時の現金と費用","rp_stress":"金利が上がったら","rp_banks":"銀行プラン比較（追加返済なし）","rp_refi":"キャンペーン後（{y} 年後に切り替え）","rp_sched":"年別返済表","rp_yr":"年","rp_paid":"支払額","rp_int":"利息","rp_prin":"元金","rp_end":"年末残高","rp_docs":"書類チェックリスト","rp_done":"準備済み","rp_todo":"未","rp_note":"申込者自身の入力による試算。金利・手数料・規則は変わります – 銀行に確認してください。金融アドバイスではありません。","rp_chart":"ローン残高","rp_page":"{a}/{b} ページ"}};</script>
+<script id="more">
+/* ========== v2: themes, wizard, loans, vault, reminders, report, live rates, updates ========== */
+(function(){ const x=window.I18N2||{}; for(const l in x){ if(l==='th') Object.assign(TH,x[l]); else if(LANGS[l]) Object.assign(LANGS[l],x[l]); } })();
+Object.assign(EN,{
+ ln_default:'My home', ln_new:'Loan {n}', ln_cols:['Loan','Lender / rate','Loan amount','Monthly now','Balance now','Paid off','Total interest',''], ln_open:'Open', ln_isopen:'open', ln_rename:'Rename', ln_del:'Delete',
+ ln_count:'Loans', ln_month:'Monthly payments (all loans)', ln_bal:'Owed now', ln_dsr:'Combined debt-to-income', ln_free:'Debt-free', ln_total:'Total', ln_ask:'Name for this loan:', ln_confirm:'Delete “{n}”? This can’t be undone.', ln_notyet:'starts {d}',
+ th_cols:['Blue','Green','Teal','Purple','Orange','Rose'],
+ rt_built:'Using the rates built into this version ({d}).', rt_live:'Rates updated {d} – loaded automatically.', rt_offline:'Rates from {d} (saved on this device).', rates_asof:'Rates as of {d}.',
+ ver_web:'Website – always the latest version.', ver_app:'Version {v}', ver_new:'Version {v} is available.', ver_get:'Download', ver_latest:'You have the latest version.', ver_err:'Couldn’t check for updates – are you online?', ver_auto:'Updates install automatically when you close the app.',
+ wz_steps:'Step {a} of {b}', wz_done:'Finish',
+ wz_q1:'Who is buying?', wz_q2:'The home and your down payment', wz_q3:'Your income', wz_q4:'Loan length and dates', wz_q5:'Interest rate',
+ wz_price:'Home price (THB)', wz_downp:'Down payment (%)', wz_inc:'Your monthly income (THB)', wz_coinc:'Co-borrower monthly income (THB, 0 if none)', wz_debts:'Other monthly debt payments (THB)', wz_years:'Years to repay', wz_start:'First payment month', wz_tdate:'Transfer date (estimate is fine)',
+ wz_r_best:'Pick the bank with the lowest total interest for me', wz_r_bank:'I have a bank in mind (choose on the Plan tab)', wz_r_fixed:'Use one fixed rate', wz_r_fixedv:'Fixed rate (%)',
+ wz_res:'Your plan is ready', wz_go:'Suggested next step', wz_next_aff:'Your payments are over the bank limit – look at Affordability to see what fits.', wz_next_docs:'This looks affordable. Next: collect your documents.', wz_next_tight:'It fits, but tightly – try the What-if sliders.', wz_open_tab:'Go there',
+ vt_add:'📎 Add photo / PDF', vt_n:'{n} file(s)', vt_none:'Files are stored only on this device.', vt_err:'Couldn’t save the file on this device.', vt_conf:'Delete this file?', vt_off:'File storage isn’t available here.',
+ rm_pay:'Home loan payment ≈ {x} THB', rm_payrow:'Every month on day {d}, until {e}', rm_rate:'Interest rate changes to {r}', rm_retain:'Ask your bank for a retention rate', rm_refi:'Promotion ends – compare refinance offers', rm_tax:'Get the interest certificate for your tax return', rm_last:'Last installment', rm_ok:'Calendar file saved – open it to add the reminders.', rm_phone_ok:'Phone reminders are on ({n} scheduled).', rm_phone_off:'Phone reminders are off.', rm_phone_stop:'Turn off phone reminders', rm_none:'No reminders – check your dates.',
+ rp_title:'Home loan report', rp_prepared:'Prepared on {d} with Home Loan Planner', rp_applicant:'Applicant', rp_name:'Name', rp_phone:'Phone', rp_loan:'Property and loan', rp_rates:'Interest rate plan', rp_from:'From year', rp_rate:'Rate', rp_inst:'Installment', rp_aff:'Affordability', rp_costs:'Cash and costs at transfer', rp_stress:'If rates rise', rp_banks:'Bank offers compared (no extra payments)', rp_refi:'After the promotion (switching after year {y})', rp_sched:'Year-by-year schedule', rp_yr:'Year', rp_paid:'Paid', rp_int:'Interest', rp_prin:'Principal', rp_end:'Balance at year end', rp_docs:'Documents checklist', rp_done:'ready', rp_todo:'to do', rp_note:'Estimates from the applicant’s own inputs; bank rates, fees and rules change – please confirm with the bank. Not financial advice.', rp_chart:'Loan balance', rp_page:'Page {a} of {b}', rp_by:'Developed by Henry Poudel · hennrywebworm@gmail.com · WhatsApp +66 87 407 5116'
+});
+const ACCENTS=[{k:'blue'},{k:'green',l:['#0E7A5C','#E2F4EC'],d:['#3CCB9A','#12352C']},{k:'teal',l:['#0F7484','#E0F2F4'],d:['#3BC3D4','#10333A']},{k:'purple',l:['#6D4AE0','#EFEAFD'],d:['#A98CFF','#271F4A']},{k:'orange',l:['#B9540B','#FDEEE3'],d:['#F59E5B','#3A2414']},{k:'rose',l:['#BE3159','#FCE8EE'],d:['#FF7FA3','#3A1622']}];
+let THEME=store.get('theme')||'system', ACC=store.get('accent')||'blue';
+const darkMQ=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+function applyTheme(){
+  const root=document.documentElement; if(THEME==='system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme',THEME);
+  const dark=THEME==='dark'||(THEME==='system'&&darkMQ&&darkMQ.matches), a=ACCENTS.find(x=>x.k===ACC)||ACCENTS[0];
+  if(a.l){ const c=dark?a.d:a.l; root.style.setProperty('--accent',c[0]); root.style.setProperty('--accent-soft',c[1]); } else { root.style.removeProperty('--accent'); root.style.removeProperty('--accent-soft'); }
+  const m=document.querySelector('meta[name=theme-color]'); if(m) m.setAttribute('content',getComputedStyle(root).getPropertyValue('--accent').trim()||'#2E5BE6');
+  document.querySelectorAll('[data-theme]').forEach(b=>{ if(b.tagName==='BUTTON') b.setAttribute('aria-pressed',b.dataset.theme===THEME); });
+  const names=T('th_cols');
+  $('swatches').innerHTML=ACCENTS.map((x,i)=>{ const c=x.l?(dark?x.d[0]:x.l[0]):(dark?'#7C9BFF':'#2E5BE6'); return `<button class="sw" data-acc="${x.k}" style="background:${c}" aria-pressed="${x.k===ACC}" aria-label="${esc(names[i])}" title="${esc(names[i])}"></button>`; }).join('');
+  store.set('theme',THEME); store.set('accent',ACC);
+}
+if(darkMQ&&darkMQ.addEventListener) darkMQ.addEventListener('change',()=>{ applyTheme(); render(); });
+
+/* ---------- plans from saved inputs (used by My loans and the wizard) ---------- */
+function planFromInputs(o){
+  const n=v=>{ const x=parseFloat(v); return isFinite(x)?x:0; };
+  const p={price:n(o.price),down:n(o.down),years:Math.max(1,n(o.years)),ppy:12,rmode:o.rmode||'fixed',frate:n(o.frate)/100,xtype:o.xtype||'amount',xfreq:o.xfreq||'every',
+    xval:(o.xtype||'amount')==='amount'?n(o.xval):n(o.xval)/100,lump:n(o.lump),lumpAt:Math.max(1,Math.round(n(o.lumpat)||12)),shock:0,shockFrom:4};
+  if(p.rmode==='steps') p.steps=(o.steps||[]).filter(s=>isFinite(+s.from)&&isFinite(+s.rate)).map(s=>({from:+s.from,rate:+s.rate/100})).sort((a,b)=>a.from-b.from);
+  if(p.rmode==='bank'){ const b=BANKS.find(x=>x.n===o.bankName)||BANKS[0]; p.steps=bankSteps(b); }
+  if(p.rmode!=='fixed'&&(!p.steps||!p.steps.length)) p.steps=[{from:1,rate:.05}];
+  return p;
+}
+function mergeSteps(st){ const out=[]; [...st].sort((a,b)=>a.from-b.from).forEach(s=>{ if(!out.length||Math.abs(out[out.length-1].rate-s.rate)>1e-9) out.push(s); }); return out; }
+function monthIndex(startYM,d){ d=d||new Date(); const [y,m]=(startYM||'2027-01').split('-').map(Number); return (d.getFullYear()*12+d.getMonth())-(y*12+m-1)+1; }
+function addMonthsISO(startYM,k,day){ const [y,m]=(startYM||'2027-01').split('-').map(Number); const d=new Date(Date.UTC(y,m-1+k,day||1)); return d.toISOString().slice(0,10); }
+function fdateISO(iso){ const [y,m,d]=iso.split('-').map(Number); return new Date(y,m-1,d).toLocaleDateString(LOC[LANG]||'en-GB',{day:'numeric',month:'short',year:'numeric'}); }
+
+/* ---------- my loans ---------- */
+let LOANS=store.get('loans'), LACT=store.get('loan_active');
+if(!Array.isArray(LOANS)||!LOANS.length){ LOANS=[{id:'main',name:T('ln_default'),inp:null}]; LACT='main'; }
+if(!LOANS.find(l=>l.id===LACT)) LACT=LOANS[0].id;
+const curLoan=()=>LOANS.find(l=>l.id===LACT);
+function saveLoans(){ const c=curLoan(); const o=exportInputs(); delete o.lang; c.inp=o; c.act=ACT; c.docs=DOCDONE; store.set('loans',LOANS); store.set('loan_active',LACT); }
+function openLoan(id){
+  saveLoans(); const l=LOANS.find(x=>x.id===id); if(!l) return; LACT=id;
+  ACT=l.act||{}; DOCDONE=l.docs||{}; if(DB) subTracker();
+  if(l.inp){ const o=Object.assign({},l.inp); delete o.lang; importInputs(o); } else render();
+  vaultLoad();
+}
+function renderLoans(){
+  const today=new Date(); let tm=0, tb=0, last=0; const rows=[], series=[]; const cols=['var(--accent)','var(--chart-3)','var(--good)','var(--bad)','var(--chart-2)','var(--warn)'];
+  LOANS.forEach((l,i)=>{ const o=l.id===LACT?exportInputs():(l.inp||exportInputs()); const p=planFromInputs(o), s=schedule(p);
+    const k=monthIndex(o.start,today), started=k>=1, idx=Math.min(Math.max(k,1),s.rows.length);
+    const monthly=started?(k<=s.rows.length?s.rows[k-1].paid:0):(s.rows[0]?s.rows[0].paid:0), bal=started?balAfter(s,k-1):s.L;
+    const endIso=addMonthsISO(o.start,s.count-1,1); const endT=new Date(endIso).getTime(); if(endT>last) last=endT;
+    tm+=monthly; tb+=bal;
+    const rateTxt=p.rmode==='fixed'?pc(p.frate)+' fixed':p.rmode==='bank'?(o.bankName||''):p.steps.map(x=>pc(x.rate)).join(' → ');
+    rows.push(`<tr class="${l.id===LACT?'pick':''}"><td><b>${esc(l.name)}</b>${l.id===LACT?` <span class="pill good">${esc(T('ln_isopen'))}</span>`:''}</td><td style="text-align:left">${esc(rateTxt)}</td><td>${fm(s.L)}</td><td>${fm(monthly)}${started?'':`<br><span class="hint">${esc(T('ln_notyet').replace('{d}',fdateISO(addMonthsISO(o.start,0,1))))}</span>`}</td><td>${fm(bal)}</td><td>${fdateISO(endIso).replace(/^\d+\s/,'')}</td><td>${fm(s.tint)}</td>
+      <td style="white-space:nowrap">${l.id===LACT?'':`<button class="btn" data-lopen="${l.id}">${T('ln_open')}</button> `}<button class="btn" data-lren="${l.id}">${T('ln_rename')}</button>${LOANS.length>1?` <button class="x" data-ldel="${l.id}" aria-label="${esc(T('ln_del'))}">×</button>`:''}</td></tr>`);
+    const pts=[[0,s.L]]; for(let y=1;y<=Math.ceil(s.count/12);y++) pts.push([y,balAfter(s,y*12)]);
+    series.push({pts,color:cols[i%cols.length],w:2.5,name:l.name});
+  });
+  const c=T('ln_cols'); const R=window.__R, inc=R?R.inc:0, debts=R?R.debts:0;
+  $('lntbl').innerHTML=`<tr>${c.map(h=>`<th>${esc(h)}</th>`).join('')}</tr>`+rows.join('')+`<tr class="best"><td>${esc(T('ln_total'))}</td><td></td><td></td><td class="tot">${fm(tm)}</td><td class="tot">${fm(tb)}</td><td></td><td></td><td></td></tr>`;
+  tiles('ln-tiles',[{k:T('ln_count'),v:String(LOANS.length)},{k:T('ln_month'),v:fm(tm)},{k:T('ln_bal'),v:fm(tb)},{k:T('ln_dsr'),v:inc?pc((tm+debts)/inc,1):'–',s:R?'≤ '+pc(R.lim,0):''},{k:T('ln_free'),v:last?new Date(last).toLocaleDateString(LOC[LANG]||'en-GB',{month:'short',year:'numeric'}):'–'}]);
+  lineChart('ch-loans',series,{label:T('ln_c')});
+  $('ln-legend').innerHTML=series.map(x=>`<span><i style="background:${x.color}"></i>${esc(x.name)}</span>`).join('');
+}
+
+/* ---------- document vault (IndexedDB, this device only) ---------- */
+let VDB=null, VAULT=[], VURL={}, VOPEN=null, VDOC=null;
+function vaultOpen(){ return new Promise(res=>{ try{ const r=indexedDB.open('thlp_vault',1); r.onupgradeneeded=()=>{ const st=r.result.createObjectStore('files',{keyPath:'id',autoIncrement:true}); st.createIndex('loan','loan'); }; r.onsuccess=()=>res(r.result); r.onerror=()=>res(null); }catch(e){ res(null); } }); }
+function vtx(mode){ return VDB.transaction('files',mode).objectStore('files'); }
+async function vaultLoad(){ if(!VDB) return; Object.values(VURL).forEach(u=>URL.revokeObjectURL(u)); VURL={};
+  VAULT=await new Promise(res=>{ const q=vtx('readonly').index('loan').getAll(LACT); q.onsuccess=()=>res(q.result||[]); q.onerror=()=>res([]); });
+  VAULT.forEach(f=>{ VURL[f.id]=URL.createObjectURL(f.blob); }); vaultDecorate(); }
+function shrinkImage(file){ return new Promise(res=>{ if(!/^image\//.test(file.type)||file.type==='image/gif') return res(file); const img=new Image(), u=URL.createObjectURL(file);
+  img.onload=()=>{ const m=1800, s=Math.min(1,m/Math.max(img.width,img.height)); if(s===1&&file.size<1.5e6){ URL.revokeObjectURL(u); return res(file); }
+    const c=document.createElement('canvas'); c.width=Math.round(img.width*s); c.height=Math.round(img.height*s); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u);
+    c.toBlob(b=>res(b||file),'image/jpeg',.85); }; img.onerror=()=>{ URL.revokeObjectURL(u); res(file); }; img.src=u; }); }
+async function vaultAdd(doc,files){ for(const f of files){ const blob=await shrinkImage(f);
+    await new Promise(res=>{ const q=vtx('readwrite').add({loan:LACT,doc:+doc,name:f.name.replace(/\.(heic|png|webp)$/i,'.jpg'),type:blob.type||f.type,blob,at:Date.now()}); q.onsuccess=res; q.onerror=()=>{ alert(T('vt_err')); res(); }; }); }
+  DOCDONE[doc]=true; await vaultLoad(); render(); }
+function vaultDecorate(){
+  if(!VDB) return; document.querySelectorAll('#doclist input[data-doc]').forEach(cb=>{ if(cb.disabled) return; const i=+cb.dataset.doc, holder=cb.parentElement.querySelector('span'); if(!holder||holder.querySelector('.vault')) return;
+    const mine=VAULT.filter(f=>f.doc===i); const v=document.createElement('span'); v.className='vault';
+    v.innerHTML=mine.map(f=>`<button class="vt" data-vview="${f.id}" title="${esc(f.name)}">${/^image\//.test(f.type)?`<img src="${VURL[f.id]}" alt="">`:'PDF'}</button>`).join('')+`<button class="vbtn" data-vadd="${i}">${esc(T('vt_add'))}</button>`;
+    holder.style.display='flex'; holder.style.flexWrap='wrap'; holder.style.gap='8px'; holder.style.alignItems='center'; holder.appendChild(v); });
+}
+function vaultView(id){ const f=VAULT.find(x=>x.id===id); if(!f) return; VOPEN=f;
+  $('v-body').innerHTML=/^image\//.test(f.type)?`<img src="${VURL[f.id]}" alt="${esc(f.name)}"><p class="hint">${esc(f.name)}</p>`:`<p><b>${esc(f.name)}</b></p><p class="hint">PDF</p>`; $('vdlg').showModal(); }
+
+/* ---------- reminders ---------- */
+function reminderEvents(){
+  const R=window.__R; if(!R) return []; const P=R.P, S=R.S, start=$('start').value||'2027-01', day=Math.min(28,Math.max(1,Math.round(num('payday'))||1)); const ev=[];
+  ev.push({key:'pay',date:addMonthsISO(start,0,day),title:T('rm_pay').replace('{x}',fm(S.first)),monthly:S.count});
+  ev.push({key:'last',date:addMonthsISO(start,S.count-1,day),title:T('rm_last')});
+  if(P.rmode!=='fixed'&&P.steps){ mergeSteps(P.steps).filter(s=>s.from>1).forEach(s=>ev.push({key:'rate'+s.from,date:addMonthsISO(start,(s.from-1)*12,day),title:T('rm_rate').replace('{r}',pc(s.rate))}));
+    const promoEndYear=P.rmode==='bank'?4:(mergeSteps(P.steps).find(s=>s.from>1)||{}).from; if(promoEndYear){ const end=addMonthsISO(start,(promoEndYear-1)*12,day), d=new Date(end); d.setUTCDate(d.getUTCDate()-90);
+      ev.push({key:'retain',date:d.toISOString().slice(0,10),title:T('rm_retain')}); ev.push({key:'refi',date:end,title:T('rm_refi')}); } }
+  const y0=+start.slice(0,4); const yrs=Math.ceil(S.count/12)+1; ev.push({key:'tax',date:`${y0+1}-02-15`,title:T('rm_tax'),yearly:yrs});
+  const td=$('tdate').value; if(td) journeyDates(td,start).forEach(j=>{ if(!JDONE[j.key]&&['first','tax','retain','refi'].indexOf(j.key)<0) ev.push({key:'jr_'+j.key,date:j.date,title:jrTxt(j.key)[0]}); });
+  return ev.sort((a,b)=>a.date<b.date?-1:1);
+}
+function renderReminders(){
+  const ev=reminderEvents(), today=new Date().toISOString().slice(0,10), S=window.__R.S;
+  const list=ev.filter(e=>e.monthly||e.yearly||e.date>=today).slice(0,14);
+  $('rmlist').innerHTML=list.length?list.map(e=>{ const soon=!e.monthly&&e.date>=today&&dayDiff(e.date)<=30;
+    const when=e.monthly?T('rm_payrow').replace('{d}',Math.round(num('payday'))||1).replace('{e}',dateOf(S.count)):fdateISO(e.date)+(e.yearly?' ↻':'');
+    return `<li><span>${esc(e.title)}</span><span class="d ${soon?'soon':''}">${esc(when)}</span></li>`; }).join(''):`<li>${esc(T('rm_none'))}</li>`;
+  const ab=window.AndroidBridge; $('rm-phone').hidden=!(ab&&ab.scheduleReminders);
+  if(ab&&ab.remindersOn){ const on=ab.remindersOn(); $('rm-phone').textContent=on?T('rm_phone_stop'):T('rm_phone'); $('rm-phone').dataset.on=on?'1':''; }
+}
+function icsText(){
+  const ev=reminderEvents(), stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z', e=s=>String(s).replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+  const d=iso=>iso.replace(/-/g,''), next=iso=>{ const x=new Date(iso+'T00:00:00Z'); x.setUTCDate(x.getUTCDate()+1); return x.toISOString().slice(0,10).replace(/-/g,''); };
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Henry Poudel//Home Loan Planner//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:Home Loan Planner'];
+  const today=new Date().toISOString().slice(0,10);
+  ev.filter(x=>x.monthly||x.yearly||x.date>=today).forEach((x,i)=>{ L.push('BEGIN:VEVENT',`UID:hlp-${LACT}-${x.key}-${i}@homeloanplanner`,`DTSTAMP:${stamp}`,`DTSTART;VALUE=DATE:${d(x.date)}`,`DTEND;VALUE=DATE:${next(x.date)}`,`SUMMARY:${e(x.title)}`,`DESCRIPTION:${e(curLoan().name+' – Home Loan Planner')}`);
+    if(x.monthly) L.push(`RRULE:FREQ=MONTHLY;COUNT=${x.monthly}`); if(x.yearly) L.push(`RRULE:FREQ=YEARLY;COUNT=${x.yearly}`);
+    L.push('BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY',`DESCRIPTION:${e(x.title)}`,'END:VALARM','END:VEVENT'); });
+  L.push('END:VCALENDAR'); return L.join('\r\n')+'\r\n';
+}
+function phoneReminders(){ // next 24 months of payments + every dated reminder, notified 09:00 the day before
+  const ev=reminderEvents(), out=[], now=Date.now(), at=iso=>{ const [y,m,d]=iso.split('-').map(Number); return new Date(y,m-1,d-1,9,0).getTime(); };
+  ev.forEach(x=>{ if(x.monthly){ const [y,m,dd]=x.date.split('-').map(Number); for(let k=0;k<Math.min(x.monthly,240);k++){ const t=new Date(y,m-1+k,dd-1,9,0).getTime(); if(t>now&&out.filter(o=>o.k==='pay').length<24) out.push({k:'pay',at:t,title:x.title,text:curLoan().name}); } }
+    else if(x.yearly){ const [y]=x.date.split('-').map(Number); for(let k=0;k<x.yearly;k++){ const t=at(`${y+k}${x.date.slice(4)}`); if(t>now){ out.push({k:x.key,at:t,title:x.title,text:curLoan().name}); break; } } }
+    else { const t=at(x.date); if(t>now) out.push({k:x.key,at:t,title:x.title,text:curLoan().name}); } });
+  return out.sort((a,b)=>a.at-b.at).slice(0,60);
+}
+
+/* ---------- bank-ready report ---------- */
+function renderReport(){
+  const R=window.__R; if(!R) return; const P=R.P,S=R.S,B0=R.B0; const today=fdateISO(new Date().toISOString().slice(0,10));
+  const t=(head,rows,cls)=>`<table class="${cls||''}"><tr>${head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table>`;
+  const STP=mergeSteps(P.steps||[]);
+  const rateRows=P.rmode==='fixed'?[[`1–${P.years}`,pc(P.frate),fm(S.first,2)]]:STP.map((s,i)=>{ const k=(s.from-1)*12+1, r=S.rows[k-1]||B0.rows[k-1]; const to=(STP[i+1]?STP[i+1].from-1:P.years); return [s.from===to?String(s.from):`${s.from}–${to}`,pc(s.rate),r?fm(r.sched,2):'–']; });
+  const yrs=[]; S.rows.forEach(r=>{ const y=Math.floor((r.k-1)/12); yrs[y]=yrs[y]||{paid:0,int:0,end:0}; yrs[y].paid+=r.paid; yrs[y].int+=r.int; yrs[y].end=Math.max(0,r.beg-(r.paid-r.int)); });
+  const top=[...R.BR].sort((a,b)=>a.tot-b.tot).slice(0,6);
+  let rf=null; try{ rf=refiCompare(P,{at:36,retRate:Math.max(0,(P.rmode==='fixed'?P.frate:(P.steps[P.steps.length-1].rate))-.0075),retFee:0,bank:top[0].bk,penPct:.03,penYears:3,regPct:.01,other:3000,topAmt:0,topRate:.065,topYears:10}); }catch(e){}
+  const at=$('atype').value, docs=DOCS.map((d,i)=>[d,i]).filter(([d])=>d[0]!=='h'&&d[0].includes(at));
+  const k=(a,b)=>`<div><span>${esc(a)}</span><b>${esc(b)}</b></div>`;
+  const foot=(a,b)=>`<div class="foot">${esc(T('rp_note'))}<br>${esc(T('dev_by'))} Henry Poudel · hennrywebworm@gmail.com · WhatsApp +66 87 407 5116 · ${esc(T('rp_page').replace('{a}',a).replace('{b}',b))}</div>`;
+  const N=4;
+  const html=`<div class="pg"><h1>${esc(T('rp_title'))} – ${esc(curLoan().name)}</h1><p class="meta">${esc(T('rp_prepared').replace('{d}',today))}</p>
+   <div class="kg">${k(T('sm_loan'),fm(S.L))+k(T('k_inst'),fm(S.first,2))+k(T('sm_hi'),fm(B0.hi,2))+k(T('k_payoff'),dateOf(S.count))+k(T('k_int'),fm(S.tint))+k(T('sm_dsr'),pc(R.dsrv,1))+k(T('sm_cash'),fm(R.fees+P.down))+k(T('sm_tax'),fm(R.taxAll))}</div>
+   <h2>${esc(T('rp_applicant'))}</h2>${t(['',''],[[esc(T('rp_name')),'<span class="blank"></span>'],[esc(T('rp_phone')),'<span class="blank"></span>'],[esc($('atype').selectedOptions[0].textContent),''],[esc(T('a_tot')),fm(R.inc)+' THB'],[esc(T('debts')),fm(R.debts)+' THB']])}
+   <h2>${esc(T('rp_loan'))}</h2>${t(['',''],[[esc(T('sm_price')),fm(P.price)],[esc(T('c_down')),fm(P.down)+` (${pc(P.price?P.down/P.price:0,0)})`],[esc(T('sm_loan')),fm(S.L)],[esc(T('sm_term')),P.years+' '+T('s_years')],[esc(T('start')),dateOf(1)],[esc(T('tdate')),$('tdate').value?fdateISO($('tdate').value):'–'],[esc(T('extra')),P.xval?esc($('xtype').selectedOptions[0].textContent)+' · '+(P.xtype==='amount'?fm(P.xval):pc(P.xval,1))+' · '+esc($('xfreq').selectedOptions[0].textContent):'–']])}
+   <h2>${esc(T('rp_rates'))}</h2>${t([T('rp_from'),T('rp_rate'),T('rp_inst')],rateRows)}
+   <h2>${esc(T('rp_chart'))}</h2><div id="rp-chart"></div>${foot(1,N)}</div>
+   <div class="pg"><h2>${esc(T('rp_aff'))}</h2>${t(['',''],[[esc(T('a_tot')),fm(R.inc)],[esc(T('a_dsr')),pc(R.dsrv,1)+' (≤ '+pc(R.lim,0)+')'],[esc(T('a_hi')),fm(B0.hi,2)]])}
+   <h2>${esc(T('rp_costs'))}</h2>${t(['',''],[[esc(T('c_down')),fm(P.down)],[esc(T('c_fees')),fm(R.fees)],[esc(T('k_cash')),fm(R.fees+P.down)],[esc(T('k_taxall')),fm(R.taxAll)]])}
+   <h2>${esc(T('rp_stress'))}</h2>${t(['',T('st_hi'),T('st_int'),T('st_dsr')],R.SR.map((r,i)=>[esc(R.heads[i]),fm(r.hi,2),fm(r.tint),R.inc?pc((r.hi+R.debts)/R.inc,1):'–']))}
+   <h2>${esc(T('rp_banks'))}</h2>${t([T('b_bank'),T('b_y1'),T('b_y2'),T('b_y3'),T('b_after'),T('b_first'),T('b_tot')],top.map(x=>[esc(x.bk.n),pc(x.bk.y[0]),pc(x.bk.y[1]),pc(x.bk.y[2]),pc(x.bk.mrr+x.bk.margin),fm(x.first),fm(x.tot)]))}
+   <p class="meta">${esc(T('rates_asof').replace('{d}',fdateISO(RATES_DATE)))}</p>
+   ${rf?`<h2>${esc(T('rp_refi').replace('{y}',3))}</h2>${t([T('rf_cols')[0],T('rf_cols')[1],T('rf_cols')[4],T('rf_cols')[5]],[[esc(T('rf_stay')),fm(rf.stay.inst),fm(rf.stay.total),'–'],[esc(T('rf_retn'))+' ('+pc((P.rmode==='fixed'?P.frate:P.steps[P.steps.length-1].rate)-.0075)+')',fm(rf.ret.inst),fm(rf.ret.total),fm(rf.ret.save)],[esc(T('rf_refn').replace('{b}',top[0].bk.n)),fm(rf.refi.inst),fm(rf.refi.total),fm(rf.refi.save)]])}`:''}${foot(2,N)}</div>
+   <div class="pg"><h2>${esc(T('rp_sched'))}</h2>${t([T('rp_yr'),T('rp_paid'),T('rp_int'),T('rp_prin'),T('rp_end')],yrs.map((y,i)=>[String(i+1),fm(y.paid),fm(y.int),fm(y.paid-y.int),fm(y.end)]))}${foot(3,N)}</div>
+   <div class="pg"><h2>${esc(T('rp_docs'))}</h2>${t(['',''],docs.map(([d,i])=>[(DOCDONE[i]?'☑ ':'☐ ')+esc(docTxt(d,i)),DOCDONE[i]?esc(T('rp_done')):esc(T('rp_todo'))]))}${foot(4,N)}</div>`;
+  $('report').innerHTML=html;
+  const pts=r=>{const a=[[0,S.L]];for(let y=1;y<=P.years;y++){a.push([y,balAfter(r,y*12)]);}return a;};
+  lineChart('rp-chart',[{pts:pts(B0),color:'#A3AEC2',dash:true,w:2},{pts:pts(S),color:'#2E5BE6',fill:true}],{label:T('rp_chart')});
+}
+
+/* ---------- live bank rates ---------- */
+let RATES_DATE='2026-11-03'; const RATES_BUILT='2026-11-03';
+const RATES_URL=/github\.io$/.test(location.hostname)?'rates.json':'https://robopoudel.github.io/thai-home-loan-planner/rates.json';
+function validRates(j){ return j&&typeof j.updated==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(j.updated)&&Array.isArray(j.banks)&&j.banks.length>=3&&j.banks.every(b=>b&&typeof b.n==='string'&&Array.isArray(b.y)&&b.y.length===3&&b.y.every(x=>typeof x==='number'&&x>=0&&x<.25)&&(b.mrr===null||(typeof b.mrr==='number'&&b.mrr<.25))&&typeof b.margin==='number'&&typeof b.ltv==='number'&&typeof b.term==='number'); }
+function useRates(j,how){
+  const keep=BANKS[BANK]&&BANKS[BANK].n, rkeep=BANKS[+$('rf-bank').value]&&BANKS[+$('rf-bank').value].n;
+  const list=j.banks.map(b=>({n:b.n,y:b.y.slice(),mrr:b.mrr,margin:b.margin,ltv:b.ltv,term:b.term,c:String(b.c||''),u:/^https:\/\//.test(b.u||'')?b.u:''}));
+  const known=list.filter(b=>b.mrr!=null); list.forEach(b=>{ if(b.mrr==null) b.mrr=known.reduce((s,x)=>s+x.mrr,0)/Math.max(1,known.length); });
+  BANKS.splice(0,BANKS.length,...list); RATES_DATE=j.updated; window.__ratesHow=how;
+  $('bank').innerHTML=BANKS.map((b,i)=>`<option value="${i}">${esc(b.n)}</option>`).join(''); $('rf-bank').innerHTML=$('bank').innerHTML;
+  const bi=BANKS.findIndex(b=>b.n===keep); BANK=bi>=0?bi:0; $('bank').value=BANK; const ri=BANKS.findIndex(b=>b.n===rkeep); $('rf-bank').value=ri>=0?ri:0;
+  render();
+}
+async function loadRates(){
+  window.__ratesHow='built';
+  const cached=store.get('rates'); if(validRates(cached)&&cached.updated>RATES_DATE) useRates(cached,'cached');
+  try{ const ctl=new AbortController(), tm=setTimeout(()=>ctl.abort(),8000);
+    const r=await fetch(RATES_URL+'?t='+Date.now(),{signal:ctl.signal,cache:'no-store'}); clearTimeout(tm);
+    if(r.ok){ const j=await r.json(); if(validRates(j)&&j.updated>=RATES_DATE){ store.set('rates',j); useRates(j,'live'); } }
+  }catch(e){}
+}
+function ratesInfo(){ const how=window.__ratesHow||'built', d=fdateISO(RATES_DATE); return how==='live'?T('rt_live').replace('{d}',d):how==='cached'?T('rt_offline').replace('{d}',d):T('rt_built').replace('{d}',fdateISO(RATES_BUILT)); }
+
+/* ---------- app updates (Android and Windows apps) ---------- */
+const IS_APP=!!(window.AndroidBridge||window.desktop), APPV=window.APP_VERSION||'';
+const vnum=v=>String(v||'').replace(/^v/,'').split('.').map(n=>parseInt(n)||0);
+const newer=(a,b)=>{ const x=vnum(a),y=vnum(b); for(let i=0;i<3;i++){ if((x[i]||0)!==(y[i]||0)) return (x[i]||0)>(y[i]||0); } return false; };
+async function checkUpdate(manual){
+  if(!IS_APP||!APPV||APPV==='web') return; if(window.desktop&&window.desktop.autoUpdates&&!manual) return;
+  try{ const r=await fetch('https://api.github.com/repos/RoboPoudel/thai-home-loan-planner/releases/latest',{cache:'no-store'}); const j=await r.json();
+    const tag=j.tag_name||''; if(newer(tag,APPV)){ const want=window.AndroidBridge?/\.apk$/:(window.desktop&&window.desktop.isPortable?/portable\.exe$/:/setup\.exe$/);
+      const a=(j.assets||[]).find(x=>want.test(x.name)), url=a?a.browser_download_url:j.html_url;
+      $('upd').hidden=false; $('upd').innerHTML=`<span>${esc(T('ver_new').replace('{v}',tag.replace(/^v/,'')))}</span> <a class="btn solid" href="${esc(url)}" target="_blank" rel="noopener">${esc(T('ver_get'))}</a>`+(window.desktop&&window.desktop.autoUpdates?` <span class="hint">${esc(T('ver_auto'))}</span>`:'');
+      if(manual) $('ver-info').textContent=T('ver_new').replace('{v}',tag.replace(/^v/,'')); }
+    else if(manual) $('ver-info').textContent=T('ver_app').replace('{v}',APPV)+' – '+T('ver_latest');
+  }catch(e){ if(manual) $('ver-info').textContent=T('ver_err'); }
+}
+
+/* ---------- start-here wizard ---------- */
+let WZ=0; const WZN=5; const WZA={};
+function wzField(id,label,type,val,extra){ return `<div class="field"><label for="${id}">${esc(label)}</label><input id="${id}" type="${type}" value="${esc(val)}" ${extra||''}></div>`; }
+function wzRender(){
+  const b=$('wz-body'); $('wz-step').textContent=WZ<WZN?T('wz_steps').replace('{a}',WZ+1).replace('{b}',WZN):''; $('wz-prog').style.width=(Math.min(WZ,WZN)/WZN*100)+'%';
+  $('wz-back').disabled=WZ===0; $('wz-next').textContent=WZ>=WZN?T('wz_done'):WZ===WZN-1?T('wz_done'):T('wz_next'); $('wz-skip').hidden=WZ>=WZN;
+  if(WZ===0){ const at=$('atype'); b.innerHTML=`<p class="wzq">${esc(T('wz_q1'))}</p><div class="choice">${[...at.options].map(o=>`<label><input type="radio" name="wz-at" value="${o.value}" ${o.value===at.value?'checked':''}> <span>${esc(o.textContent)}</span></label>`).join('')}</div>`; }
+  if(WZ===1){ const pr=num('price'), dp=pr?Math.round(num('down')/pr*100):20; b.innerHTML=`<p class="wzq">${esc(T('wz_q2'))}</p>${wzField('wz-price',T('wz_price'),'number',pr||3000000,'step="50000" min="0"')}${wzField('wz-down',T('wz_downp'),'number',dp,'step="1" min="0" max="100"')}`; }
+  if(WZ===2){ b.innerHTML=`<p class="wzq">${esc(T('wz_q3'))}</p>${wzField('wz-inc',T('wz_inc'),'number',num('inc'),'step="1000" min="0"')}${wzField('wz-coinc',T('wz_coinc'),'number',num('coinc'),'step="1000" min="0"')}${wzField('wz-debts',T('wz_debts'),'number',num('debts'),'step="500" min="0"')}`; }
+  if(WZ===3){ b.innerHTML=`<p class="wzq">${esc(T('wz_q4'))}</p>${wzField('wz-years',T('wz_years'),'number',num('years')||30,'min="1" max="40"')}${wzField('wz-start',T('wz_start'),'month',$('start').value||'')}${wzField('wz-tdate',T('wz_tdate'),'date',$('tdate').value||'')}`; }
+  if(WZ===4){ const m=$('rmode').value; b.innerHTML=`<p class="wzq">${esc(T('wz_q5'))}</p><div class="choice"><label><input type="radio" name="wz-r" value="best" ${m!=='fixed'?'checked':''}> <span>${esc(T('wz_r_best'))}</span></label><label><input type="radio" name="wz-r" value="keep"> <span>${esc(T('wz_r_bank'))}</span></label><label><input type="radio" name="wz-r" value="fixed" ${m==='fixed'?'checked':''}> <span>${esc(T('wz_r_fixed'))}</span></label></div>${wzField('wz-frate',T('wz_r_fixedv'),'number',num('frate')||5,'step="0.05" min="0"')}`; }
+  if(WZ>=WZN){ const R=window.__R; const over=R.inc&&R.dsrv>R.lim, tight=R.inc&&R.dsrv>R.lim*.85; const go=over?'afford':tight?'whatif':'docs';
+    b.innerHTML=`<p class="wzq">${esc(T('wz_res'))}</p><div class="wzres">${[[T('k_inst'),fm(R.S.first)],[T('sm_loan'),fm(R.S.L)],[T('a_dsr'),R.inc?pc(R.dsrv,1):'–'],[T('k_cash'),fm(R.fees+R.P.down)],[T('k_payoff'),dateOf(R.S.count)],[T('sm_best'),[...R.BR].sort((a,c)=>a.tot-c.tot)[0].bk.n]].map(([a,c])=>`<div class="tile"><div class="k">${esc(a)}</div><div class="v num" style="font-size:18px">${esc(c)}</div></div>`).join('')}</div>
+      <div class="banner ${over?'bad':tight?'warn':'good'}" style="margin-top:12px"><b>${esc(T('wz_go'))}:</b> ${esc(over?T('wz_next_aff'):tight?T('wz_next_tight'):T('wz_next_docs'))} <a href="#${go}" data-wzgo>${esc(T('wz_open_tab'))} →</a></div>`; }
+}
+function wzSave(){
+  const v=id=>$(id)?$(id).value:null;
+  if(WZ===0){ const c=document.querySelector('input[name=wz-at]:checked'); if(c){ $('atype').value=c.value; $('thai').value=/[SBF]/.test(c.value)?'yes':'no'; } }
+  if(WZ===1){ const pr=parseFloat(v('wz-price'))||0, dp=Math.min(100,Math.max(0,parseFloat(v('wz-down'))||0)); $('price').value=pr; $('down').value=Math.round(pr*dp/100); if(!num('apprais')) $('apprais').value=pr; }
+  if(WZ===2){ $('inc').value=parseFloat(v('wz-inc'))||0; $('coinc').value=parseFloat(v('wz-coinc'))||0; $('debts').value=parseFloat(v('wz-debts'))||0; }
+  if(WZ===3){ $('years').value=Math.min(40,Math.max(1,parseFloat(v('wz-years'))||30)); if(v('wz-start')) $('start').value=v('wz-start'); if(v('wz-tdate')) $('tdate').value=v('wz-tdate'); }
+  if(WZ===4){ const c=document.querySelector('input[name=wz-r]:checked'), w=c?c.value:'best';
+    if(w==='fixed'){ $('rmode').value='fixed'; $('frate').value=parseFloat(v('wz-frate'))||5; }
+    if(w==='best'){ render(); const foreign=$('thai').value==='no'; const R=window.__R; const pool=R.BR.filter(x=>/foreign/i.test(x.bk.n)===foreign); const best=(pool.length?pool:R.BR).sort((a,c)=>a.tot-c.tot)[0]; BANK=best.i; $('bank').value=BANK; $('rmode').value='bank'; } }
+  WI=null; render();
+}
+
+/* ---------- hooks into the existing app ---------- */
+const _render=render;
+render=function(){ _render(); try{ saveLoans(); if(document.querySelector('#v-loans.on')) renderLoans(); if(document.querySelector('#v-report.on')) renderReport(); renderReminders(); vaultDecorate();
+  const n=$('banks-asof'); if(n) n.textContent=T('rates_asof').replace('{d}',fdateISO(RATES_DATE)); }catch(e){ console.error(e); } };
+const _route=route; route=function(){ _route(); if(document.querySelector('#v-loans.on')) renderLoans(); if(document.querySelector('#v-report.on')) renderReport(); };
+window.removeEventListener('hashchange',_route); window.addEventListener('hashchange',route);
+// tracker shared per loan ("main" keeps the earlier data)
+let trUnsub=null;
+function subTracker(){ if(!DB) return; if(trUnsub){ try{trUnsub();}catch(e){} } trUnsub=DB.doc('tracker/'+LACT).onSnapshot(d=>{ const v=d.exists?d.data():null; if(v&&v.act&&JSON.stringify(v.act)!==JSON.stringify(ACT)){ ACT=v.act; renderMore(); } },()=>{}); }
+saveAct=function(){ store.set('act',ACT); if(!DB) return; clearTimeout(actTimer); actTimer=setTimeout(()=>{ DB.doc('tracker/'+LACT).set({act:ACT,at:Date.now(),by:ME}).catch(()=>{$('tr-sync').textContent=T('fm_err');}); },800); };
+
+document.addEventListener('click',async e=>{
+  const t=e.target;
+  if(t.id==='set-open'){ $('rt-info').textContent=ratesInfo(); $('ver-info').textContent=IS_APP&&APPV?T('ver_app').replace('{v}',APPV):T('ver_web'); $('ver-check').hidden=!IS_APP; applyTheme(); $('setdlg').showModal(); return; }
+  if(t.closest('[data-close]')){ t.closest('dialog').close(); return; }
+  const th=t.closest('button[data-theme]'); if(th){ THEME=th.dataset.theme; applyTheme(); render(); return; }
+  const sw=t.closest('[data-acc]'); if(sw){ ACC=sw.dataset.acc; applyTheme(); render(); return; }
+  if(t.id==='ver-check'){ $('ver-info').textContent='…'; checkUpdate(true); return; }
+  if(t.id==='wiz-open'){ WZ=0; wzRender(); $('wizdlg').showModal(); return; }
+  if(t.id==='wz-next'){ if(WZ>=WZN){ $('wizdlg').close(); store.set('wizdone',1); return; } wzSave(); WZ++; wzRender(); return; }
+  if(t.id==='wz-back'){ if(WZ>0){ WZ--; wzRender(); } return; }
+  if(t.id==='wz-skip'){ $('wizdlg').close(); store.set('wizdone',1); return; }
+  if(t.closest('[data-wzgo]')){ $('wizdlg').close(); store.set('wizdone',1); return; }
+  // loans
+  if(t.id==='ln-add'||t.id==='ln-copy'){ saveLoans(); const n=LOANS.length+1, name=prompt(T('ln_ask'),T('ln_new').replace('{n}',n)); if(name===null) return;
+    const id='L'+Date.now().toString(36); const base=Object.assign({},curLoan().inp); LOANS.push({id,name:(name.trim()||T('ln_new').replace('{n}',n)).slice(0,40),inp:base,act:{},docs:t.id==='ln-copy'?Object.assign({},DOCDONE):{}});
+    openLoan(id); return; }
+  const lo=t.closest('[data-lopen]'); if(lo){ openLoan(lo.dataset.lopen); return; }
+  const lr=t.closest('[data-lren]'); if(lr){ const l=LOANS.find(x=>x.id===lr.dataset.lren); const name=prompt(T('ln_ask'),l.name); if(name&&name.trim()){ l.name=name.trim().slice(0,40); saveLoans(); renderLoans(); } return; }
+  const ldl=t.closest('[data-ldel]'); if(ldl){ const l=LOANS.find(x=>x.id===ldl.dataset.ldel); if(!confirm(T('ln_confirm').replace('{n}',l.name))) return;
+    if(VDB){ VAULT.filter(()=>l.id===LACT).forEach(()=>{}); await new Promise(res=>{ const q=vtx('readwrite').index('loan').openCursor(l.id); q.onsuccess=()=>{ const c=q.result; if(c){ c.delete(); c.continue(); } else res(); }; q.onerror=res; }); }
+    LOANS=LOANS.filter(x=>x.id!==l.id); if(l.id===LACT){ LACT=LOANS[0].id; const n=LOANS[0]; ACT=n.act||{}; DOCDONE=n.docs||{}; if(n.inp){ const o=Object.assign({},n.inp); delete o.lang; importInputs(o); } vaultLoad(); } store.set('loans',LOANS); renderLoans(); return; }
+  // vault
+  const va=t.closest('[data-vadd]'); if(va){ e.preventDefault(); VDOC=va.dataset.vadd; $('vault-in').value=''; $('vault-in').click(); return; }
+  const vv=t.closest('[data-vview]'); if(vv){ e.preventDefault(); vaultView(+vv.dataset.vview); return; }
+  if(t.id==='v-dl'&&VOPEN){ saveFile(VOPEN.blob,VOPEN.name); return; }
+  if(t.id==='v-del'&&VOPEN){ if(!confirm(T('vt_conf'))) return; await new Promise(res=>{ const q=vtx('readwrite').delete(VOPEN.id); q.onsuccess=res; q.onerror=res; }); $('vdlg').close(); VOPEN=null; await vaultLoad(); render(); return; }
+  // reminders
+  if(t.id==='rm-ics'){ try{ await saveFile(new Blob([icsText()],{type:'text/calendar'}),'home-loan-reminders.ics'); $('rm-msg').textContent=T('rm_ok'); }catch(err){} return; }
+  if(t.id==='rm-phone'&&window.AndroidBridge){ if(t.dataset.on){ window.AndroidBridge.cancelReminders(); $('rm-msg').textContent=T('rm_phone_off'); } else { const list=phoneReminders(); window.AndroidBridge.scheduleReminders(JSON.stringify(list)); $('rm-msg').textContent=T('rm_phone_ok').replace('{n}',list.length); } renderReminders(); return; }
+  // report
+  if(t.id==='rp-print'){ printPage(T('rp_title')); return; }
+});
+document.addEventListener('change',e=>{ if(e.target.id==='vault-in'&&e.target.files&&e.target.files.length&&VDOC!=null){ vaultAdd(VDOC,[...e.target.files]); } });
+document.addEventListener('input',e=>{ if(e.target.id==='payday'){ store.set('payday',e.target.value); renderReminders(); } },true);
+
+/* ---------- start-up ---------- */
+(function(){
+  const pd=store.get('payday'); if(pd) $('payday').value=pd;
+  // first run: adopt the inputs already on screen as the first loan
+  const c=curLoan(); if(!c.inp){ saveLoans(); } else if(LOANS.length>1||c.id!=='main'){ ACT=c.act||ACT; DOCDONE=c.docs||DOCDONE; }
+  const bd=document.createElement('p'); bd.className='hint'; bd.id='banks-asof'; const bn=document.querySelector('[data-t="banks_n"]'); if(bn) bn.after(bd);
+  applyTheme(); applyLang();
+  vaultOpen().then(db=>{ VDB=db; if(!db){ } else vaultLoad(); });
+  loadRates();
+  setTimeout(()=>checkUpdate(false),2500);
+  if(!store.get('wizdone')&&window.__firstRun&&!(location.hash||'').startsWith('#p=')){ store.set('wizdone',1); setTimeout(()=>{ WZ=0; wzRender(); $('wizdlg').showModal(); },400); }
+})();
 </script>
 </body>
 </html>

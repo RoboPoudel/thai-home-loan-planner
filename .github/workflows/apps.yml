@@ -3,7 +3,7 @@ name: Android & Windows apps
 on:
   push:
     branches: [main]
-    paths: ['app/**', 'site/**', 'tools/**', 'android/**', 'windows/**', '.github/workflows/apps.yml']
+    paths: ['app/**', 'site/**', '!site/rates.json', 'tools/make_site.py', 'android/**', 'windows/**', '.github/workflows/apps.yml']
   workflow_dispatch:
 
 permissions:
@@ -27,11 +27,21 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
-      - name: Build APK
-        working-directory: android
-        run: gradle assembleDebug --no-daemon
-      - name: Rename APK
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk HomeLoanPlanner-${VERSION_NAME}.apk
+      - name: Build APK (signed with the permanent key when the secrets are set)
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            export ANDROID_KEYSTORE="$RUNNER_TEMP/release.jks"
+            (cd android && gradle assembleRelease --no-daemon)
+            cp android/app/build/outputs/apk/release/app-release.apk HomeLoanPlanner-${VERSION_NAME}.apk
+          else
+            echo "::warning::ANDROID_KEYSTORE_B64 secret not set - building a debug-signed APK"
+            (cd android && gradle assembleDebug --no-daemon)
+            cp android/app/build/outputs/apk/debug/app-debug.apk HomeLoanPlanner-${VERSION_NAME}.apk
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
@@ -63,7 +73,10 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: windows-exe
-          path: windows/dist/*.exe
+          path: |
+            windows/dist/*.exe
+            windows/dist/*.blockmap
+            windows/dist/latest.yml
 
   release:
     needs: [android, windows]
@@ -80,7 +93,7 @@ jobs:
           make_latest: 'true'
           body: |
             **Android:** download the `.apk`, open it on your phone and allow installing from this source.
-            **Windows:** `-portable.exe` runs without installing; `-setup.exe` installs it with a Start-menu shortcut. Windows SmartScreen may warn because the app isn't code-signed – choose *More info → Run anyway*.
+            **Windows:** `-setup.exe` installs it with a Start-menu shortcut and updates itself; `-portable.exe` runs without installing and tells you when a new version is out. Windows SmartScreen may warn because the app isn't code-signed – choose *More info → Run anyway*.
             Developed by Henry Poudel · hennrywebworm@gmail.com · WhatsApp +66 87 407 5116 (https://wa.me/66874075116)
 
             **Web / iPhone:** https://robopoudel.github.io/thai-home-loan-planner/ (Share → Add to Home Screen).

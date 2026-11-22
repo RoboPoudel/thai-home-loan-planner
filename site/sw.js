@@ -1,5 +1,5 @@
 // Offline support: cache the app shell, serve it when offline, refresh it in the background.
-const CACHE = 'thlp-v1';
+const CACHE = 'thlp-v2';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {
@@ -15,6 +15,7 @@ self.addEventListener('fetch', e => {
   const sameOrigin = url.origin === location.origin;
   const isFont = /fonts\.(googleapis|gstatic)\.com$/.test(url.hostname);
   if (!sameOrigin && !isFont) return;
+  if (url.pathname.endsWith('/rates.json')) return; // always fresh from the network
   // network first for the page itself (so updates arrive), cache first for everything else
   if (req.mode === 'navigate') {
     e.respondWith(fetch(req).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put('./index.html', copy)); return r; })

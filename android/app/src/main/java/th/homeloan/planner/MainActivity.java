@@ -107,6 +107,20 @@ public class MainActivity extends AppCompatActivity {
     /** Lets the page save a generated file (the exported Excel planner) to Downloads, and print. */
     private class Bridge {
         @JavascriptInterface
+        public int scheduleReminders(String json) {
+            if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                runOnUiThread(() -> requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 7));
+            }
+            return Reminders.schedule(MainActivity.this, json);
+        }
+
+        @JavascriptInterface
+        public void cancelReminders() { Reminders.cancel(MainActivity.this); }
+
+        @JavascriptInterface
+        public boolean remindersOn() { return Reminders.isOn(MainActivity.this); }
+
+        @JavascriptInterface
         public void print(String title) {
             runOnUiThread(() -> {
                 String job = (title == null || title.isEmpty()) ? "Home Loan Planner" : title;

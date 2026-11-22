@@ -3,6 +3,9 @@ const { app, BrowserWindow, shell, Menu, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
+const PORTABLE = !!process.env.PORTABLE_EXECUTABLE_DIR;
+let autoUpdater = null;
+if (!PORTABLE && app.isPackaged) { try { ({ autoUpdater } = require('electron-updater')); } catch (e) { autoUpdater = null; } }
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -12,7 +15,8 @@ function createWindow() {
     title: 'Home Loan Planner',
     icon: path.join(__dirname, 'icon.png'),
     backgroundColor: '#F3F5F9',
-    webPreferences: { contextIsolation: true, sandbox: true, preload: path.join(__dirname, 'preload.js') },
+    webPreferences: { contextIsolation: true, sandbox: true, preload: path.join(__dirname, 'preload.js'),
+      additionalArguments: [`--hlp-portable=${PORTABLE ? 1 : 0}`, `--hlp-auto=${autoUpdater ? 1 : 0}`] },
   });
   Menu.setApplicationMenu(null);
   // bank sites, GitHub and other links open in the default browser
@@ -50,6 +54,8 @@ ipcMain.handle('print-preview', (e, title) => {
 
 app.whenReady().then(() => {
   createWindow();
+  // installed copies update themselves from GitHub releases; the portable .exe shows a banner instead
+  if (autoUpdater) { autoUpdater.checkForUpdatesAndNotify().catch(() => {}); }
   app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
 });
 app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });

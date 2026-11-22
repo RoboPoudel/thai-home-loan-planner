@@ -1,0 +1,160 @@
+{
+ "updated": "2026-11-03",
+ "source": "Promotional rates published by each bank (sansiri.com comparison table; ttb from ttbbank.com). After year 3 = MRR + margin. mrr null = estimated as the average of the other banks.",
+ "banks": [
+  {
+   "n": "GH Bank (ธอส.)",
+   "y": [
+    0.0323,
+    0.0323,
+    0.0323
+   ],
+   "mrr": 0.06145,
+   "margin": -0.0125,
+   "ltv": 1,
+   "term": 40,
+   "c": "3-year avg of the GH Bank Saensuk 2026 promotion",
+   "u": "https://www.ghbank.co.th"
+  },
+  {
+   "n": "Government Savings Bank (ออมสิน)",
+   "y": [
+    0.04245,
+    0.04245,
+    0.04245
+   ],
+   "mrr": 0.06045,
+   "margin": -0.0125,
+   "ltv": 1.1,
+   "term": 40,
+   "c": "Purchase, build, renovate or refinance",
+   "u": "https://www.gsb.or.th"
+  },
+  {
+   "n": "Krungthai (กรุงไทย)",
+   "y": [
+    0.022,
+    0.031,
+    0.031
+   ],
+   "mrr": 0.06845,
+   "margin": -0.0125,
+   "ltv": 1,
+   "term": 40,
+   "c": "New homes; loan-protection insurance; yrs 2–3 derived",
+   "u": "https://krungthai.com"
+  },
+  {
+   "n": "Bangkok Bank (กรุงเทพ)",
+   "y": [
+    0.0299,
+    0.0299,
+    0.0299
+   ],
+   "mrr": 0.065,
+   "margin": -0.0125,
+   "ltv": 1,
+   "term": 30,
+   "c": "New homes from partner developers",
+   "u": "https://www.bangkokbank.com"
+  },
+  {
+   "n": "Kasikorn (กสิกรไทย)",
+   "y": [
+    0.0199,
+    0.03775,
+    0.03775
+   ],
+   "mrr": 0.0658,
+   "margin": -0.0125,
+   "ltv": 1,
+   "term": 30,
+   "c": "Apply by 31 Dec 2026; insurance required; yrs 2–3 derived",
+   "u": "https://www.kasikornbank.com"
+  },
+  {
+   "n": "SCB (ไทยพาณิชย์)",
+   "y": [
+    0.0255,
+    0.027,
+    0.027
+   ],
+   "mrr": 0.06575,
+   "margin": -0.0125,
+   "ltv": 1,
+   "term": 30,
+   "c": "New homes; term + age max 65",
+   "u": "https://www.scb.co.th"
+  },
+  {
+   "n": "Krungsri (กรุงศรี)",
+   "y": [
+    0.048,
+    0.048,
+    0.048
+   ],
+   "mrr": 0.0667,
+   "margin": -0.0125,
+   "ltv": 1.1,
+   "term": 30,
+   "c": "Loans of 5M THB or more",
+   "u": "https://www.krungsri.com"
+  },
+  {
+   "n": "Kiatnakin Phatra (KKP)",
+   "y": [
+    0.02892,
+    0.02892,
+    0.02892
+   ],
+   "mrr": 0.074,
+   "margin": -0.0125,
+   "ltv": 1.1,
+   "term": 40,
+   "c": "New homes from designated developers",
+   "u": "https://www.kkpfg.com"
+  },
+  {
+   "n": "ttb",
+   "y": [
+    0.033,
+    0.033,
+    0.033
+   ],
+   "mrr": null,
+   "margin": -0.0113,
+   "ltv": 1,
+   "term": 30,
+   "c": "Fixed 3.30% for 3 years; MRR estimated",
+   "u": "https://www.ttbbank.com"
+  },
+  {
+   "n": "UOB – foreigners",
+   "y": [
+    0.065,
+    0.065,
+    0.065
+   ],
+   "mrr": 0.065,
+   "margin": 0,
+   "ltv": 0.7,
+   "term": 30,
+   "c": "Estimate for foreign buyers, freehold condos",
+   "u": "https://www.uob.co.th"
+  },
+  {
+   "n": "ICBC Thai – foreigners",
+   "y": [
+    0.065,
+    0.065,
+    0.065
+   ],
+   "mrr": 0.065,
+   "margin": 0,
+   "ltv": 0.6,
+   "term": 30,
+   "c": "Estimate, case by case",
+   "u": "https://www.icbcthai.com"
+  }
+ ]
+}
