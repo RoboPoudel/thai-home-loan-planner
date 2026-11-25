@@ -1,7 +1,7 @@
 // Checks the planner's calculation engine against figures from the Excel planner and an independent Python model.
 const fs = require('fs'), path = require('path');
 const html = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
-eval(html.match(/<script id="engine">([\s\S]*?)<\/script>/)[1] + ';Object.assign(globalThis,{schedule,bankSteps,pit,investVsPrepay,refiCompare,rentVsBuy,trackerReplay,normalizePlan});');
+eval(html.match(/<script id="engine">([\s\S]*?)<\/script>/)[1] + ';Object.assign(globalThis,{schedule,bankSteps,pit,investVsPrepay,refiCompare,rentVsBuy,trackerReplay,normalizePlan,savingsPlan,dsrBooster,landTax,runningCosts});');
 let fail = 0;
 const eq = (name, got, want, tol = 0.5) => { const ok = Math.abs(got - want) <= tol; if (!ok) fail++; console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}: ${got} (expected ${want})`); };
 const r = Math.round;
@@ -23,4 +23,10 @@ const rv = rentVsBuy(varp, { rent: 15000, rentUp: .03, years: 10, growth: .02, r
 eq('buy wealth 10y', r(rv.buy), 3481880); eq('rent wealth 10y', r(rv.rent), 2600528);
 const pl = schedule(varp); eq('tracker ahead', r(trackerReplay(varp, { 1: pl.rows[0].paid, 2: pl.rows[1].paid, 3: 30000 }).ahead), 7283);
 const sh = Object.assign({}, varp, { shock: .01, shockFrom: 1 }); eq('what-if normalize', r(schedule(normalizePlan(sh)).tint), r(schedule(sh).tint));
+eq('tax primary 8M', landTax(8e6, 'primary'), 0); eq('tax second home 8M', landTax(8e6, 'other'), 1600);
+eq('tax primary 60M', landTax(60e6, 'primary'), 3000); eq('tax building-only 20M', landTax(20e6, 'building'), 2000); eq('tax other 80M', landTax(80e6, 'other'), 20000);
+const sv = savingsPlan({ target: 1005000, have: 320000, monthly: 15000, rate: .015, months: 12 }); eq('savings months', sv.months, 44); eq('savings monthly for 12m', r(sv.monthlyNeeded), 56292);
+const bo = dsrBooster(varp, { inc: 40000, debts: 5000, lim: .4 }); eq('booster income', r(bo.incomeNeeded), 32087); eq('booster down', r(bo.downNeeded), 1615469);
+const okb = dsrBooster(varp, { inc: 100000, debts: 5000, lim: .4 }); eq('booster headroom', r(okb.headroom), r(3e6 * 35000 / okb.hi - 3e6));
+const rc = runningCosts({ sqm: 35, cfee: 50, sink: 600, elec: 1500, water: 200, net: 600, insure: 2000, value: 4e6, repair: .005, appraised: 4e6, taxKind: 'other' }); eq('running costs month', r(rc.month), r(1750 + 2300 + 2000 / 12 + 20000 / 12 + 800 / 12));
 if (fail) { console.error(fail + ' check(s) failed'); process.exit(1); } else console.log('all checks passed');

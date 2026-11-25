@@ -13,9 +13,12 @@ Plan a home loan in Thailand: compare bank offers, stress-test rate rises, track
 | Tab | |
 |---|---|
 | My loans | Several homes or loans side by side: monthly total, balances, combined debt-to-income, debt-free date |
+| Savings goal | How long to save the down payment + transfer cash, monthly target for a date, deposit log |
 | Plan | Fixed, your own variable steps (up to 20), or a bank's offer; extra payments (amount, % of installment, % of balance; monthly or yearly) and a lump sum |
-| Bank rates | Thai banks' promotional rates side by side, total interest for your loan |
-| Affordability | Debt-to-income (DSR), maximum loan and property price |
+| Bank rates | Thai banks' promotional rates side by side, total interest for your loan; check an offer you received (photo read by AI inside Claude, or typed) |
+| Affordability | Debt-to-income (DSR), maximum loan and property price; income in another currency; "get the bank to say yes" – debts to pay off, income, term or down payment needed |
+| Area check | Price per sqm vs Bangkok/Chiang Mai area ranges and nearby listings, likely rent and yield, appraisal gap |
+| Living costs | Common fee, sinking fund, utilities, insurance, repairs, land & building tax – the real monthly cost |
 | Costs & tax | Transfer-day cash, the 0.01% fee measure, yearly tax saved from the interest deduction |
 | Stress test | +1/+2/+3% and your own rise, with DSR check |
 | Invest vs prepay | Same monthly budget, which leaves you richer |
@@ -23,13 +26,14 @@ Plan a home loan in Thailand: compare bank offers, stress-test rate rises, track
 | What-if | Sliders for price, down payment, rate, term and extra; save plans and compare them |
 | Journey | Booking → transfer → retention/refinance timeline, plus reminders: calendar file (.ics) and phone notifications in the Android app |
 | Tracker | Log real payments and see whether you're ahead of plan |
+| Progress | % paid ring, 15 achievements, a shareable progress card picture |
 | Refinance | Stay vs retention vs refinance (penalty, fees, break-even) and top-up loans |
 | Rent vs buy | Wealth after N years both ways, plus rental yield |
 | Apply | Official home-loan pages of banks in Thailand and Myanmar, and a printable information sheet |
 | Report | Bank-ready multi-page PDF: key figures, rate plan, affordability, stress test, bank comparison, yearly schedule, documents |
 | Share & sync | Plan link, Excel planner import/export |
 
-Also: a start-here wizard, light/dark mode with 6 colours, bank rates that update themselves from `site/rates.json`, and apps that tell you (Android, portable Windows) or install (Windows setup) when a new version is out.
+Also: voice questions and read-aloud answers in the advisor, any loan currency (THB, MMK, USD …), a start-here wizard, light/dark mode with 6 colours, bank rates that update themselves from `site/rates.json`, and apps that tell you (Android, portable Windows) or install (Windows setup) when a new version is out.
 
 Everything runs in your browser; inputs are saved only on your device.
 
