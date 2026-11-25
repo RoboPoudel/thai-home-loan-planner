@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03",
+ "updated": "2026-11-25",
  "source": "Promotional rates published by each bank (sansiri.com comparison table; ttb from ttbbank.com). After year 3 = MRR + margin. mrr null = estimated as the average of the other banks.",
  "banks": [
   {
@@ -121,11 +121,11 @@
     0.033,
     0.033
    ],
-   "mrr": null,
+   "mrr": 0.071,
    "margin": -0.0113,
    "ltv": 1,
    "term": 30,
-   "c": "Fixed 3.30% for 3 years; MRR estimated",
+   "c": "Fixed 3.30% for 3 years; MRR 7.10%, after yr 3 MRR-1.13% (Supalai table, 10 Nov 2026)",
    "u": "https://www.ttbbank.com"
   },
   {
