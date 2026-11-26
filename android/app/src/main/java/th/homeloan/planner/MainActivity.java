@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri u = request.getUrl();
                 if (HOST.equals(u.getHost())) return false;
+                if ("wa.me".equals(u.getHost()) || "api.whatsapp.com".equals(u.getHost())) { openWhatsApp(u); return true; }
                 // bank sites, GitHub, etc. open in the phone's browser
                 try { startActivity(new Intent(Intent.ACTION_VIEW, u)); } catch (Exception ignored) { }
                 return true;
@@ -158,6 +159,17 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "Could not save: " + e.getMessage(), Toast.LENGTH_LONG).show());
             }
+        }
+    }
+
+    /** Opens the developer's WhatsApp chat; if WhatsApp isn't installed, opens WhatsApp in the Play Store. */
+    private void openWhatsApp(Uri u) {
+        for (String pkg : new String[]{"com.whatsapp", "com.whatsapp.w4b"}) {
+            try { startActivity(new Intent(Intent.ACTION_VIEW, u).setPackage(pkg)); return; } catch (Exception ignored) { }
+        }
+        try { startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.whatsapp"))); }
+        catch (Exception e) {
+            try { startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.whatsapp"))); } catch (Exception ignored) { }
         }
     }
 }
