@@ -33,6 +33,7 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
         run: |
           if [ -n "$KEYSTORE_B64" ]; then
+            echo "HAS_KEY=yes" >> "$GITHUB_ENV"
             echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
             export ANDROID_KEYSTORE="$RUNNER_TEMP/release.jks"
             (cd android && gradle assembleRelease --no-daemon)
@@ -42,10 +43,23 @@ jobs:
             (cd android && gradle assembleDebug --no-daemon)
             cp android/app/build/outputs/apk/debug/app-debug.apk HomeLoanPlanner-${VERSION_NAME}.apk
           fi
+      - name: Build Google Play bundle (.aab, needs the signing secrets)
+        if: ${{ env.HAS_KEY == 'yes' }}
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+          export ANDROID_KEYSTORE="$RUNNER_TEMP/release.jks"
+          STORE=play python3 tools/make_site.py
+          (cd android && gradle bundleRelease --no-daemon)
+          cp android/app/build/outputs/bundle/release/app-release.aab HomeLoanPlanner-${VERSION_NAME}-play.aab
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
-          path: HomeLoanPlanner-*.apk
+          path: |
+            HomeLoanPlanner-*.apk
+            HomeLoanPlanner-*.aab
 
   windows:
     runs-on: windows-latest
@@ -93,6 +107,7 @@ jobs:
           make_latest: 'true'
           body: |
             **Android:** download the `.apk`, open it on your phone and allow installing from this source.
+            **Google Play:** `-play.aab` is the bundle to upload in Play Console (only built when the signing secrets are set).
             **Windows:** `-setup.exe` installs it with a Start-menu shortcut and updates itself; `-portable.exe` runs without installing and tells you when a new version is out. Windows SmartScreen may warn because the app isn't code-signed – choose *More info → Run anyway*.
             Developed by Henry Poudel · hennrywebworm@gmail.com · WhatsApp +66 87 407 5116 (https://wa.me/66874075116)
 

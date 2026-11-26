@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'th.homeloan.planner'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId 'th.homeloan.planner'
         minSdk 24
-        targetSdk 34
+        targetSdk 35
         versionCode Integer.parseInt(System.getenv('VERSION_CODE') ?: '1')
         versionName System.getenv('VERSION_NAME') ?: '1.0'
     }

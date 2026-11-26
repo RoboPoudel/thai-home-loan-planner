@@ -66,3 +66,6 @@ Edit `site/rates.json` (rates are fractions: 2.55% = `0.0255`; `mrr: null` means
 ## Android signing
 
 Release APKs are signed with a permanent key so updates install over the previous version. The key lives in two repository secrets (Settings → Secrets and variables → Actions): `ANDROID_KEYSTORE_B64` and `ANDROID_KEYSTORE_PASSWORD`. Without them the build falls back to a debug-signed APK.
+
+## Google Play
+The workflow also builds a signed `-play.aab` (Android 15 / API 35, no self-update) when the signing secrets are set. Store texts, screenshots, the feature graphic and a step-by-step checklist are in [`docs/play`](docs/play/CHECKLIST.md). Privacy policy: https://robopoudel.github.io/thai-home-loan-planner/privacy.html

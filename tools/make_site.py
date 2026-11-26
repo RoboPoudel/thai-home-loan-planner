@@ -9,7 +9,8 @@ root = pathlib.Path(__file__).resolve().parent.parent
 src = (root / "app" / "index.html").read_text(encoding="utf-8")
 
 version = os.environ.get("VERSION_NAME", "web")
-head = f"""<script>window.APP_VERSION={version!r};</script>
+store = os.environ.get("STORE", "")  # "play" for the Google Play build: no self-updates, no APK/exe downloads
+head = f"""<script>window.APP_VERSION={version!r};window.APP_STORE={store!r};</script>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2E5BE6">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
@@ -24,6 +25,6 @@ if ('serviceWorker' in navigator && location.protocol === 'https:' && !/androidp
 </script>
 """
 out = src.replace("</head>", head + "</head>", 1).replace("</body>", sw + "</body>", 1)
-out = out.replace("</footer>", '</footer>\n<footer style="padding-top:0"><a href="Mortgage_Planner.xlsx" download>⬇ Excel planner (Mortgage_Planner.xlsx)</a> · <a href="https://github.com/RoboPoudel/thai-home-loan-planner">GitHub</a></footer>', 1)
+out = out.replace("</footer>", '</footer>\n<footer style="padding-top:0"><a href="Mortgage_Planner.xlsx" download>⬇ Excel planner (Mortgage_Planner.xlsx)</a> · <a href="https://github.com/RoboPoudel/thai-home-loan-planner">GitHub</a> · <a href="https://robopoudel.github.io/thai-home-loan-planner/privacy.html">Privacy</a></footer>', 1)
 (root / "site" / "index.html").write_text(out, encoding="utf-8")
 print("site/index.html written,", len(out), "bytes")
