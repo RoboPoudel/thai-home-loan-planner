@@ -36,8 +36,16 @@ GET APPROVED
 • Document checklist for employees, business owners, freelancers and foreigners
 • Step-by-step buying journey with dates, and a bank-ready PDF report
 
+SMART MONEY
+• House hunting board: every home you visit with its real monthly cost, side by side
+• Tax refund helper: what the 100,000-baht home-loan interest deduction saves you
+• Got a bonus? Compare paying down the loan, saving or investing
+• Home value and equity tracker
+
 OWN YOUR HOME
-• Home screen with smart alerts: next payment, rate changes, promotion ending
+• Home screen and home-screen widget with smart alerts: next payment, rate changes, promotion ending
+• Home care calendar: fire insurance, land tax, common fees, upkeep
+• Ready-to-send letters to your bank in Thai or English
 • Payment tracker and reminders, achievements and progress card
 • Family budget for the whole household, living costs after moving in
 • Backup and restore to move to a new phone
@@ -70,8 +78,16 @@ Developed by Henry Poudel · hennrywebworm@gmail.com · WhatsApp +66 87 407 5116
 • รายการเอกสารสำหรับพนักงาน เจ้าของกิจการ ฟรีแลนซ์ และชาวต่างชาติ
 • ขั้นตอนซื้อบ้านพร้อมวันที่ และรายงาน PDF สำหรับยื่นธนาคาร
 
+ฉลาดเรื่องเงิน
+• กระดานตามหาบ้าน เทียบทุกหลังพร้อมค่าใช้จ่ายรายเดือนจริง
+• ตัวช่วยคืนภาษีจากดอกเบี้ยบ้าน (สูงสุด 100,000 บาท)
+• ได้โบนัส? เทียบโปะบ้าน ฝากเงิน หรือลงทุน
+• ติดตามมูลค่าบ้านและส่วนที่เป็นของคุณ
+
 ผ่อนบ้าน
-• หน้าแรกพร้อมการแจ้งเตือน: งวดถัดไป ดอกเบี้ยเปลี่ยน โปรหมด
+• ปฏิทินดูแลบ้าน: ประกันอัคคีภัย ภาษีที่ดิน ค่าส่วนกลาง
+• จดหมายถึงธนาคารพร้อมส่ง ภาษาไทยและอังกฤษ
+• หน้าแรกและวิดเจ็ตพร้อมการแจ้งเตือน: งวดถัดไป ดอกเบี้ยเปลี่ยน โปรหมด
 • ติดตามการผ่อนและแจ้งเตือน ความสำเร็จ และการ์ดความคืบหน้า
 • งบครอบครัวทั้งบ้าน และค่าใช้จ่ายหลังเข้าอยู่
 • สำรองและกู้คืนข้อมูลเมื่อเปลี่ยนเครื่อง

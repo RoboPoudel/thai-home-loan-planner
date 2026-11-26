@@ -29,4 +29,6 @@ const sv = savingsPlan({ target: 1005000, have: 320000, monthly: 15000, rate: .0
 const bo = dsrBooster(varp, { inc: 40000, debts: 5000, lim: .4 }); eq('booster income', r(bo.incomeNeeded), 32087); eq('booster down', r(bo.downNeeded), 1615469);
 const okb = dsrBooster(varp, { inc: 100000, debts: 5000, lim: .4 }); eq('booster headroom', r(okb.headroom), r(3e6 * 35000 / okb.hi - 3e6));
 const rc = runningCosts({ sqm: 35, cfee: 50, sink: 600, elec: 1500, water: 200, net: 600, insure: 2000, value: 4e6, repair: .005, appraised: 4e6, taxKind: 'other' }); eq('running costs month', r(rc.month), r(1750 + 2300 + 2000 / 12 + 20000 / 12 + 800 / 12));
+eq('second lump = first lump', r(schedule(Object.assign({}, varp, { lump2At: 30, lump2: 200000 })).tint), r(schedule(Object.assign({}, varp, { lumpAt: 30, lump: 200000 })).tint));
+eq('home-loan tax saving 840k salary', pit(840000 - 100000 - 60000 - 9000) - pit(840000 - 100000 - 60000 - 9000 - 100000), 15000);
 if (fail) { console.error(fail + ' check(s) failed'); process.exit(1); } else console.log('all checks passed');

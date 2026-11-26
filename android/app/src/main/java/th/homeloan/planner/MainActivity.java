@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if (savedInstanceState != null) web.restoreState(savedInstanceState);
-        else web.loadUrl("https://" + HOST + "/assets/index.html#plan");
+        else web.loadUrl("https://" + HOST + "/assets/index.html#home");
     }
 
     @Override
@@ -123,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return Reminders.schedule(MainActivity.this, json);
         }
+
+        @JavascriptInterface
+        public void updateWidget(String json) { LoanWidget.save(MainActivity.this, json); }
+
+        @JavascriptInterface
+        public boolean pinWidget() { return LoanWidget.pin(MainActivity.this); }
 
         @JavascriptInterface
         public void cancelReminders() { Reminders.cancel(MainActivity.this); }
