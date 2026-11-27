@@ -1,7 +1,7 @@
 // Checks the planner's calculation engine against figures from the Excel planner and an independent Python model.
 const fs = require('fs'), path = require('path');
 const html = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
-eval(html.match(/<script id="engine">([\s\S]*?)<\/script>/)[1] + ';Object.assign(globalThis,{schedule,bankSteps,pit,investVsPrepay,refiCompare,rentVsBuy,trackerReplay,normalizePlan,savingsPlan,dsrBooster,landTax,runningCosts});');
+eval(html.match(/<script id="engine">([\s\S]*?)<\/script>/)[1] + ';Object.assign(globalThis,{schedule,bankSteps,pit,investVsPrepay,refiCompare,rentVsBuy,trackerReplay,normalizePlan,savingsPlan,dsrBooster,landTax,runningCosts,extraForTarget,debtPlan,rentalCalc});');
 let fail = 0;
 const eq = (name, got, want, tol = 0.5) => { const ok = Math.abs(got - want) <= tol; if (!ok) fail++; console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}: ${got} (expected ${want})`); };
 const r = Math.round;
@@ -31,4 +31,9 @@ const okb = dsrBooster(varp, { inc: 100000, debts: 5000, lim: .4 }); eq('booster
 const rc = runningCosts({ sqm: 35, cfee: 50, sink: 600, elec: 1500, water: 200, net: 600, insure: 2000, value: 4e6, repair: .005, appraised: 4e6, taxKind: 'other' }); eq('running costs month', r(rc.month), r(1750 + 2300 + 2000 / 12 + 20000 / 12 + 800 / 12));
 eq('second lump = first lump', r(schedule(Object.assign({}, varp, { lump2At: 30, lump2: 200000 })).tint), r(schedule(Object.assign({}, varp, { lumpAt: 30, lump: 200000 })).tint));
 eq('home-loan tax saving 840k salary', pit(840000 - 100000 - 60000 - 9000) - pit(840000 - 100000 - 60000 - 9000 - 100000), 15000);
+const one = debtPlan([{ n: 'card', bal: 10000, rate: 12, min: 1000 }], 0, 'avalanche'); eq('debt months', one.months, 11); eq('debt interest', r(one.interest), 590);
+const two = debtPlan([{ n: 'a', bal: 5000, rate: 20, min: 500 }, { n: 'b', bal: 20000, rate: 5, min: 500 }], 2000, 'avalanche'); eq('avalanche clears high rate first', two.order[0].n === 'a' ? 1 : 0, 1);
+const sn = debtPlan([{ n: 'a', bal: 9000, rate: 20, min: 500 }, { n: 'b', bal: 2000, rate: 5, min: 500 }], 2000, 'snowball'); eq('snowball clears small balance first', sn.order[0].n === 'b' ? 1 : 0, 1);
+const gt = extraForTarget(varp, 120, 1); eq('goal meets target', gt.s.count <= 120 ? 1 : 0, 1); eq('goal is minimal (100 baht steps)', schedule(Object.assign({}, varp, { x2From: 1, x2: gt.extra - 100 })).count > 120 ? 1 : 0, 1);
+const rc0 = rentalCalc({ price: 1e6, down: 1e6, rent: 10000, years: 1 }); eq('gross yield', rc0.gross, .12, 1e-9); eq('rental cash flow', r(rc0.cf1), 10000); eq('break-even rent', r(rc0.breakeven), 0);
 if (fail) { console.error(fail + ' check(s) failed'); process.exit(1); } else console.log('all checks passed');

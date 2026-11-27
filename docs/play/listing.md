@@ -42,7 +42,16 @@ SMART MONEY
 • Got a bonus? Compare paying down the loan, saving or investing
 • Home value and equity tracker
 
+PLAN SMARTER
+• Loan health score (0–100) with your top 3 actions
+• Debt-free by your chosen age: the extra payment it takes
+• Debt payoff planner for cards and car loans – raise what you can borrow
+• Buy-to-rent calculator: yield, cash flow and total return
+
 OWN YOUR HOME
+• Handover inspection checklist with photos and a defect report for the developer
+• Moving-in checklist: electricity, water, house registration (and TM30 for foreigners)
+• Renovation budget and calendar export of every important date
 • Home screen and home-screen widget with smart alerts: next payment, rate changes, promotion ending
 • Home care calendar: fire insurance, land tax, common fees, upkeep
 • Ready-to-send letters to your bank in Thai or English
@@ -84,7 +93,16 @@ Developed by Henry Poudel · hennrywebworm@gmail.com · WhatsApp +66 87 407 5116
 • ได้โบนัส? เทียบโปะบ้าน ฝากเงิน หรือลงทุน
 • ติดตามมูลค่าบ้านและส่วนที่เป็นของคุณ
 
+วางแผนให้ฉลาดขึ้น
+• คะแนนสุขภาพสินเชื่อ (0–100) พร้อม 3 สิ่งที่ควรทำ
+• ปลดหนี้ภายในอายุที่ต้องการ: ต้องโปะเพิ่มเท่าไร
+• วางแผนปิดหนี้บัตรและรถ เพื่อกู้บ้านได้มากขึ้น
+• คำนวณซื้อไว้ปล่อยเช่า
+
 ผ่อนบ้าน
+• ตรวจรับบ้านพร้อมรูปและรายงานจุดชำรุด
+• รายการย้ายเข้า: ไฟ น้ำ ทะเบียนบ้าน
+• งบตกแต่งบ้าน และส่งวันสำคัญเข้าปฏิทิน
 • ปฏิทินดูแลบ้าน: ประกันอัคคีภัย ภาษีที่ดิน ค่าส่วนกลาง
 • จดหมายถึงธนาคารพร้อมส่ง ภาษาไทยและอังกฤษ
 • หน้าแรกและวิดเจ็ตพร้อมการแจ้งเตือน: งวดถัดไป ดอกเบี้ยเปลี่ยน โปรหมด

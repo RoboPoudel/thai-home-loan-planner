@@ -270,7 +270,18 @@ nav.tabs a[hidden]{display:none}
 textarea{font:inherit;width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--surface);color:var(--ink)}
 pre.letter{white-space:pre-wrap;font:15px/1.7 "Sarabun","Noto Sans Thai",system-ui,sans-serif;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;margin:0 0 10px;max-height:60vh;overflow:auto}
 table.hc{width:100%;border-collapse:collapse}table.hc th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;padding:4px}table.hc td{padding:4px}table.hc input{font:inherit;font-size:14px;width:100%;border:1px solid var(--line);border-radius:8px;padding:7px 8px;background:var(--surface);color:var(--ink)}table.hc td:first-child input{min-width:170px}table.hc td:nth-child(2) input,table.hc td:nth-child(3) input{max-width:110px;min-width:70px}
-@media print{body.print-letter *{visibility:hidden!important}body.print-letter #lt-out,body.print-letter #lt-out *{visibility:visible!important}body.print-letter #lt-out{position:absolute;left:0;top:0;width:100%;border:0;max-height:none;overflow:visible;font-size:14pt}}</style>
+@media print{body.print-letter *{visibility:hidden!important}body.print-letter #lt-out,body.print-letter #lt-out *{visibility:visible!important}body.print-letter #lt-out{position:absolute;left:0;top:0;width:100%;border:0;max-height:none;overflow:visible;font-size:14pt}}.hs-ring{position:relative;width:200px;margin:8px auto}#hs-num{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:46px;text-align:center;line-height:1}#hs-num small{display:block;font-size:14px;font-weight:500;color:var(--muted)}
+.hsrow{display:grid;grid-template-columns:1fr 120px 52px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.hsrow>div:first-child{display:grid}.hsrow .prog{height:8px}.hsrow .num{text-align:right;font-weight:600}
+.hmhealth{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);text-decoration:none}.hmhealth:hover{border-color:var(--accent)}.hmhealth>span:nth-child(2){flex:1;display:grid}.hmhealth small{color:var(--muted)}
+.hmhealth .sc{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:19px;color:#fff;flex:none}.hmhealth .sc.g{background:var(--good)}.hmhealth .sc.w{background:var(--warn)}.hmhealth .sc.b{background:var(--bad)}
+details.inarea{padding:0;margin-bottom:10px}details.inarea>summary{cursor:pointer;padding:14px 18px;display:flex;justify-content:space-between;gap:10px;list-style:none}details.inarea>summary::-webkit-details-marker{display:none}details.inarea>summary::after{content:'▾';color:var(--muted)}details.inarea[open]>summary::after{content:'▴'}
+.initem{padding:10px 18px;border-top:1px solid var(--line);display:grid;gap:8px}.initem .t{font-size:14px}.initem.bad{background:color-mix(in srgb,var(--bad) 6%,transparent)}.initem.ok .t{color:var(--muted)}
+.initem .seg button.on.ok{background:var(--good);color:#fff}.initem .seg button.on.bad{background:var(--bad);color:#fff}.initem .seg button.on.na{background:var(--muted);color:#fff}
+.inbad{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.inbad input{flex:1;min-width:200px;font:inherit;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--surface);color:var(--ink)}.inbad .thumbs{flex-basis:100%}
+ol.inrep li{margin-bottom:12px}ol.inrep .thumbs img{max-width:160px}
+.chklist{display:grid;gap:8px;margin:8px 0 12px}.chk{display:flex;gap:8px;align-items:center;cursor:pointer}.chk input{width:18px;height:18px;accent-color:var(--accent)}
+ul.mvlist{list-style:none;padding:0;margin:0}
+@media print{body.print-insp *{visibility:hidden!important}body.print-insp #in-report,body.print-insp #in-report *{visibility:visible!important}body.print-insp #in-report{position:absolute;left:0;top:0;width:100%;border:0}body.print-insp #in-print{display:none}}</style>
 </head>
 <body>
 <div id="splash" role="presentation"><img src="data:image/png;base64,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" alt="" width="112" height="112"><div class="sp-name">Home Loan Planner</div><div class="sp-by"><span data-t="dev_by">Developed by</span> Henry Poudel</div></div>
@@ -752,6 +763,100 @@ table.hc{width:100%;border-collapse:collapse}table.hc th{text-align:left;font-si
     <div class="panel"><h2 data-t="hc_next">Coming up</h2><ul class="alerts" id="hc-next"></ul></div></div>
 </section>
 
+<!-- PAYOFF GOAL -->
+<section class="view" id="v-goal">
+  <div class="panel"><h2 data-t="gl_h">Debt-free by…</h2><p class="sub" data-t="gl_s">Pick the age you want to own your home outright – see the extra payment it takes</p>
+    <div class="row2"><div class="field"><label for="gl-age" data-t="gl_age">Your age now</label><input id="gl-age" type="number" min="18" max="80" value="35"></div>
+    <div class="field"><label for="gl-tgt" data-t="gl_tgt">Debt-free at age</label><input id="gl-tgt" type="number" min="19" max="90" value="50"></div></div>
+    <input id="gl-range" type="range" min="19" max="90" value="50" aria-label="Debt-free at age" style="width:100%">
+    <p class="hint" data-t="gl_n">The extra is paid every month from now on top of your installment. Banks in Thailand usually want the loan finished by age 65–70.</p>
+    <p><button class="btn" id="gl-apply" data-t="gl_apply">Use this extra payment in my plan</button></p></div>
+  <div class="stack"><div id="gl-banner" class="banner good"></div><div class="tiles" id="gl-tiles"></div>
+    <div class="panel"><h2 data-t="gl_c">Loan balance by your age</h2><div id="ch-goal"></div>
+    <div class="legend"><span><i style="background:var(--chart-2)"></i><span data-t="gl_lnow">Now</span></span><span><i style="background:var(--good)"></i><span data-t="gl_lgoal">With the extra payment</span></span></div></div></div>
+</section>
+<!-- DEBT PAYOFF -->
+<section class="view wide" id="v-debts">
+  <div class="panel"><h2 data-t="db_h">Debt payoff planner</h2><p class="sub" data-t="db_s">Clear cards, car and personal loans in the best order – and raise the home loan you can get</p>
+    <div id="db-list"></div><p><button class="btn" id="db-add" data-t="db_add">+ Add a debt</button></p>
+    <div class="row2"><div class="field"><label for="db-extra" data-t="db_extra">Extra I can pay each month</label><input id="db-extra" type="number" step="500" value="3000"></div>
+    <div class="field"><label for="db-m" data-t="db_m">Method</label><select id="db-m"><option value="avalanche" data-t="db_av">Highest interest first (saves most)</option><option value="snowball" data-t="db_sn">Smallest balance first (quick wins)</option></select></div></div>
+    <p><button class="btn" id="db-use" data-t="db_use">Use these minimum payments as my other debts</button></p></div>
+  <div class="stack"><div id="db-banner" class="banner good"></div><div class="tiles" id="db-tiles"></div>
+    <div class="panel"><h2 data-t="db_o">Pay-off order</h2><ol class="steps" id="db-order"></ol></div></div>
+</section>
+<!-- RENTAL -->
+<section class="view" id="v-rental">
+  <div class="panel"><h2 data-t="rx_h">Buy to rent out</h2><p class="sub" data-t="rx_s">Rental yield, monthly cash flow and total return – is it worth it?</p>
+    <div class="row2"><div class="field"><label for="rt-rent" data-t="rx_rent">Rent per month</label><input id="rt-rent" type="number" step="500" value="15000"></div>
+    <div class="field"><label for="rt-vac" data-t="rx_vac">Empty months per year</label><input id="rt-vac" type="number" step="0.5" min="0" max="12" value="1"></div></div>
+    <div class="row2"><div class="field"><label for="rt-mgmt" data-t="rx_mgmt">Agent / management (% of rent)</label><input id="rt-mgmt" type="number" step="1" value="0"></div>
+    <div class="field"><label for="rt-maint" data-t="rx_maint">Repairs & furniture (% of price a year)</label><input id="rt-maint" type="number" step="0.1" value="0.5"></div></div>
+    <div class="row2"><div class="field"><label for="rt-tax" data-t="rx_tax">Your income tax rate on rent (%)</label><select id="rt-tax"><option value="0">0%</option><option value="0.05">5%</option><option value="0.1" selected>10%</option><option value="0.15">15%</option><option value="0.2">20%</option><option value="0.25">25%</option><option value="0.3">30%</option><option value="0.35">35%</option></select></div>
+    <div class="field"><label for="rt-up" data-t="rx_up">Rent increase per year (%)</label><input id="rt-up" type="number" step="0.5" value="2"></div></div>
+    <div class="row2"><div class="field"><label for="rt-g" data-t="rx_g">Price change per year (%)</label><input id="rt-g" type="number" step="0.5" value="2"></div>
+    <div class="field"><label for="rt-yrs" data-t="rx_yrs">Hold for (years)</label><input id="rt-yrs" type="number" min="1" max="40" value="10"></div></div>
+    <p class="hint" data-t="rx_n">Uses your plan's price, down payment and installments, the common fee and insurance from Living costs, and land tax for a second home. Rent is taxed after a 30% flat expense deduction. Estimates only.</p></div>
+  <div class="stack"><div id="rt-banner" class="banner"></div><div class="tiles" id="rt-tiles"></div>
+    <div class="panel"><h2 data-t="rx_c">Cash flow each year</h2><div id="ch-rental"></div></div></div>
+</section>
+<!-- INSPECTION -->
+<section class="view" id="v-inspect">
+  <div class="panel"><h2 data-t="in_h">Handover inspection</h2><p class="sub" data-t="in_s">Check the new home room by room before you sign for the keys – then send the defect list to the developer</p>
+    <div class="row2"><div class="field"><label for="in-proj" data-t="in_proj">Project / unit</label><input id="in-proj" maxlength="80"></div>
+    <div class="field"><label for="in-date" data-t="in_date">Inspection date</label><input id="in-date" type="date"></div></div>
+    <div class="row2"><div class="field"><label for="in-bed" data-t="in_bed">Bedrooms</label><input id="in-bed" type="number" min="0" max="8" value="2"></div>
+    <div class="field"><label for="in-bath" data-t="in_bath">Bathrooms</label><input id="in-bath" type="number" min="1" max="8" value="2"></div></div>
+    <p class="hint" data-t="in_n">Bring: a phone charger or socket tester, a torch, a coin or small stick for tapping tiles, masking tape to mark defects, and a bucket of water for drains. Go in daylight and after rain if you can.</p>
+    <div class="tiles" id="in-tiles"></div>
+    <p><button class="btn solid" id="in-rep" data-t="in_rep">Defect report</button> <button class="btn" id="in-copy" data-t="in_copy">Copy as text</button> <button class="btn" id="in-reset" data-t="in_reset">Start a new inspection</button> <span class="hint" id="in-msg"></span></p></div>
+  <div class="stack"><div id="in-areas"></div></div>
+  <div id="in-report" class="panel" hidden></div>
+</section>
+<!-- MOVING IN -->
+<section class="view" id="v-movein">
+  <div class="panel"><h2 data-t="mv_h">Moving-in checklist</h2><p class="sub" data-t="mv_s">Utilities, house registration, keys and address changes – dated from your transfer day</p>
+    <div class="row2"><div class="field"><label for="mv-day" data-t="mv_day">Transfer / key day</label><input id="mv-day" type="date"></div>
+    <div class="field"><label for="mv-kind" data-t="mv_kind">Home type</label><select id="mv-kind"><option value="condo" data-t="hh_condo">Condo</option><option value="house" data-t="hh_house">House</option></select></div></div>
+    <label class="chk"><input type="checkbox" id="mv-fgn"> <span data-t="mv_fgn">I am a foreigner</span></label>
+    <p class="hint" data-t="mv_n">MEA serves Bangkok, Nonthaburi and Samut Prakan; PEA the rest of Thailand. Water: MWA in Bangkok area, PWA elsewhere. Rules and offices can change – check before you go.</p>
+    <div class="prog" style="margin-top:8px"><b id="mv-prog"></b></div><p class="hint num" id="mv-pt"></p></div>
+  <div class="stack"><div class="panel"><ul class="mvlist" id="mv-list"></ul></div></div>
+</section>
+<!-- RENOVATION -->
+<section class="view wide" id="v-reno">
+  <div class="panel"><h2 data-t="rn_h">Renovation & fit-out budget</h2><p class="sub" data-t="rn_s">Quotes, what is paid and how to pay for the rest</p>
+    <div id="rn-list"></div><p><button class="btn" id="rn-add" data-t="rn_add">+ Add a job</button> <button class="btn" id="rn-sugg" data-t="rn_sugg">Add common jobs</button></p>
+    <div class="secthead" data-t="rn_fin">Paying for it</div>
+    <div class="row2"><div class="field"><label for="rn-cash" data-t="rn_cash">Cash I can use</label><input id="rn-cash" type="number" step="10000" value="100000"></div>
+    <div class="field"><label for="rn-rate" data-t="rn_rate">Top-up / renovation loan rate (%)</label><input id="rn-rate" type="number" step="0.1" value="6.5"></div></div>
+    <div class="field"><label for="rn-yrs" data-t="rn_yrs">Loan years</label><input id="rn-yrs" type="number" min="1" max="30" value="10"></div></div>
+  <div class="stack"><div id="rn-banner" class="banner"></div><div class="tiles" id="rn-tiles"></div>
+    <div class="panel"><h2 data-t="rn_c">Budget by room</h2><div id="ch-reno"></div></div></div>
+</section>
+<!-- CALENDAR -->
+<section class="view" id="v-cal">
+  <div class="panel"><h2 data-t="cl_h">Add dates to your calendar</h2><p class="sub" data-t="cl_s">Every payment and important date in Google Calendar, your phone or Outlook – with a reminder the day before</p>
+    <div class="chklist">
+      <label class="chk"><input type="checkbox" id="cl-pay" checked> <span data-t="cl_pay">Monthly payments (next 24)</span></label>
+      <label class="chk"><input type="checkbox" id="cl-rate" checked> <span data-t="cl_rate">Rate changes and promotion end</span></label>
+      <label class="chk"><input type="checkbox" id="cl-care" checked> <span data-t="cl_care">Home care items</span></label>
+      <label class="chk"><input type="checkbox" id="cl-jr" checked> <span data-t="cl_jr">Buying journey steps</span></label>
+      <label class="chk"><input type="checkbox" id="cl-mv" checked> <span data-t="cl_mv">Moving-in tasks</span></label>
+      <label class="chk"><input type="checkbox" id="cl-tax" checked> <span data-t="cl_tax">Tax filing (interest certificate and deadline)</span></label></div>
+    <p><button class="btn solid" id="cl-dl" data-t="cl_dl">⬇ Download calendar file (.ics)</button> <span class="hint" id="cl-msg"></span></p>
+    <ol class="steps hint" id="cl-how"></ol></div>
+  <div class="stack"><div class="panel"><h2 data-t="cl_prev">What will be added</h2><ul class="alerts" id="cl-list"></ul></div></div>
+</section>
+<!-- HEALTH -->
+<section class="view" id="v-health">
+  <div class="panel"><h2 data-t="hs_h">Loan health score</h2><p class="sub" data-t="hs_s">One number for how healthy your home loan is – and what would raise it</p>
+    <div class="hs-ring"><div id="hs-ring"></div><div id="hs-num"></div></div>
+    <p id="hs-grade" style="text-align:center;font-weight:700;font-size:18px;margin:6px 0 0"></p></div>
+  <div class="stack"><div class="panel"><h2 data-t="hs_top">Top 3 things to do</h2><ol class="steps" id="hs-top"></ol></div>
+    <div class="panel"><h2 data-t="hs_parts">How the score is made</h2><div id="hs-parts"></div></div></div>
+</section>
+
 <!-- BACKUP -->
 <section class="view" id="v-backup">
   <div class="panel"><h2 data-t="bk_h">Backup & restore</h2><p class="sub" data-t="bk_s">Everything in one file: all loans, payments, savings, documents photos, settings</p>
@@ -856,6 +961,7 @@ function schedule(p,opt){
       }
       if(k===p.lumpAt) ex+=p.lump;
       if(k===p.lump2At) ex+=p.lump2||0;
+      if(p.x2From&&k>=p.x2From) ex+=p.x2||0;
       if(opt.flatExtra!=null) ex=opt.flatExtra;
     } else if(opt.flatExtra!=null) ex=opt.flatExtra;
     const paid=Math.min(sched+ex,bal+int);
@@ -964,6 +1070,38 @@ function journeyDates(tISO,startYM){
     else dt=new Date(Date.UTC(y+(yrs||0),m-1,d+off));
     return {key,date:dt.toISOString().slice(0,10)};
   });
+}
+
+/* v6 engine: second extra from a month, payoff goal, debt payoff, rental */
+function extraForTarget(p,months,from){
+  const base=schedule(p); if(base.count<=months) return {extra:0,s:base,base};
+  let lo=0, hi=p.price-p.down, s=null;
+  if(schedule(Object.assign({},p,{x2From:from,x2:hi})).count>months) return {extra:null,s:null,base};
+  for(let i=0;i<40;i++){ const mid=(lo+hi)/2; if(schedule(Object.assign({},p,{x2From:from,x2:mid})).count<=months) hi=mid; else lo=mid; }
+  const extra=Math.ceil(hi/100)*100; s=schedule(Object.assign({},p,{x2From:from,x2:extra})); return {extra,s,base};
+}
+function debtPlan(debts,extra,method){
+  const D=debts.filter(d=>d.bal>0).map(d=>({n:d.n,bal:+d.bal,r:(+d.rate||0)/100/12,min:Math.max(+d.min||0,1)}));
+  const order=[...D].sort((a,b)=>method==='snowball'?a.bal-b.bal:(b.r-a.r)||(a.bal-b.bal));
+  const minAll=D.reduce((s,d)=>s+d.min,0); let m=0, tint=0; const done=[];
+  while(D.some(d=>d.bal>0.005)&&m<600){ m++; let pool=extra;
+    D.forEach(d=>{ if(d.bal<=0.005) { pool+=d.min; return; } const i=d.bal*d.r; tint+=i; d.bal+=i; const p=Math.min(d.min,d.bal); d.bal-=p; pool+=d.min-p; });
+    for(const d of order){ if(pool<=0) break; if(d.bal>0.005){ const p=Math.min(pool,d.bal); d.bal-=p; pool-=p; } }
+    D.forEach(d=>{ if(d.bal<=0.005&&!done.some(x=>x.d===d)){ d.bal=0; done.push({d,n:d.n,month:m}); } });
+  }
+  return {months:m,interest:tint,minAll,order:done.map(x=>({n:x.n,month:x.month})),stuck:m>=600};
+}
+function rentalCalc(o){
+  const vac=Math.min(12,Math.max(0,o.vac||0)), yrs=Math.max(1,o.years||10), out=[]; let cum=0;
+  for(let y=1;y<=yrs;y++){
+    const rent=o.rent*Math.pow(1+(o.rentUp||0),y-1), inc=rent*(12-vac), exp=(o.cfee||0)*12+(o.mgmt||0)*inc+(o.maint||0)*o.price+(o.insure||0)+(o.ltax||0);
+    const tax=Math.max(0,inc*.7)*(o.taxRate||0), pay=(o.pay||[]).slice((y-1)*12,y*12).reduce((s,v)=>s+v,0), cf=inc-exp-tax-pay; cum+=cf;
+    out.push({y,inc,exp,tax,pay,cf,cum});
+  }
+  const y1=out[0], invested=(o.down||0)+(o.closing||0), noi=y1.inc-y1.exp-y1.tax;
+  const fixed=(o.cfee||0)*12+(o.maint||0)*o.price+(o.insure||0)+(o.ltax||0), k=(12-vac)*(1-(o.mgmt||0)-.7*(o.taxRate||0));
+  const value=o.price*Math.pow(1+(o.growth||0),yrs), equity=value-(o.balEnd||0);
+  return {rows:out,gross:o.price?o.rent*12/o.price:0,net:o.price?noi/o.price:0,cf1:y1.cf/12,coc:invested?y1.cf/invested:0,breakeven:k>0?(fixed+y1.pay)/k:null,total:cum+equity-invested,value,invested};
 }
 </script>
 <script id="xlsx">
@@ -1216,11 +1354,11 @@ function kv(el,arr){ $(el).innerHTML=arr.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${e
 /* ---------- charts (SVG) ---------- */
 function lineChart(el,series,opt){
   const W=760,H=260,P={l:64,r:14,t:12,b:28}; const all=series.flatMap(s=>s.pts);
-  const xmax=Math.max(...all.map(p=>p[0]),1), ymax=Math.max(...all.map(p=>p[1]),1)*1.05;
-  const X=x=>P.l+x/xmax*(W-P.l-P.r), Y=y=>H-P.b-y/ymax*(H-P.t-P.b);
+  const xmin=opt.xmin||0, xmax=Math.max(...all.map(p=>p[0]),xmin+1), ymax=Math.max(...all.map(p=>p[1]),1)*1.05;
+  const X=x=>P.l+(x-xmin)/(xmax-xmin)*(W-P.l-P.r), Y=y=>H-P.b-y/ymax*(H-P.t-P.b);
   let g=''; const ticks=4;
   for(let i=0;i<=ticks;i++){const v=ymax/ticks*i; g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${P.l-6}" y="${Y(v)+4}" text-anchor="end">${fm(v)}</text>`;}
-  const step=Math.max(1,Math.ceil(xmax/10)); for(let x=0;x<=xmax;x+=step) g+=`<text x="${X(x)}" y="${H-8}" text-anchor="middle">${x}</text>`;
+  const step=Math.max(1,Math.ceil((xmax-xmin)/10)); for(let x=xmin;x<=xmax;x+=step) g+=`<text x="${X(x)}" y="${H-8}" text-anchor="middle">${x}</text>`;
   series.forEach(s=>{ const d=s.pts.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join('');
     if(s.fill) g+=`<path d="${d}L${X(s.pts[s.pts.length-1][0])},${Y(0)}L${X(s.pts[0][0])},${Y(0)}Z" fill="${s.color}" opacity=".12"/>`;
     g+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.w||2.5}" ${s.dash?'stroke-dasharray="6 5"':''}/>`;
@@ -2537,7 +2675,7 @@ function careCalc(){ const t=todayISO(), yr=CARE.reduce((s,c)=>s+(c.every>0?(+c.
   return {yr,up,over:up.filter(c=>c.next<t),soon:up.filter(c=>c.next>=t&&dayDiff(c.next)<=120)}; }
 function renderCare(){
   const el=$('hc-list');
-  if(!(document.activeElement&&el.contains(document.activeElement)))
+  if(!(document.activeElement&&el.contains(document.activeElement)&&document.activeElement.tagName==='INPUT'))
   el.innerHTML=CARE.length?`<div class="scroll"><table class="hc"><tr><th>${esc(T('hc_name'))}</th><th>${esc(T('hc_cost'))}</th><th>${esc(T('hc_every'))}</th><th>${esc(T('hc_nextd'))}</th><th></th></tr>`+CARE.map((c,i)=>`<tr><td><input data-hc="${i}" data-f="n" value="${esc(c.n)}" maxlength="60" aria-label="${esc(T('hc_name'))}"></td><td><input data-hc="${i}" data-f="cost" type="number" step="100" value="${+c.cost||0}" aria-label="${esc(T('hc_cost'))}"></td><td><input data-hc="${i}" data-f="every" type="number" min="0" step="1" value="${c.every}" aria-label="${esc(T('hc_every'))}"></td><td><input data-hc="${i}" data-f="next" type="date" value="${c.next||''}" aria-label="${esc(T('hc_nextd'))}"></td><td style="white-space:nowrap"><button class="btn" data-hcdone="${i}">${esc(T('hc_done'))}</button> <button class="x" data-hcdel="${i}" aria-label="Delete">×</button></td></tr>`).join('')+'</table></div>':'';
   const c=careCalc(), nx=c.up.find(x=>x.next>=todayISO());
   tiles('hc-tiles',[{k:T('hc_year'),v:fm(c.yr)},{k:T('hc_month'),v:fm(c.yr/12)},{k:T('hc_due'),v:nx?fdateISO(nx.next):'–',s:nx?nx.n:''},{k:T('hc_over'),v:String(c.over.length),good:!c.over.length}]);
@@ -2625,6 +2763,209 @@ document.addEventListener('click',async e=>{ const t=e.target.closest('button,a,
 });
 document.addEventListener('keydown',e=>{ const a=e.target.closest&&e.target.closest('article[data-hh]'); if(a&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); hhOpen(a.dataset.hh); } });
 (function(){ V5IN.forEach(id=>{ const v=store.get('v5_'+id); if(v!=null&&$(id)) $(id).value=v; }); if(window.claude&&window.claude.use) $("lt-ai").hidden=false; applyLang(); route(); })();
+</script>
+<script id="i18n6">window.I18N6={};</script>
+<script id="v6">
+/* ========== v6: payoff goal, debt planner, rental, handover inspection, moving in, renovation, calendar export, loan health ========== */
+Object.assign(EN,{
+ t_goal:'Debt-free by', t_debts:'Other debts', t_rental:'Rent it out', t_inspect:'Inspection', t_movein:'Moving in', t_reno:'Renovation', t_cal:'Calendar', t_health:'Loan health',
+ gl_ok:'Pay {x} extra a month and the home is yours at {a} – {y} earlier, saving {s} interest.', gl_al:'Already on track: your loan ends at age {a}.', gl_no:'That target is too soon – even a large extra payment can’t finish by then. Try a later age.', gl_old:'Your loan now ends at age {a}. Many banks want it finished by 65–70.',
+ gl_x:'Extra each month', gl_new:'New monthly total', gl_end:'Debt-free at age', gl_save:'Interest saved', gl_yrs:'{n} years', gl_lump:'Or one lump sum now', gl_age:'Age {a}',
+ db_n0:'Name', db_bal:'Balance', db_rate:'Interest %', db_min:'Minimum / month', db_free:'Debt-free in', db_int:'Interest you will pay', db_minall:'Minimum payments now', db_boost:'Bigger home loan when cleared', db_ok:'All debts gone in {m} months, paying {x} interest. After that your bank can lend about {b} more.', db_none:'Add your credit cards, car loan and other debts.', db_stuck:'The payments are too small to ever clear these debts – raise the extra payment.', db_mo:'month {m}', db_dsr:'Debt-to-income now → after',
+ db_sug:[['Credit card',30000,16,3000],['Car loan',250000,4.5,6500],['Personal loan',50000,22,2500]],
+ rx_gross:'Gross yield', rx_net:'Net yield (before loan)', rx_cf:'Cash flow per month (year 1)', rx_coc:'Cash-on-cash return', rx_be:'Break-even rent', rx_tot:'Total gain after {n} years', rx_good:'Good investment: {y} net yield and the rent covers the loan with {x} a month left over.', rx_neg:'The rent doesn’t cover the costs: you add {x} a month in year 1. It can still pay off if prices rise – total gain after {n} years: {t}.', rx_bad:'Weak deal: you add {x} a month and lose money overall after {n} years ({t}). Look for a lower price or higher rent.',
+ in_ok:'OK', in_bad:'Defect', in_na:'N/A', in_note:'What is wrong?', in_ai:'✦ Describe from photo', in_aiw:'Looking…', in_photo:'📷', in_checked:'Checked', in_defects:'Defects', in_left:'Not checked yet', in_none:'No defects found yet.', in_title:'Defect list', in_to:'To: the project developer / juristic office', in_by:'Reported by', in_copied:'Copied.', in_new:'Start a new inspection? The current results will be cleared.',
+ in_areas:{living:'Living room',bed:'Bedroom {n}',bath:'Bathroom {n}',kitchen:'Kitchen',balcony:'Balcony',outside:'Outside & roof',system:'Whole home'},
+ in_items:{walls:'Walls and ceiling – no cracks, stains or patchy paint',floor:'Floor – tap the tiles: no hollow sound, chips or uneven joints',door:'Doors open, close and lock smoothly',window:'Windows and sliding doors – no gaps, leaks or stiff locks',sock:'Every socket works (use a tester or phone charger)',light:'Lights and switches work',ac:'Air-con cools and drains properly',tiles:'Wall tiles – straight, no cracks or missing grout',slope:'Floor slopes to the drain – no pooling water',tap:'Taps and shower – pressure, hot water, no leaks',toilet:'Toilet flushes, refills and does not leak',drain:'Drains – pour water, it flows away fast',heater:'Water heater works and has earth leakage protection',sink:'Sink and pipes under it – no leaks',cab:'Cabinets and counter – fixed, doors aligned',hood:'Cooker hood / extractor works',rail:'Railing is firm and the floor drains after water test',roof:'Roof and ceiling – no leak marks (check after rain)',gutter:'Gutters and downpipes are clear',fence:'Fence, gate and driveway – no cracks or sinking',ext:'Outside walls – no cracks, paint is even',panel:'Breaker panel labelled; earth leakage (RCD) trip works',meter:'Water meter does not move with all taps closed (hidden leak)',net:'Internet / TV / phone points work',keys:'All keys, key cards and remotes handed over'},
+ mv_items:[[-14,'pack','Book movers and start packing',''],[-7,'elec','Transfer the electricity meter to your name (MEA / PEA)','ID card or passport, sale contract or title deed, house registration copy'],[-7,'water','Transfer the water meter (MWA / PWA)','ID card or passport, title deed or sale contract'],[-7,'net','Order internet and TV',''],[0,'keys','Collect all keys, key cards, remotes and parking sticker; photograph the meter readings',''],[0,'lock','Change the locks or door codes',''],[1,'jur','Register with the juristic office and set up the common-fee payment','Copy of title deed, ID card'],[1,'ins','Start fire and home contents insurance',''],[1,'tm30','The owner files TM30 (foreigner’s address) within 24 hours','Passport, TM6 / visa page, title deed','f'],[15,'reg','Move your name into the house registration (ทะเบียนบ้าน) at the district office – within 15 days','ID card, house registration book, transfer documents'],[15,'yellow','Ask for a yellow house book (ทร.13) at the district office','Passport, work permit, title deed, 2 witnesses','f'],[30,'addr','Update your address: bank, employer, social security, insurance, car','House registration'],[30,'90d','Update your address for the 90-day report and work permit','Passport, TM30 receipt','f'],[30,'auto','Set up autopay for electricity, water, internet and the home loan',''],[60,'warr','Report any defects to the developer while the warranty lasts','Your inspection report']],
+ mv_done:'{d} of {t} done', mv_due:'due {d}', mv_docs:'Bring',
+ rn_job:'Job', rn_room:'Room', rn_quote:'Quote', rn_paid:'Paid', rn_total:'Total budget', rn_paidt:'Paid so far', rn_left:'Still to pay', rn_need:'To borrow', rn_month:'Loan payment / month', rn_dsr:'Debt-to-income with it', rn_ok:'Your cash covers it – nothing to borrow.', rn_loan:'Borrow {x}: about {m} a month for {y} years. Your debt-to-income becomes {d}.', rn_hi:'Borrow {x}: about {m} a month – your debt-to-income goes to {d}, over the bank limit. Spread the work out or save first.',
+ rn_sug:[['Built-in wardrobes','Bedroom',60000],['Kitchen counter and cabinets','Kitchen',90000],['Air-conditioners (2 units)','Whole home',50000],['Curtains and blinds','Whole home',25000],['Water heater and water filter','Bathroom',12000],['Mosquito screens','Whole home',15000],['Furniture','Living room',80000]],
+ cl_how:['Download the file.','Google Calendar on a computer: Settings → Import & export → Import, choose the file.','iPhone / Mac: open the file and tap Add all.','Android: open it with Google Calendar or your calendar app.'], cl_done:'Calendar file saved: {f}', cl_n:'{n} events', cl_pmt:'Home loan payment #{k}', cl_ratech:'Interest rate changes to {r}', cl_promo:'Promotion rate ends – ask for retention or refinance', cl_cert:'Get the home-loan interest certificate for tax', cl_file:'Last day to file income tax (paper)', cl_more:'…and {n} more',
+ hs_grades:[[85,'Excellent'],[70,'Healthy'],[55,'Needs attention'],[0,'At risk']], hs_go:'Fix it',
+ hs_f:{dsr:['Affordability','Payments are {p} of income (bank limit {l})','Lower your debt-to-income – clear small debts first'],rate:['Interest rate','Your plan costs {x} more interest than the best bank','Compare banks or ask for a lower rate'],em:['Emergency fund','{n} months of spending saved','Save at least 3–6 months of spending'],ltv:['Equity','You owe {p} of the home’s value','Pay down to below 80% loan-to-value'],extra:['Paying extra','{t}','Add a small extra payment each month'],track:['On track','{t}','Log your payments and catch up'],promo:['Promotion end','{t}','Plan your retention or refinance before the promotion ends'],care:['Home & insurance','{t}','Set up home care: insurance, tax and upkeep']},
+ hs_t:{ex1:'You pay extra – well done',ex0:'Only the minimum installment',tr1:'Up to date',tr0:'Behind your plan by {x}',tr2:'Loan not started yet',pr1:'No promotion ending soon',pr0:'Promotion ends {d}',ca1:'Set up and up to date',ca0:'{n} overdue',ca2:'Not set up yet'}
+});
+(function(){ const x=window.I18N6||{}; for(const l in x){ if(l==='th') Object.assign(TH,x[l]); else if(LANGS[l]) Object.assign(LANGS[l],x[l]); } })();
+GROUPS.plan.push('goal','debts'); GROUPS.compare.push('rental'); GROUPS.buy.splice(GROUPS.buy.indexOf('contract')+1,0,'inspect'); GROUPS.own.unshift('movein'); GROUPS.own.splice(GROUPS.own.indexOf('value')+1,0,'reno'); GROUPS.tools.unshift('health'); GROUPS.tools.splice(GROUPS.tools.indexOf('letters')+1,0,'cal');
+(function(){ const tabs=document.querySelector('nav.tabs'); [['goal','t_goal','Debt-free by'],['debts','t_debts','Other debts'],['rental','t_rental','Rent it out'],['inspect','t_inspect','Inspection'],['movein','t_movein','Moving in'],['reno','t_reno','Renovation'],['cal','t_cal','Calendar'],['health','t_health','Loan health']].forEach(([h,k,l])=>{ const a=document.createElement('a'); a.href='#'+h; a.dataset.t=k; a.textContent=l; tabs.appendChild(a); if(typeof DEFAULT==='object') DEFAULT[k]=l; }); })();
+const V6IN=['gl-age','gl-tgt','db-extra','db-m','rt-rent','rt-vac','rt-mgmt','rt-maint','rt-tax','rt-up','rt-g','rt-yrs','in-proj','in-date','in-bed','in-bath','mv-day','mv-kind','rn-cash','rn-rate','rn-yrs'];
+const V6CK=['mv-fgn','cl-pay','cl-rate','cl-care','cl-jr','cl-mv','cl-tax'];
+const v6n=id=>{ const v=parseFloat($(id).value); return isFinite(v)?v:0; };
+
+/* ---------- debt-free by age ---------- */
+function goalCalc(){ const R=window.__R, P=R.P, age=v6n('gl-age'), tgt=v6n('gl-tgt'), k0=Math.max(1,monthIndex($('start').value||'2027-01')), done=Math.max(0,k0-1);
+  const months=Math.round((tgt-age)*12)+done, r=extraForTarget(P,months,k0), baseEnd=age+(r.base.count-done)/12;
+  return {age,tgt,k0,done,months,r,baseEnd,newEnd:r.s?age+(r.s.count-done)/12:null}; }
+function renderGoal(){ const g=goalCalc(), R=window.__R, bn=$('gl-banner'); $('gl-range').value=g.tgt;
+  if(g.r.extra===null){ bn.className='banner bad'; bn.textContent=T('gl_no'); }
+  else if(g.r.extra===0){ bn.className='banner '+(g.baseEnd>70?'warn':'good'); bn.textContent=T('gl_al').replace('{a}',g.baseEnd.toFixed(1))+(g.baseEnd>70?' '+T('gl_old').replace('{a}',g.baseEnd.toFixed(1)):''); }
+  else { bn.className='banner good'; bn.textContent=T('gl_ok').replace('{x}',fm(g.r.extra)).replace('{a}',g.newEnd.toFixed(1)).replace('{y}',T('gl_yrs').replace('{n}',(g.baseEnd-g.newEnd).toFixed(1))).replace('{s}',fm(g.r.base.tint-g.r.s.tint)); }
+  const s=g.r.s||g.r.base, cur=s.rows[g.k0-1]; let lump=null;
+  if(g.r.extra){ let lo=0,hi=R.S.L; for(let i=0;i<36;i++){ const m=(lo+hi)/2; if(schedule(Object.assign({},R.P,{lump2At:g.k0,lump2:m})).count<=g.months) hi=m; else lo=m; } lump=Math.ceil(hi/1000)*1000; }
+  tiles('gl-tiles',[{k:T('gl_x'),v:g.r.extra==null?'–':fm(g.r.extra),good:g.r.extra===0},{k:T('gl_new'),v:cur?fm(cur.paid):'–'},{k:T('gl_end'),v:(g.newEnd??g.baseEnd).toFixed(1)},{k:T('gl_save'),v:g.r.s?fm(g.r.base.tint-g.r.s.tint):'–',good:true},{k:T('gl_lump'),v:lump?fm(lump):'–'}]);
+  const pts=sch=>{ const a=[]; for(let t=0;t*12<=sch.count+12;t++){ const k=g.done+t*12; a.push([Math.round(g.age+t),balAfter(sch,Math.min(k,sch.count))]); if(k>=sch.count) break; } return a; };
+  lineChart('ch-goal',[{pts:pts(g.r.base),color:'var(--chart-2)',dash:true,w:2},{pts:pts(s),color:'var(--good)',fill:true}],{label:T('gl_c'),xmin:Math.round(g.age)});
+}
+
+/* ---------- other debts ---------- */
+let DEBTS=store.get('debtlist')||[];
+function debtCalc(){ const R=window.__R, ex=Math.max(0,v6n('db-extra')), pl=debtPlan(DEBTS,ex,$('db-m').value), inc=R.inc||0;
+  const P=R.P, inst=R.S.first, dNow=pl.minAll, cap=inc*R.lim, roomNow=Math.max(0,cap-dNow), roomAfter=Math.max(0,cap);
+  const perB=inst/Math.max(1,R.S.L); return {pl,dsrNow:inc?(inst+dNow)/inc:0,dsrAfter:inc?inst/inc:0,boost:perB>0?(roomAfter-roomNow)/perB:0}; }
+function renderDebts(){ const el=$('db-list');
+  if(!(document.activeElement&&el.contains(document.activeElement)&&document.activeElement.tagName==='INPUT'))
+  el.innerHTML=DEBTS.length?`<div class="scroll"><table class="hc"><tr><th>${esc(T('db_n0'))}</th><th>${esc(T('db_bal'))}</th><th>${esc(T('db_rate'))}</th><th>${esc(T('db_min'))}</th><th></th></tr>`+DEBTS.map((d,i)=>`<tr><td><input data-db="${i}" data-f="n" value="${esc(d.n)}" maxlength="40" aria-label="${esc(T('db_n0'))}"></td><td><input data-db="${i}" data-f="bal" type="number" step="1000" value="${d.bal}" aria-label="${esc(T('db_bal'))}"></td><td><input data-db="${i}" data-f="rate" type="number" step="0.5" value="${d.rate}" aria-label="${esc(T('db_rate'))}"></td><td><input data-db="${i}" data-f="min" type="number" step="100" value="${d.min}" aria-label="${esc(T('db_min'))}"></td><td><button class="x" data-dbdel="${i}" aria-label="Delete">×</button></td></tr>`).join('')+'</table></div>':`<p class="hint">${esc(T('db_none'))}</p>`;
+  const c=debtCalc(), bn=$('db-banner');
+  if(!DEBTS.length){ bn.className='banner'; bn.textContent=T('db_none'); } else if(c.pl.stuck){ bn.className='banner bad'; bn.textContent=T('db_stuck'); }
+  else { bn.className='banner good'; bn.textContent=T('db_ok').replace('{m}',c.pl.months).replace('{x}',fm(c.pl.interest)).replace('{b}',fm(c.boost)); }
+  tiles('db-tiles',[{k:T('db_free'),v:DEBTS.length&&!c.pl.stuck?T('bn_months').replace('{n}',c.pl.months):'–'},{k:T('db_int'),v:fm(c.pl.interest)},{k:T('db_minall'),v:fm(c.pl.minAll)},{k:T('db_dsr'),v:pc(c.dsrNow,0)+' → '+pc(c.dsrAfter,0),good:true},{k:T('db_boost'),v:fm(c.boost),good:c.boost>0}]);
+  $('db-order').innerHTML=c.pl.order.map(o=>`<li><b>${esc(o.n||'—')}</b> – ${esc(T('db_mo').replace('{m}',o.month))}</li>`).join('');
+}
+
+/* ---------- rent it out ---------- */
+function rentalData(){ const R=window.__R, P=R.P, lv=livingCalc(), yrs=Math.max(1,Math.min(40,Math.round(v6n('rt-yrs'))||10));
+  const fees=P.price*.01+R.S.L*.01+3000;
+  return rentalCalc({price:P.price,down:P.down,closing:fees,rent:v6n('rt-rent'),vac:v6n('rt-vac'),cfee:lv.common,mgmt:v6n('rt-mgmt')/100,maint:v6n('rt-maint')/100,insure:num('lv-ins'),ltax:landTax(P.price,'other'),taxRate:+$('rt-tax').value,rentUp:v6n('rt-up')/100,growth:v6n('rt-g')/100,years:yrs,pay:R.S.rows.map(r=>r.paid),balEnd:balAfter(R.S,Math.min(yrs*12,R.S.count))}); }
+function renderRental(){ const d=rentalData(), n=Math.round(v6n('rt-yrs'))||10, bn=$('rt-banner');
+  if(d.cf1>=0&&d.net>=.03){ bn.className='banner good'; bn.textContent=T('rx_good').replace('{y}',pc(d.net,1)).replace('{x}',fm(d.cf1)); }
+  else if(d.total>0){ bn.className='banner warn'; bn.textContent=T('rx_neg').replace('{x}',fm(-d.cf1)).replace('{n}',n).replace('{t}',fm(d.total)); }
+  else { bn.className='banner bad'; bn.textContent=T('rx_bad').replace('{x}',fm(Math.abs(d.cf1))).replace('{n}',n).replace('{t}',fm(d.total)); }
+  tiles('rt-tiles',[{k:T('rx_gross'),v:pc(d.gross,1)},{k:T('rx_net'),v:pc(d.net,1),good:d.net>=.04},{k:T('rx_cf'),v:fm(d.cf1),good:d.cf1>=0},{k:T('rx_coc'),v:pc(d.coc,1),good:d.coc>0},{k:T('rx_be'),v:d.breakeven?fm(d.breakeven):'–'},{k:T('rx_tot').replace('{n}',n),v:fm(d.total),good:d.total>0}]);
+  barChart('ch-rental',d.rows.map(r=>({l:String(r.y),v:Math.abs(r.cf),c:r.cf>=0?'var(--good)':'var(--bad)'})),{label:T('rx_c')});
+}
+
+/* ---------- handover inspection ---------- */
+let INS=store.get('insp')||{}, INSU={};
+const IN_T={living:['walls','floor','door','window','sock','light','ac'],bed:['walls','floor','door','window','sock','light','ac'],bath:['tiles','slope','tap','toilet','drain','heater','door','light'],kitchen:['sink','cab','hood','sock','tiles','floor'],balcony:['rail','floor','door','light'],outside:['roof','gutter','fence','ext'],system:['panel','meter','net','keys']};
+function inAreas(){ const a=[['living','living',0]], nb=Math.max(0,Math.min(8,Math.round(v6n('in-bed')))), nt=Math.max(1,Math.min(8,Math.round(v6n('in-bath'))||1));
+  for(let i=1;i<=nb;i++) a.push(['bed'+i,'bed',i]); for(let i=1;i<=nt;i++) a.push(['bath'+i,'bath',i]); a.push(['kitchen','kitchen',0],['balcony','balcony',0],['outside','outside',0],['system','system',0]); return a; }
+function inName(t,i){ const n=T('in_areas')[t]||t; return n.replace('{n}',i); }
+function inStats(){ let c=0,b=0,t=0; inAreas().forEach(([id,ty])=>IN_T[ty].forEach(it=>{ t++; const s=(INS[id]||{})[it]; if(s&&s.s){ c++; if(s.s==='bad') b++; } })); return {c,b,t}; }
+async function inPhotos(key){ if(!VDB) return []; const rows=await new Promise(res=>{ const q=vtx('readonly').index('loan').getAll('insp:'+key); q.onsuccess=()=>res(q.result||[]); q.onerror=()=>res([]); }); return rows; }
+function renderInspect(){
+  if(!$('in-date').value) $('in-date').value=todayISO();
+  const st=inStats(); tiles('in-tiles',[{k:T('in_checked'),v:st.c+' / '+st.t},{k:T('in_defects'),v:String(st.b),good:!st.b},{k:T('in_left'),v:String(st.t-st.c)}]);
+  const el=$('in-areas'); if(el.contains(document.activeElement)&&document.activeElement.tagName==='INPUT'&&document.activeElement.type!=='file') return;
+  const items=T('in_items'), open=el.dataset.open||'living';
+  el.innerHTML=inAreas().map(([id,ty,i])=>{ const A=INS[id]||{}, bad=IN_T[ty].filter(it=>(A[it]||{}).s==='bad').length, ck=IN_T[ty].filter(it=>(A[it]||{}).s).length;
+    return `<details class="panel inarea" data-area="${id}" ${open===id?'open':''}><summary><b>${esc(inName(ty,i))}</b><span class="hint">${ck}/${IN_T[ty].length}${bad?` · <span style="color:var(--bad)">${bad} ${esc(T('in_defects'))}</span>`:''}</span></summary>`
+     +IN_T[ty].map(it=>{ const s=A[it]||{}, k=id+':'+it; return `<div class="initem ${s.s||''}"><div class="t">${esc(items[it]||it)}</div><div class="seg" role="radiogroup">${['ok','bad','na'].map(v=>`<button type="button" role="radio" aria-checked="${s.s===v}" class="${s.s===v?'on '+v:''}" data-in="${k}" data-v="${v}">${esc(T('in_'+v))}</button>`).join('')}</div>`
+       +(s.s==='bad'?`<div class="inbad"><input data-innote="${k}" value="${esc(s.note||'')}" placeholder="${esc(T('in_note'))}" maxlength="300" aria-label="${esc(T('in_note'))}"><label class="btn" title="photo"><span>${T('in_photo')}</span><input type="file" accept="image/*" capture="environment" data-inph="${k}" hidden></label>${window.claude&&window.claude.use?`<button class="btn" data-inai="${k}">${esc(T('in_ai'))}</button>`:''}<div class="thumbs" data-inthumbs="${k}"></div></div>`:'')+`</div>`; }).join('')+`</details>`; }).join('');
+  el.querySelectorAll('[data-inthumbs]').forEach(async d=>{ const ph=await inPhotos(d.dataset.inthumbs); d.innerHTML=ph.map(p=>{ const u=INSU[p.id]||(INSU[p.id]=URL.createObjectURL(p.blob)); return `<span class="tw"><img src="${u}" alt=""><button class="x" data-inphdel="${p.id}" aria-label="Delete">×</button></span>`; }).join(''); });
+}
+async function inDefects(){ const out=[], items=T('in_items'); for(const [id,ty,i] of inAreas()) for(const it of IN_T[ty]){ const s=(INS[id]||{})[it]; if(s&&s.s==='bad'){ const ph=await inPhotos(id+':'+it); out.push({area:inName(ty,i),item:items[it]||it,note:s.note||'',ph}); } } return out; }
+async function inReport(){ const d=await inDefects(), r=$('in-report');
+  r.innerHTML=`<h2>${esc(T('in_title'))}</h2><p class="hint">${esc($('in-proj').value||'')} · ${esc(fdateISO($('in-date').value||todayISO()))}<br>${esc(T('in_to'))}</p>`+(d.length?`<ol class="inrep">`+d.map(x=>`<li><b>${esc(x.area)}</b> – ${esc(x.item)}${x.note?`<br><span>${esc(x.note)}</span>`:''}${x.ph.length?`<div class="thumbs">${x.ph.map(p=>`<img src="${INSU[p.id]||(INSU[p.id]=URL.createObjectURL(p.blob))}" alt="">`).join('')}</div>`:''}</li>`).join('')+`</ol>`:`<p>${esc(T('in_none'))}</p>`)
+   +`<p class="hint">${esc(T('in_by'))}: ………………………… · ${esc(T('dev_by')||'')}</p><p><button class="btn solid" id="in-print">${esc(T('lt_print'))}</button></p>`;
+  r.hidden=false; r.scrollIntoView({behavior:'smooth'}); }
+async function inText(){ const d=await inDefects(); return `${T('in_title')} – ${$('in-proj').value||''} – ${fdateISO($('in-date').value||todayISO())}\n\n`+(d.length?d.map((x,i)=>`${i+1}. ${x.area} – ${x.item}${x.note?'\n   '+x.note:''}`).join('\n'):T('in_none')); }
+
+/* ---------- moving in ---------- */
+let MV=store.get('movein')||{};
+function mvItems(){ const f=$('mv-fgn').checked, day=$('mv-day').value||$('tdate').value||todayISO(), condo=$('mv-kind').value==='condo';
+  return T('mv_items').filter(x=>(x[4]!=='f'||f)&&!(x[1]==='yellow'&&!f)).filter(x=>!(x[1]==='jur'&&!condo&&false)).map(([o,k,t,d])=>({k,t,d,date:isoAdd2(day,o)})); }
+function isoAdd2(iso,days){ const [y,m,d]=iso.split('-').map(Number); return new Date(Date.UTC(y,m-1,d+days)).toISOString().slice(0,10); }
+function renderMovein(){ if(!$('mv-day').value&&$('tdate').value) $('mv-day').placeholder=$('tdate').value;
+  const L=mvItems(), done=L.filter(x=>MV[x.k]).length; $('mv-prog').style.width=(L.length?done/L.length*100:0)+'%'; $('mv-pt').textContent=T('mv_done').replace('{d}',done).replace('{t}',L.length);
+  $('mv-list').innerHTML=L.map(x=>{ const dd=dayDiff(x.date); return `<li class="doc ${MV[x.k]?'done':''}"><input type="checkbox" data-mv="${x.k}" ${MV[x.k]?'checked':''} aria-label="${esc(x.t)}"><div><span class="t">${esc(x.t)}</span><span class="hint" style="display:block">${esc(fdateISO(x.date))}${!MV[x.k]&&dd<0?' · <b style="color:var(--bad)">'+esc(T('hc_over'))+'</b>':''}${x.d?' · '+esc(T('mv_docs'))+': '+esc(x.d):''}</span>${x.k==='warr'?` <a href="#inspect">${esc(T('t_inspect'))} →</a>`:''}</div></li>`; }).join(''); }
+
+/* ---------- renovation ---------- */
+let RENO=store.get('reno')||[];
+function renoCalc(){ const R=window.__R, tot=RENO.reduce((s,r)=>s+(+r.quote||0),0), paid=RENO.reduce((s,r)=>s+Math.min(+r.paid||0,+r.quote||0),0), left=tot-paid, need=Math.max(0,left-Math.max(0,v6n('rn-cash'))),
+  rate=v6n('rn-rate')/100/12, n=Math.max(1,Math.round(v6n('rn-yrs')))*12, m=need?pmt(rate,n,need):0, dsr=R.inc?(R.S.first+R.debts+m)/R.inc:0; return {tot,paid,left,need,m,dsr,lim:R.lim}; }
+function renderReno(){ const el=$('rn-list');
+  if(!(document.activeElement&&el.contains(document.activeElement)&&document.activeElement.tagName==='INPUT'))
+  el.innerHTML=RENO.length?`<div class="scroll"><table class="hc"><tr><th>${esc(T('rn_job'))}</th><th>${esc(T('rn_room'))}</th><th>${esc(T('rn_quote'))}</th><th>${esc(T('rn_paid'))}</th><th></th></tr>`+RENO.map((r,i)=>`<tr><td><input data-rn="${i}" data-f="n" value="${esc(r.n)}" maxlength="60" aria-label="${esc(T('rn_job'))}"></td><td><input data-rn="${i}" data-f="room" value="${esc(r.room||'')}" maxlength="30" aria-label="${esc(T('rn_room'))}"></td><td><input data-rn="${i}" data-f="quote" type="number" step="1000" value="${+r.quote||0}" aria-label="${esc(T('rn_quote'))}"></td><td><input data-rn="${i}" data-f="paid" type="number" step="1000" value="${+r.paid||0}" aria-label="${esc(T('rn_paid'))}"></td><td><button class="x" data-rndel="${i}" aria-label="Delete">×</button></td></tr>`).join('')+'</table></div>':'';
+  const c=renoCalc(), bn=$('rn-banner'), y=Math.round(v6n('rn-yrs'))||10;
+  if(!c.need){ bn.className='banner good'; bn.textContent=T('rn_ok'); } else { const hi=c.dsr>c.lim; bn.className='banner '+(hi?'bad':'warn'); bn.textContent=T(hi?'rn_hi':'rn_loan').replace('{x}',fm(c.need)).replace('{m}',fm(c.m)).replace('{y}',y).replace('{d}',pc(c.dsr,0)); }
+  tiles('rn-tiles',[{k:T('rn_total'),v:fm(c.tot)},{k:T('rn_paidt'),v:fm(c.paid),good:true},{k:T('rn_left'),v:fm(c.left)},{k:T('rn_need'),v:fm(c.need)},{k:T('rn_month'),v:fm(c.m)},{k:T('rn_dsr'),v:pc(c.dsr,0),good:c.dsr<=c.lim}]);
+  const by={}; RENO.forEach(r=>{ const k=r.room||'—'; by[k]=(by[k]||0)+(+r.quote||0); }); const cols=['var(--accent)','var(--chart-2)','var(--chart-3)','var(--good)','var(--warn)','var(--bad)'];
+  barChart('ch-reno',Object.entries(by).map(([l,v],i)=>({l,v,c:cols[i%cols.length]})),{horizontal:true,label:T('rn_c')}); }
+
+/* ---------- calendar export ---------- */
+function calEvents(){ const R=window.__R, P=R.P, start=$('start').value||'2027-01', day=Math.min(28,Math.max(1,Math.round(num('payday'))||1)), t=todayISO(), ev=[];
+  if($('cl-pay').checked){ const k0=Math.max(1,monthIndex(start)); for(let k=k0;k<k0+24&&k<=R.S.count;k++){ const d=addMonthsISO(start,k-1,day); if(d>=t) ev.push({d,t:T('cl_pmt').replace('{k}',k)+' – '+fm(R.S.rows[k-1].paid)+' '+CURR,id:'pay'+k}); } }
+  if($('cl-rate').checked&&P.rmode!=='fixed'&&P.steps){ mergeSteps(P.steps).filter(s=>s.from>1).forEach(s=>{ const d=addMonthsISO(start,(s.from-1)*12,day); if(d>=t) ev.push({d,t:T('cl_ratech').replace('{r}',pc(s.rate)),id:'rate'+s.from}); });
+    const pe=P.rmode==='bank'?4:(mergeSteps(P.steps).find(s=>s.from>1)||{}).from; if(pe){ const d=isoAdd2(addMonthsISO(start,(pe-1)*12,day),-90); if(d>=t) ev.push({d,t:T('cl_promo'),id:'promo'}); } }
+  if($('cl-care').checked) CARE.forEach(c=>{ if(c.next) ev.push({d:c.next,t:'🛠️ '+c.n,id:'care'+c.id,rr:c.every>0?`FREQ=MONTHLY;INTERVAL=${c.every}`:null}); });
+  if($('cl-jr').checked&&$('tdate').value) journeyDates($('tdate').value,start).forEach(j=>{ if(!JDONE[j.key]&&j.date>=t) ev.push({d:j.date,t:'🏠 '+jrTxt(j.key)[0],id:'jr'+j.key}); });
+  if($('cl-mv').checked) mvItems().forEach(x=>{ if(!MV[x.k]&&x.date>=t) ev.push({d:x.date,t:'📦 '+x.t,id:'mv'+x.k}); });
+  if($('cl-tax').checked){ const y=+t.slice(0,4)+(t.slice(5)>'03-31'?1:0); ev.push({d:`${y}-01-15`,t:T('cl_cert'),id:'cert',rr:'FREQ=YEARLY'},{d:`${y}-03-31`,t:T('cl_file'),id:'file',rr:'FREQ=YEARLY'}); }
+  return ev.sort((a,b)=>a.d<b.d?-1:1); }
+function icsText(ev){ const esc2=s=>String(s).replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'), stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  const fold=l=>{ const out=[]; let s=l; while(new TextEncoder().encode(s).length>73){ let n=60; out.push(s.slice(0,n)); s=' '+s.slice(n); } out.push(s); return out.join('\r\n'); };
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Henry Poudel//Home Loan Planner//EN','CALSCALE:GREGORIAN','X-WR-CALNAME:Home Loan Planner'];
+  ev.forEach(e=>{ const d=e.d.replace(/-/g,''), nx=isoAdd2(e.d,1).replace(/-/g,''); L.push('BEGIN:VEVENT','UID:'+e.id+'-'+d+'@home-loan-planner','DTSTAMP:'+stamp,'DTSTART;VALUE=DATE:'+d,'DTEND;VALUE=DATE:'+nx,fold('SUMMARY:'+esc2(e.t))); if(e.rr) L.push('RRULE:'+e.rr); L.push('BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc2(e.t).slice(0,60),'TRIGGER:-PT15H','END:VALARM','END:VEVENT'); });
+  L.push('END:VCALENDAR'); return L.join('\r\n')+'\r\n'; }
+function renderCal(){ const ev=calEvents(); $('cl-how').innerHTML=T('cl_how').map(s=>`<li>${esc(s)}</li>`).join('');
+  $('cl-list').innerHTML=ev.slice(0,14).map(e=>`<li class="info"><span class="e">🗓️</span><div><b>${esc(e.t)}</b><span>${esc(fdateISO(e.d))}</span></div></li>`).join('')+(ev.length>14?`<li class="info"><span class="e">…</span><div><b>${esc(T('cl_more').replace('{n}',ev.length-14))}</b></div></li>`:''); }
+
+/* ---------- loan health ---------- */
+function healthCalc(){ const R=window.__R, P=R.P, F=[], hf=T('hs_f'), ht=T('hs_t');
+  const add=(k,w,s,detail,go)=>F.push({k,w,s:Math.max(0,Math.min(1,s)),name:hf[k][0],detail,act:hf[k][2],go});
+  const dsr=R.inc?R.dsrv:0; add('dsr',20,!R.inc?.6:dsr<=R.lim*.75?1:dsr<=R.lim?.6:.2,hf.dsr[1].replace('{p}',pc(dsr,0)).replace('{l}',pc(R.lim,0)),'#debts');
+  const best=[...R.BR].sort((a,b)=>a.tot-b.tot)[0], diff=best?R.B0.tint-best.tot:0, rel=R.B0.tint?diff/R.B0.tint:0; add('rate',15,diff<=0?1:rel<.05?.75:rel<.12?.5:.25,hf.rate[1].replace('{x}',fm(Math.max(0,diff))),'#banks');
+  const b=budgetCalc(), spend=b&&b.spend?b.spend:R.S.first+livingCalc().month, em=(store.get('v4_fb-emerg')!=null?+store.get('v4_fb-emerg'):0)||(+store.get('v5_bn-em')||0), mo=spend?em/spend:0;
+  add('em',15,mo>=6?1:mo>=3?.75:mo>=1?.4:.1,hf.em[1].replace('{n}',mo.toFixed(1)),'#budget');
+  const V=(+store.get('v5_hv-now'))||P.price, owe=balNow(), ltv=V?owe/V:1; add('ltv',10,ltv<=.8?1:ltv<=.9?.7:.4,hf.ltv[1].replace('{p}',pc(ltv,0)),'#value');
+  const ex=(P.xval>0)||(P.lump>0)||Object.keys(ACT).some(k=>R.S.rows[k-1]&&ACT[k]>R.S.rows[k-1].sched+1); add('extra',10,ex?1:.5,hf.extra[1].replace('{t}',ex?ht.ex1:ht.ex0),'#whatif');
+  const k=monthIndex($('start').value||'2027-01'), tr=trackerReplay(P,ACT); let trS=1,trT=ht.tr2; if(k>=1){ if(tr.logged&&tr.ahead<-100){ trS=.3; trT=ht.tr0.replace('{x}',fm(-tr.ahead)); } else trT=ht.tr1; } add('track',10,trS,hf.track[1].replace('{t}',trT),'#tracker');
+  let prS=1,prT=ht.pr1; if(P.rmode!=='fixed'&&P.steps){ const pe=P.rmode==='bank'?4:(mergeSteps(P.steps).find(s=>s.from>1)||{}).from; if(pe){ const end=addMonthsISO($('start').value||'2027-01',(pe-1)*12,1), n=dayDiff(end); if(n>=0&&n<=180){ prS=.4; prT=ht.pr0.replace('{d}',fdateISO(end)); } } } add('promo',10,prS,hf.promo[1].replace('{t}',prT),'#refi');
+  const cc=careCalc(); add('care',10,!CARE.length?.6:cc.over.length?.4:1,hf.care[1].replace('{t}',!CARE.length?ht.ca2:cc.over.length?ht.ca0.replace('{n}',cc.over.length):ht.ca1),'#care');
+  const score=Math.round(F.reduce((s,f)=>s+f.w*f.s,0)); return {score,F,top:[...F].filter(f=>f.s<1).sort((a,b)=>b.w*(1-b.s)-a.w*(1-a.s)).slice(0,3),grade:(T('hs_grades').find(g=>score>=g[0])||[0,''])[1]}; }
+function renderHealth(){ const h=healthCalc(); ring('hs-ring',h.score/100); $('hs-num').innerHTML=`<div>${h.score}<small>/100</small></div>`; $('hs-grade').textContent=h.grade;
+  $('hs-top').innerHTML=h.top.length?h.top.map(f=>`<li><b>${esc(f.act)}</b><br><span class="hint">${esc(f.name)}: ${esc(f.detail)}</span> <a href="${f.go}">${esc(T('hs_go'))} →</a></li>`).join(''):`<li>${esc(T('al_ok'))}</li>`;
+  $('hs-parts').innerHTML=h.F.map(f=>`<div class="hsrow"><div><b>${esc(f.name)}</b><span class="hint">${esc(f.detail)}</span></div><div class="prog"><b style="width:${Math.round(f.s*100)}%;background:${f.s>=.75?'var(--good)':f.s>=.5?'var(--warn)':'var(--bad)'}"></b></div><span class="num">${Math.round(f.w*f.s)}/${f.w}</span></div>`).join(''); }
+
+/* ---------- wiring ---------- */
+const _home6=renderHome; renderHome=function(){ _home6(); try{ const h=healthCalc(); let el=$('hm-health'); if(!el){ const al=$('alerts'), host=al.closest('.panel')||al; host.insertAdjacentHTML('beforebegin','<a id="hm-health" class="hmhealth" href="#health"></a>'); el=$('hm-health'); }
+  el.innerHTML=`<span class="sc ${h.score>=70?'g':h.score>=55?'w':'b'}">${h.score}</span><span><b>${esc(T('t_health'))}: ${esc(h.grade)}</b><small>${h.top[0]?esc(h.top[0].act):''}</small></span><span aria-hidden="true">→</span>`; }catch(e){ console.error(e); } };
+const _smart6=smartAlerts; smartAlerts=function(){ const out=_smart6(); try{ const L=mvItems(); if($('mv-day').value||Object.keys(MV).length){ L.filter(x=>!MV[x.k]).forEach(x=>{ const d=dayDiff(x.date); if(d>=-3&&d<=7) out.push({lv:d<0?'warn':'info',e:'📦',t:x.t,s:fdateISO(x.date),go:'#movein'}); }); } }catch(e){} return out; };
+const _v5=renderV4; renderV4=function(){ _v5(); if(!window.__R) return; const v=curView();
+  try{ if(v==='goal') renderGoal(); else if(v==='debts') renderDebts(); else if(v==='rental') renderRental(); else if(v==='inspect') renderInspect(); else if(v==='movein') renderMovein(); else if(v==='reno') renderReno(); else if(v==='cal') renderCal(); else if(v==='health') renderHealth(); }catch(e){ console.error(e); } };
+const V6VIEWS=['goal','debts','rental','inspect','movein','reno','cal','health'];
+const _route6=route; route=function(){ _route6(); if(V6VIEWS.includes(curView())) renderV4(); };
+window.removeEventListener('hashchange',_route6); window.addEventListener('hashchange',route);
+const _aiCtx6=aiContext; aiContext=function(){ let s=_aiCtx6(); try{ const h=healthCalc(); s+=`\nLOAN HEALTH SCORE: ${h.score}/100 (${h.grade}); weakest: ${h.top.map(f=>f.name+' – '+f.detail).join('; ')}`; if(DEBTS.length) s+=`\nOTHER DEBTS: `+DEBTS.map(d=>`${d.n} ${fm(d.bal)} at ${d.rate}% min ${fm(d.min)}`).join('; '); const st=inStats(); if(st.c) s+=`\nHANDOVER INSPECTION: ${st.c}/${st.t} checked, ${st.b} defects`; }catch(e){} return s; };
+document.addEventListener('input',e=>{ const t=e.target;
+  if(V6IN.includes(t.id)){ store.set('v6_'+t.id,t.value); if(t.id==='gl-tgt') $('gl-range').value=t.value; renderV4(); return; }
+  if(t.id==='gl-range'){ $('gl-tgt').value=t.value; store.set('v6_gl-tgt',t.value); renderGoal(); return; }
+  if(t.dataset.db!=null){ const d=DEBTS[+t.dataset.db]; if(!d) return; d[t.dataset.f]=t.dataset.f==='n'?t.value:(parseFloat(t.value)||0); store.set('debtlist',DEBTS); renderDebts(); return; }
+  if(t.dataset.rn!=null){ const r=RENO[+t.dataset.rn]; if(!r) return; r[t.dataset.f]=['n','room'].includes(t.dataset.f)?t.value:(parseFloat(t.value)||0); store.set('reno',RENO); renderReno(); return; }
+  if(t.dataset.innote!=null){ const [a,i]=t.dataset.innote.split(':'); (INS[a]=INS[a]||{})[i]=Object.assign(INS[a][i]||{},{note:t.value}); store.set('insp',INS); return; }
+},true);
+document.addEventListener('change',async e=>{ const t=e.target;
+  if(V6CK.includes(t.id)){ store.set('v6_'+t.id,t.checked); renderV4(); return; }
+  if(t.id==='db-m'||t.id==='rt-tax'||t.id==='mv-kind'){ store.set('v6_'+t.id,t.value); renderV4(); return; }
+  if(t.dataset.mv){ MV[t.dataset.mv]=t.checked; if(!t.checked) delete MV[t.dataset.mv]; store.set('movein',MV); renderMovein(); return; }
+  if(t.dataset.inph&&t.files&&VDB){ const k=t.dataset.inph; for(const f of [...t.files].slice(0,6)){ const blob=await shrinkImage(f); await new Promise(res=>{ const q=vtx('readwrite').add({loan:'insp:'+k,doc:'photo',name:f.name,type:blob.type||'image/jpeg',at:Date.now(),blob}); q.onsuccess=res; q.onerror=res; }); } t.value=''; renderInspect(); return; }
+});
+document.addEventListener('toggle',e=>{ const d=e.target; if(d.classList&&d.classList.contains('inarea')&&d.open){ $('in-areas').dataset.open=d.dataset.area; } },true);
+document.addEventListener('click',async e=>{ const t=e.target.closest('button,a')||e.target;
+  if(t.id==='gl-apply'){ const g=goalCalc(); if(g.r.extra){ $('xtype').value='amount'; $('xfreq').value='every'; $('xval').value=g.r.extra; WI=null; render(); location.hash='#plan'; } return; }
+  if(t.id==='db-add'){ const sg=T('db_sug'), nx=sg[DEBTS.length]||['',0,0,0]; DEBTS.push({n:nx[0],bal:nx[1],rate:nx[2],min:nx[3]}); store.set('debtlist',DEBTS); renderDebts(); return; }
+  if(t.dataset&&t.dataset.dbdel!=null){ DEBTS.splice(+t.dataset.dbdel,1); store.set('debtlist',DEBTS); renderDebts(); return; }
+  if(t.id==='db-use'){ $('debts').value=Math.round(DEBTS.reduce((s,d)=>s+(+d.min||0),0)); $('debts').dispatchEvent(new Event('input',{bubbles:true})); render(); return; }
+  if(t.dataset&&t.dataset.in&&t.dataset.v){ const [a,i]=t.dataset.in.split(':'); INS[a]=INS[a]||{}; const cur=INS[a][i]||{}; INS[a][i]=Object.assign(cur,{s:cur.s===t.dataset.v?'':t.dataset.v}); store.set('insp',INS); $('in-areas').dataset.open=a; renderInspect(); return; }
+  if(t.dataset&&t.dataset.inphdel!=null&&VDB){ await new Promise(res=>{ const q=vtx('readwrite').delete(+t.dataset.inphdel); q.onsuccess=res; q.onerror=res; }); renderInspect(); return; }
+  if(t.dataset&&t.dataset.inai){ const k=t.dataset.inai, ph=await inPhotos(k), sample=await window.claude.use('sample'); if(!sample||!ph.length){ $('in-msg').textContent=!ph.length?T('ct_none'):T('ct_noai'); return; } t.textContent=T('in_aiw');
+    try{ const langName={en:'English',th:'Thai',my:'Burmese',ne:'Nepali',hi:'Hindi',vi:'Vietnamese',zh:'Simplified Chinese',ja:'Japanese'}[LANG]||'English';
+      const r=await sample(`This photo was taken during a new-home handover inspection in Thailand, for the check: "${T('in_items')[k.split(':')[1]]||''}". Describe the visible defect in one short sentence a developer can act on (what, where, how big), in ${langName}. If no defect is visible, say so briefly. Reply with only the sentence.`,{images:ph.slice(0,3).map(p=>p.blob),cache:false});
+      const [a,i]=k.split(':'); (INS[a]=INS[a]||{})[i]=Object.assign(INS[a][i]||{},{note:(r.text||'').trim().slice(0,300)}); store.set('insp',INS); renderInspect(); }catch(err){ $('in-msg').textContent=T('ai_busy'); renderInspect(); } return; }
+  if(t.id==='in-rep'){ inReport(); return; }
+  if(t.id==='in-print'){ document.body.classList.add('print-insp'); printPage(); setTimeout(()=>document.body.classList.remove('print-insp'),1500); return; }
+  if(t.id==='in-copy'){ try{ await copyText(await inText()); $('in-msg').textContent=T('in_copied'); }catch(err){} return; }
+  if(t.id==='in-reset'){ if(!confirm(T('in_new'))) return; if(VDB){ const all=await new Promise(res=>{ const q=vtx('readonly').getAll(); q.onsuccess=()=>res(q.result||[]); q.onerror=()=>res([]); }); for(const f of all) if(String(f.loan).startsWith('insp:')) await new Promise(res=>{ const q=vtx('readwrite').delete(f.id); q.onsuccess=res; q.onerror=res; }); }
+    INS={}; store.set('insp',INS); $('in-report').hidden=true; renderInspect(); return; }
+  if(t.id==='rn-add'){ RENO.push({n:'',room:'',quote:0,paid:0}); store.set('reno',RENO); renderReno(); return; }
+  if(t.id==='rn-sugg'){ T('rn_sug').forEach(([n,room,q])=>{ if(!RENO.some(r=>r.n===n)) RENO.push({n,room,quote:q,paid:0}); }); store.set('reno',RENO); renderReno(); return; }
+  if(t.dataset&&t.dataset.rndel!=null){ RENO.splice(+t.dataset.rndel,1); store.set('reno',RENO); renderReno(); return; }
+  if(t.id==='cl-dl'){ const ev=calEvents(), f='home-loan-planner.ics'; try{ await saveFile(new Blob([icsText(ev)],{type:'text/calendar'}),f); $('cl-msg').textContent=T('cl_done').replace('{f}',f)+' · '+T('cl_n').replace('{n}',ev.length); }catch(err){} return; }
+});
+(function(){ V6IN.forEach(id=>{ const v=store.get('v6_'+id); if(v!=null&&$(id)) $(id).value=v; }); V6CK.forEach(id=>{ const v=store.get('v6_'+id); if(v!=null&&$(id)) $(id).checked=!!v; });
+  if(store.get('v6_mv-fgn')==null&&/^[WN]$/.test($('atype').value)) $('mv-fgn').checked=true;
+  applyLang(); route(); })();
 </script>
 </body>
 </html>
